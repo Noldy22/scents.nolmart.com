@@ -1,7 +1,7 @@
 {
   "name": "scents.nolmart.com",
   "version": "1.0.0",
-  "description": "NolMart Scents — Luxury Artisanal Perfumery Website",
+  "description": "NolMart Scents — Luxury Perfumes & Fragrance Blends Website",
   "main": "index.html",
   "scripts": {
     "dev": "npx serve . -p 3000",

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NolMart Scents — Luxury Artisanal Perfumes & Signature Blends | Tanzania</title>
-    <meta name="description" content="Shop luxury artisanal perfumes crafted with 60% pure fragrance oil for 12+ hours longevity. Flagship scents, signature blends, and 10ml/30ml discovery bottles. Fast delivery across Tanzania.">
+    <title>NolMart Scents — Luxury Long-Lasting Perfumes & Signature Blends | Tanzania</title>
+    <meta name="description" content="Shop luxury perfumes crafted for 12+ hours skin longevity. Flagship scents, signature blends, and 10ml/30ml discovery bottles. Fast delivery to all regions in Tanzania.">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +13,7 @@
 
     <!-- 1. TOP ANNOUNCEMENT BANNER -->
     <div class="announcement-banner">
-        <span>🚚 <strong>Fast Delivery Across Tanzania</strong> • Same-Day Dar es Salaam Delivery | Pay via <strong>M-Pesa, Tigo Pesa, Airtel Money</strong> or Cash on Delivery</span>
+        <span>🚚 <strong>Fast Delivery to All Regions in Tanzania</strong> | Pay via <strong>Vodacom M-Pesa, Airtel Money, Selcom, CRDB</strong> or Cash on Delivery</span>
         <a href="contact.html">Learn More →</a>
     </div>
 
@@ -30,8 +30,7 @@
                 <a href="#catalog" class="nav-link">Shop Scents</a>
                 <a href="#bundles" class="nav-link">Discovery Sets</a>
                 <a href="#quiz" class="nav-link">Scent Matcher</a>
-                <a href="about.html" class="nav-link">Our Formula</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="contact.html" class="nav-link">Contact & Delivery</a>
             </nav>
 
             <div class="header-right-actions">
@@ -56,13 +55,13 @@
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="hero-eyebrow">
-                    ✨ <span>Extrait de Parfum • 60% Oil Concentration</span>
+                    ✨ <span>Extra Long-Lasting • Luxury Perfumes</span>
                 </div>
                 <h1 class="hero-title">
-                    Artisanal Fragrance. <span>Uncompromising</span> Longevity.
+                    Luxury Perfumes. <span>Long-Lasting</span> Scents.
                 </h1>
                 <p class="hero-description">
-                    Handcrafted in Tanzania using 60% pure essential fragrance oils and French long-lasting fixatives. Experience rich projection that lasts 12+ hours without fading away.
+                    Made with high-quality fragrance oils for rich, memorable scents. Enjoy an attractive fragrance that stays on your skin and clothes for 12+ hours without fading away.
                 </p>
 
                 <div class="hero-ctas">
@@ -72,23 +71,23 @@
                     <a href="#quiz" class="btn btn-gold">
                         🔮 Find Your Scent (Quiz)
                     </a>
-                    <a href="https://wa.me/255695557358?text=Hello%20NolMart%20Scents!%20I'm%20looking%20for%20a%20signature%20perfume%20recommendation." target="_blank" class="btn btn-whatsapp">
-                        💬 Chat with Perfumer
+                    <a href="https://wa.me/255695557358?text=Hello%20NolMart%20Scents!%20I'm%20looking%20for%20a%20perfume%20recommendation." target="_blank" class="btn btn-whatsapp">
+                        💬 Order on WhatsApp
                     </a>
                 </div>
 
                 <div class="hero-trust-row">
                     <div class="trust-item">
                         <div class="trust-item-icon">💧</div>
-                        <span>60% Pure Oil (Extrait)</span>
+                        <span>Pure Fragrance Oils</span>
                     </div>
                     <div class="trust-item">
                         <div class="trust-item-icon">⏳</div>
-                        <span>12+ Hours Sillage</span>
+                        <span>Lasts 12+ Hours</span>
                     </div>
                     <div class="trust-item">
                         <div class="trust-item-icon">🇹🇿</div>
-                        <span>Dar Same-Day Delivery</span>
+                        <span>Fast Tanzania Delivery</span>
                     </div>
                 </div>
             </div>
@@ -108,87 +107,139 @@
     <section class="scent-quiz-section" id="quiz">
         <div class="container">
             <div style="text-align: center; margin-bottom: 24px;">
-                <span class="section-tag">AI Fragrance Matcher</span>
+                <span class="section-tag">Interactive Scent Matcher</span>
                 <h2 class="section-title">Find Your Signature Scent</h2>
-                <p class="section-subtitle" style="margin: 0 auto 30px;">Answer 3 quick questions and let our master formulation engine match you with your dream fragrance in 30 seconds.</p>
+                <p class="section-subtitle" style="margin: 0 auto 30px;">Answer 5 quick questions and discover the perfect perfume match tailored to your style and personality in 30 seconds.</p>
             </div>
 
             <div class="quiz-wrapper">
+                <span id="quizStepCounter" style="font-size: 0.88rem; font-weight: 600; color: var(--brand-blue); display: block; text-align: center; margin-bottom: 12px;">Question 1 of 5</span>
                 <div class="quiz-progress-bar">
-                    <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                    <div class="quiz-progress-fill" id="quizProgressFill" style="width: 20%;"></div>
                 </div>
 
                 <div id="scentQuizForm">
                     <!-- Step 1: Target -->
                     <div class="quiz-step active" data-step="1">
                         <h3 class="quiz-question">1. Who are you choosing this fragrance for?</h3>
-                        <p class="quiz-subtitle">We tailor scent notes to personal style and skin chemistry.</p>
+                        <p class="quiz-subtitle">Select who will be wearing this perfume.</p>
                         <div class="quiz-options-grid">
                             <button type="button" class="quiz-option-btn" data-group="gender" data-value="men">
                                 <span class="quiz-opt-icon">👔</span>
                                 <span class="quiz-opt-label">For Him</span>
-                                <span class="quiz-opt-desc">Commanding, fresh, or smoky</span>
+                                <span class="quiz-opt-desc">Fresh, woody, or bold masculine scents</span>
                             </button>
                             <button type="button" class="quiz-option-btn selected" data-group="gender" data-value="women">
                                 <span class="quiz-opt-icon">👗</span>
                                 <span class="quiz-opt-label">For Her</span>
-                                <span class="quiz-opt-desc">Sweet, floral, or sensual</span>
+                                <span class="quiz-opt-desc">Sweet, floral, or warm feminine scents</span>
                             </button>
                             <button type="button" class="quiz-option-btn" data-group="gender" data-value="unisex">
                                 <span class="quiz-opt-icon">✨</span>
                                 <span class="quiz-opt-label">Unisex / Shared</span>
-                                <span class="quiz-opt-desc">Modern, versatile, boundary-free</span>
+                                <span class="quiz-opt-desc">Clean, versatile scents for everyone</span>
                             </button>
                         </div>
                     </div>
 
                     <!-- Step 2: Scent Vibe -->
                     <div class="quiz-step" data-step="2">
-                        <h3 class="quiz-question">2. Which fragrance profile attracts you most?</h3>
-                        <p class="quiz-subtitle">Choose the mood you want to evoke when you walk into a room.</p>
+                        <h3 class="quiz-question">2. Which scent style attracts you most?</h3>
+                        <p class="quiz-subtitle">Choose the scent feeling you want to enjoy.</p>
                         <div class="quiz-options-grid">
-                            <button type="button" class="quiz-option-btn selected" data-group="vibe" data-value="bold">
-                                <span class="quiz-opt-icon">🌙</span>
-                                <span class="quiz-opt-label">Bold & Smoky</span>
-                                <span class="quiz-opt-desc">Oud, cardamom, dark woods</span>
+                            <button type="button" class="quiz-option-btn" data-group="vibe" data-value="fresh">
+                                <span class="quiz-opt-icon">🌊</span>
+                                <span class="quiz-opt-label">Fresh & Clean</span>
+                                <span class="quiz-opt-desc">Ocean breeze, citrus, clean mint</span>
                             </button>
-                            <button type="button" class="quiz-option-btn" data-group="vibe" data-value="sweet">
+                            <button type="button" class="quiz-option-btn selected" data-group="vibe" data-value="sweet">
                                 <span class="quiz-opt-icon">🍬</span>
-                                <span class="quiz-opt-label">Sweet & Gourmand</span>
-                                <span class="quiz-opt-desc">Vanilla, marshmallow, spun sugar</span>
+                                <span class="quiz-opt-label">Sweet & Warm Vanilla</span>
+                                <span class="quiz-opt-desc">Rich vanilla, spun sugar, caramel warmth</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="vibe" data-value="woody">
+                                <span class="quiz-opt-icon">🌲</span>
+                                <span class="quiz-opt-label">Rich Woods & Spice</span>
+                                <span class="quiz-opt-desc">Warm cardamom, amber, deep woods</span>
                             </button>
                             <button type="button" class="quiz-option-btn" data-group="vibe" data-value="floral">
                                 <span class="quiz-opt-icon">🌸</span>
-                                <span class="quiz-opt-label">Powdery & Floral</span>
-                                <span class="quiz-opt-desc">Peach blossom, iris, romantic rose</span>
-                            </button>
-                            <button type="button" class="quiz-option-btn" data-group="vibe" data-value="fresh">
-                                <span class="quiz-opt-icon">🌊</span>
-                                <span class="quiz-opt-label">Clean & Aquatic</span>
-                                <span class="quiz-opt-desc">Sea salt, mint, crisp bergamot</span>
+                                <span class="quiz-opt-label">Romantic Florals</span>
+                                <span class="quiz-opt-desc">Soft rose petals, fresh flowers</span>
                             </button>
                         </div>
                     </div>
 
                     <!-- Step 3: Occasion -->
                     <div class="quiz-step" data-step="3">
-                        <h3 class="quiz-question">3. When will you wear this fragrance most?</h3>
-                        <p class="quiz-subtitle">Helps us calibrate projection strength and sillage.</p>
+                        <h3 class="quiz-question">3. When will you wear this perfume most?</h3>
+                        <p class="quiz-subtitle">Helps us select the right balance for your daily routine.</p>
                         <div class="quiz-options-grid">
-                            <button type="button" class="quiz-option-btn selected" data-group="occasion" data-value="night">
-                                <span class="quiz-opt-icon">🍸</span>
-                                <span class="quiz-opt-label">Nightlife & Evenings</span>
-                                <span class="quiz-opt-desc">Parties, dinner dates, celebrations</span>
-                            </button>
-                            <button type="button" class="quiz-option-btn" data-group="occasion" data-value="daily">
+                            <button type="button" class="quiz-option-btn selected" data-group="occasion" data-value="daily">
                                 <span class="quiz-opt-icon">💼</span>
-                                <span class="quiz-opt-label">Everyday & Office</span>
-                                <span class="quiz-opt-desc">Professional, clean, signature scent</span>
+                                <span class="quiz-opt-label">Daily Work & Office</span>
+                                <span class="quiz-opt-desc">Professional, inviting signature scent</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="occasion" data-value="night">
+                                <span class="quiz-opt-icon">🍸</span>
+                                <span class="quiz-opt-label">Night Out & Events</span>
+                                <span class="quiz-opt-desc">Parties, dinners, celebrations</span>
                             </button>
                             <button type="button" class="quiz-option-btn" data-group="occasion" data-value="romantic">
                                 <span class="quiz-opt-icon">🌹</span>
-                                <span class="quiz-opt-label">Romantic Moments</span>
-                                <span class="quiz-opt-desc">Intimate, magnetic, captivating</span>
+                                <span class="quiz-opt-label">Romantic Dates</span>
+                                <span class="quiz-opt-desc">Intimate, charming, and magnetic</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="occasion" data-value="casual">
+                                <span class="quiz-opt-icon">☕</span>
+                                <span class="quiz-opt-label">Relaxed Weekends</span>
+                                <span class="quiz-opt-desc">Casual outings, errands, mood lift</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Scent Strength -->
+                    <div class="quiz-step" data-step="4">
+                        <h3 class="quiz-question">4. How strong do you like your perfume scent?</h3>
+                        <p class="quiz-subtitle">All our perfumes last 12+ hours; pick your projection style.</p>
+                        <div class="quiz-options-grid">
+                            <button type="button" class="quiz-option-btn selected" data-group="intensity" data-value="balanced">
+                                <span class="quiz-opt-icon">✨</span>
+                                <span class="quiz-opt-label">Noticeable & Inviting</span>
+                                <span class="quiz-opt-desc">Leaves an attractive scent trail that turns heads</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="intensity" data-value="bold">
+                                <span class="quiz-opt-icon">👑</span>
+                                <span class="quiz-opt-label">Bold & Room-Filling</span>
+                                <span class="quiz-opt-desc">Makes a powerful statement when you enter</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="intensity" data-value="gentle">
+                                <span class="quiz-opt-icon">🌿</span>
+                                <span class="quiz-opt-label">Gentle & Subtle</span>
+                                <span class="quiz-opt-desc">Soft, clean, and intimate close to skin</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Size & Starting Option -->
+                    <div class="quiz-step" data-step="5">
+                        <h3 class="quiz-question">5. Which size or option would you like to start with?</h3>
+                        <p class="quiz-subtitle">Select what fits your budget and preference.</p>
+                        <div class="quiz-options-grid">
+                            <button type="button" class="quiz-option-btn" data-group="size" data-value="10ml">
+                                <span class="quiz-opt-icon">💎</span>
+                                <span class="quiz-opt-label">10ml Pocket Size</span>
+                                <span class="quiz-opt-desc">From 10,000 Tzs • Easy to carry anywhere</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn selected" data-group="size" data-value="30ml">
+                                <span class="quiz-opt-icon">🏆</span>
+                                <span class="quiz-opt-label">30ml Luxury Bottle</span>
+                                <span class="quiz-opt-desc">From 30,000 Tzs • Full bottle for daily use</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="size" data-value="bundle">
+                                <span class="quiz-opt-icon">🎁</span>
+                                <span class="quiz-opt-label">3-in-1 Discovery Set</span>
+                                <span class="quiz-opt-desc">25,000 Tzs • Try 3 different scents & save</span>
                             </button>
                         </div>
                     </div>
@@ -220,9 +271,9 @@
     <section class="flagships-section" id="flagships">
         <div class="container">
             <div style="text-align: center; margin-bottom: 48px;">
-                <span class="section-tag" style="background: var(--brand-gold-light); color: var(--brand-gold);">Exclusive Formulations</span>
-                <h2 class="section-title">The Flagship Signatures</h2>
-                <p class="section-subtitle" style="margin: 0 auto;">Our crown jewel proprietary house blends. Compounded with rare essential oils and aged to perfection for those who demand an unmistakable signature presence.</p>
+                <span class="section-tag" style="background: var(--brand-gold-light); color: var(--brand-gold);">Best Sellers</span>
+                <h2 class="section-title">The Flagship Perfumes</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Our most loved and prestigious signature perfumes. Crafted for those who love high-quality scents that turn heads and make an unforgettable impression.</p>
             </div>
 
             <div class="flagships-grid" id="flagshipsContainer">
@@ -235,31 +286,31 @@
     <section class="why-section">
         <div class="container">
             <div style="text-align: center; max-width: 700px; margin: 0 auto;">
-                <span class="section-tag" style="background: rgba(33, 116, 219, 0.2); color: #7dd3fc;">The NolMart Standard</span>
-                <h2 class="section-title" style="color: #fff;">Why Our Perfumes Last While Others Fade</h2>
-                <p style="color: #94a3b8; font-size: 1.05rem;">Most commercial sprays sold in retail are Eau de Toilette (EDT) diluted with 85% water and alcohol. NolMart Scents operates on a strict artisanal standard.</p>
+                <span class="section-tag" style="background: rgba(33, 116, 219, 0.2); color: #7dd3fc;">The NolMart Scents Difference</span>
+                <h2 class="section-title" style="color: #fff;">Why Fragrance Lovers Choose Us</h2>
+                <p style="color: #94a3b8; font-size: 1.05rem;">We believe everyone deserves rich, long-lasting luxury perfumes that turn heads without costing a fortune.</p>
             </div>
 
             <div class="why-grid">
                 <div class="why-feature-box">
-                    <div class="why-icon">💧</div>
-                    <h3>60% Oil vs 15% Standard</h3>
-                    <p>We blend 6.0ml pure concentrated fragrance oil per 10ml bottle (and 18ml per 30ml bottle). That is 4x higher oil density than standard mall perfumes.</p>
-                </div>
-                <div class="why-feature-box">
-                    <div class="why-icon">🧪</div>
-                    <h3>3-Drop Fixative Anchor</h3>
-                    <p>Every bottle is infused with 3 precise drops of specialized molecular fixative that binds the fragrance notes to your skin oils, preventing premature evaporation.</p>
-                </div>
-                <div class="why-feature-box">
                     <div class="why-icon">⏳</div>
-                    <h3>Artisanal 15-Min Maturation</h3>
-                    <p>Unlike rushed mass production, each signature batch is hand-blended and rested for up to 15 minutes allowing top, heart, and base notes to marry seamlessly.</p>
+                    <h3>Lasts 12+ Hours Guaranteed</h3>
+                    <p>Crafted with premium high-concentration fragrance oils that stay on your skin and clothes from morning until midnight without fading away.</p>
                 </div>
                 <div class="why-feature-box">
-                    <div class="why-icon">🎒</div>
+                    <div class="why-icon">💎</div>
                     <h3>Pocket 10ml & Luxury 30ml</h3>
-                    <p>Carry your favorite scent everywhere in our leakproof 10ml pocket atomizers, or dress your vanity with our heavy-bottom 30ml luxury crystal bottles.</p>
+                    <p>Carry your favorite scent anywhere with our convenient 10ml travel sprayers (from 10,000 Tzs), or elevate your dresser with our 30ml luxury bottles.</p>
+                </div>
+                <div class="why-feature-box">
+                    <div class="why-icon">🚚</div>
+                    <h3>Fast Delivery to All Regions</h3>
+                    <p>Enjoy fast 24–48 hour doorstep delivery to all regions in Tanzania. Every order is safely packed and delivered in perfect condition.</p>
+                </div>
+                <div class="why-feature-box">
+                    <div class="why-icon">🔒</div>
+                    <h3>Safe & Flexible Payments</h3>
+                    <p>Pay smoothly and safely using Vodacom M-Pesa, Airtel Money, Selcom, or CRDB Bank with instant WhatsApp order confirmation.</p>
                 </div>
             </div>
         </div>
@@ -270,11 +321,11 @@
         <div class="container">
             <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: 24px;">
                 <div>
-                    <span class="section-tag">Full Fragrance Wardrobe</span>
+                    <span class="section-tag">Full Fragrance Collection</span>
                     <h2 class="section-title">Explore All Scents</h2>
                 </div>
                 <div style="color: var(--text-muted); font-size: 0.9rem;">
-                    Showing artisanal Extrait de Parfum creations
+                    Showing long-lasting luxury perfumes
                 </div>
             </div>
 
@@ -313,7 +364,7 @@
                     <span style="background: #b45309; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: var(--radius-full);">MOST POPULAR STARTER PACK</span>
                     <h3 style="font-size: 1.8rem; color: var(--brand-navy-dark); margin: 10px 0 6px;">"Try & Buy" Discovery Set</h3>
                     <p style="font-size: 1.1rem; color: var(--brand-blue); font-weight: 600; margin-bottom: 12px;">3 × 10ml Atomizers of Any Scents You Choose</p>
-                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Pick any 3 pure scents or signature blends from our entire collection. Keep one in your car, one at the office, and one at home. Full 60% oil concentration in handbag/pocket atomizers.</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Pick any 3 pure scents or signature blends from our entire collection. Keep one in your car, one at the office, and one at home. Long-lasting luxury formula in portable handbag and pocket sprayers.</p>
                     
                     <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
                         <span style="font-size: 2rem; font-weight: 700; color: var(--brand-navy);">Tzs 25,000</span>
@@ -340,25 +391,25 @@
             <div style="text-align: center; margin-bottom: 48px;">
                 <span class="section-tag">Real Feedback</span>
                 <h2 class="section-title">Loved by Scent Lovers Across Tanzania</h2>
-                <p class="section-subtitle" style="margin: 0 auto;">Over 1,200+ bottles delivered to customers in Dar es Salaam, Arusha, Mwanza, Dodoma, and Zanzibar.</p>
+                <p class="section-subtitle" style="margin: 0 auto;">Over 1,200+ bottles delivered to happy customers all across Tanzania.</p>
             </div>
 
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">"Crown Noir is simply on another level. I sprayed it before my morning meeting in Posta, and by 9 PM at night after dinner, people were still asking me what fragrance I was wearing. The longevity is real!"</p>
+                    <p class="testimonial-quote">"Crown Noir is simply on another level. I sprayed it before my morning meeting, and by 9 PM at night after dinner, people were still asking me what fragrance I was wearing. The longevity is real!"</p>
                     <div class="author-info">
                         <h5>Amani M.</h5>
-                        <span>Dar es Salaam • Verified Buyer</span>
+                        <span>Tanzania • Verified Buyer</span>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">"Cashmere Bloom is the softest, most luxurious floral scent I've owned. It smells expensive and powdery without irritating my nose. I ordered the 30ml and received it the same afternoon via WhatsApp checkout!"</p>
+                    <p class="testimonial-quote">"Cashmere Bloom is the softest, most luxurious floral scent I've owned. It smells expensive and powdery without irritating my nose. I ordered the 30ml and received it promptly via WhatsApp checkout!"</p>
                     <div class="author-info">
                         <h5>Fatma K.</h5>
-                        <span>Kinondoni, Dar • Verified Buyer</span>
+                        <span>Tanzania • Verified Buyer</span>
                     </div>
                 </div>
 
@@ -367,7 +418,7 @@
                     <p class="testimonial-quote">"The Try & Buy set is genius. I got Obsidian Reef, Vanilla 28, and 212 VIP Men. Obsidian Reef is by far my favorite—dark oud cut with crisp ocean breeze. 10/10 recommend NolMart Scents."</p>
                     <div class="author-info">
                         <h5>Kelvin S.</h5>
-                        <span>Arusha • Verified Buyer</span>
+                        <span>Tanzania • Verified Buyer</span>
                     </div>
                 </div>
             </div>
@@ -386,7 +437,7 @@
 
         <div class="cart-drawer-body">
             <div class="cart-empty-state" id="cartEmptyState">
-                <div class="cart-empty-icon">🌸</div>
+                <div class="cart-empty-icon">🛍️</div>
                 <h4>Your Bag is Empty</h4>
                 <p style="margin: 8px 0 20px; font-size: 0.88rem;">Explore our Flagships or try the 30-second Scent Quiz to discover your signature fragrance.</p>
                 <a href="#flagships" class="btn btn-outline-primary" onclick="closeCartDrawer()">
@@ -405,7 +456,7 @@
                 <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
             </div>
             <div class="cart-delivery-note">
-                <span>🚚</span> Same-day delivery in Dar es Salaam | 24-48h Tanzania Upcountry
+                <span>🚚</span> Fast Delivery to All Regions in Tanzania (24–48h)
             </div>
             <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
                 💬 Complete Order on WhatsApp →
@@ -451,7 +502,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h2>NolMart Scents</h2>
-                    <p>The artisanal perfumery division of NolMart. Formulating concentrated Extrait de Parfum with 60% pure fragrance oils and long-lasting anchors for discerning fragrance lovers across Tanzania.</p>
+                    <p>The dedicated luxury perfume store by NolMart. High-quality, long-lasting fragrances and signature blends for men and women across Tanzania.</p>
                     <div class="footer-social-row">
                         <a href="https://instagram.com/_nolmart" target="_blank" class="footer-social-btn" aria-label="Instagram">📸</a>
                         <a href="https://tiktok.com/@_nolmart" target="_blank" class="footer-social-btn" aria-label="TikTok">🎵</a>
@@ -473,9 +524,8 @@
                 <div class="footer-links">
                     <h4>Customer Care</h4>
                     <ul>
-                        <li><a href="about.html">Our 60/40 Formula</a></li>
                         <li><a href="contact.html">Delivery Information</a></li>
-                        <li><a href="contact.html">Payment Methods (M-Pesa)</a></li>
+                        <li><a href="contact.html">Payment Methods (M-Pesa, Selcom, CRDB)</a></li>
                         <li><a href="contact.html">Contact & WhatsApp</a></li>
                         <li><a href="https://nolmart.com" target="_blank">Visit NolMart Main Store ↗</a></li>
                     </ul>
@@ -487,7 +537,7 @@
                     <a href="https://wa.me/255695557358" target="_blank" class="btn btn-whatsapp" style="display: inline-flex; margin-bottom: 14px;">
                         💬 +255 695 557 358
                     </a>
-                    <p style="font-size: 0.8rem; color: #64748b;">Dar es Salaam, Tanzania • Delivery nationwide</p>
+                    <p style="font-size: 0.8rem; color: #64748b;">Tanzania • Fast delivery to all regions</p>
                 </div>
             </div>
 
@@ -501,6 +551,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Concierge -->
+    <a href="https://wa.me/255695557358?text=Hello%20NolMart%20Scents!%20I'm%20shopping%20on%20your%20website%20and%20would%20like%20assistance." target="_blank" class="floating-wa-concierge" aria-label="Order on WhatsApp">
+        <span style="font-size: 1.25rem;">💬</span>
+        <span>WhatsApp Orders</span>
+    </a>
 
     <!-- Scripts -->
     <script type="module" src="js/main.js"></script>

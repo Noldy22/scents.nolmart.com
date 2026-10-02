@@ -3,7 +3,7 @@
 
 export const CONFIG = {
     BRAND_NAME: "NolMart Scents",
-    SUBTITLE: "Artisanal Perfumery & Signature Fragrance Blends",
+    SUBTITLE: "Luxury Perfumes & Signature Fragrances",
     PARENT_BRAND: "NolMart",
     PARENT_URL: "https://nolmart.com",
     WHATSAPP_NUMBER: "255695557358",
@@ -11,13 +11,11 @@ export const CONFIG = {
     EMAIL: "info@nolmart.com",
     CURRENCY: "TZS",
     CURRENCY_SYMBOL: "Tzs",
-    DEFAULT_DELIVERY: "Delivery across Tanzania (Dar es Salaam same-day, upcountry 24-48h)",
+    DEFAULT_DELIVERY: "Fast delivery to all regions in Tanzania",
     STORAGE_KEY: "nolmart_scents_cart",
-    FORMULA_INFO: {
-        OIL_PERCENTAGE: "60%",
-        CARRIER_PERCENTAGE: "40%",
-        FIXATIVE: "3 concentrated fixative drops per bottle",
-        LONGEVITY: "8–14 Hours Skin Longevity",
-        CLASSIFICATION: "Extrait de Parfum (Highest concentration)"
+    QUALITY_INFO: {
+        LONGEVITY: "12+ Hours Longevity",
+        CLASSIFICATION: "Extra Long-Lasting Luxury Fragrance",
+        DELIVERY: "Fast delivery to all regions in Tanzania"
     }
 };

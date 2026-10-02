@@ -1,6 +1,6 @@
-# 🌸 NolMart Scents — Official Web Platform (`scents.nolmart.com`)
+# 🛍️ NolMart Scents — Official Web Platform (`scents.nolmart.com`)
 
-> **Luxury Artisanal Perfumery & Signature Fragrance Blends**  
+> **Luxury Long-Lasting Perfumes & Signature Fragrance Blends**  
 > Dedicated sub-brand of **[NolMart](https://nolmart.com)**.
 
 [![Website](https://img.shields.io/badge/Website-scents.nolmart.com-0f386b?style=for-the-badge&logo=googlechrome&logoColor=white)](https://scents.nolmart.com)
@@ -11,26 +11,28 @@
 
 ## 🌟 Overview
 
-**NolMart Scents** is engineered to deliver high-converting, luxury digital shopping for artisanal fragrances in Tanzania. Every scent is formulated using our strict **60% pure fragrance oil : 40% perfumer's ethanol** ratio, fortified with **3 drops of molecular fixative** per bottle for unmatched 12+ hour skin longevity.
+**NolMart Scents** is engineered to deliver a seamless, high-converting digital shopping experience for luxury long-lasting fragrances across Tanzania. Every fragrance in our collection is carefully formulated and matured for extra-strength projection and guaranteed 12+ hour skin longevity.
 
-This repository powers the official subdomain **[scents.nolmart.com](https://scents.nolmart.com)**, adhering to NolMart's established e-commerce checkout architecture while elevating visual luxury, micro-interactions, and mobile conversion.
+This repository powers the official web platform **[scents.nolmart.com](https://scents.nolmart.com)** (and [noldy22.github.io/scents.nolmart.com](https://noldy22.github.io/scents.nolmart.com/)), adhering to NolMart's established e-commerce checkout architecture while offering modern aesthetics, smooth scroll animations, and fast mobile performance.
 
 ---
 
 ## ✨ Key Features & High-Conversion UX
 
-- 🔮 **Interactive 30-Second Scent Matcher Quiz**: AI-styled matching algorithm guiding customers to their signature scent (Flagships, Gourmands, Aquatics, Florals) with 1-click add-to-bag.
-- 👑 **Flagship Collection Showcase**: Prominent hero spotlight for NolMart's proprietary house formulas:
-  - **Crown Noir** (Men's Bold Flagship • 212 VIP Men + Tom Ford Noir Extreme)
-  - **Cashmere Bloom** (Women's Elegant Flagship • Marshmallow + Burberry Weekend)
-  - **Azure VIP** (Men's Calm Flagship • 212 VIP Men + Vanilla 28)
-  - **Onyx Bloom** (Women's Bold Flagship • Tom Ford Noir Extreme + Pink Chiffon)
-- 💧 **Real-Time Size & Price Toggle**: Seamless 10ml (Pocket/Travel Atomizer) vs 30ml (Luxury Crystal Bottle) switcher directly on cards and product details.
-- 🛍️ **Slide-Out Floating Cart Drawer**: Real-time reactive badge counter, thumbnail previews, quantity steppers, and free delivery thresholds matching the main NolMart store standard.
-- 💬 **WhatsApp Express Checkout**: Auto-generates structured, professional receipts with customer details, bottle sizes, quantities, and totals in Tanzanian Shillings (TZS) directly to `+255 695 557 358`.
-- 📱 **Mobile-First Luxury Design**: Sticky bottom action bar, instant WhatsApp 1-click buy, and fast asset loading on mobile networks.
-- 🌿 **Fragrance Architecture (Pyramids)**: Visual breakdown of Top, Heart, and Base notes, plus longevity and sillage ratings.
+- 🔮 **Interactive 5-Step Scent Matcher Quiz**: Smart recommendation engine matching customers based on who they're shopping for, scent vibe, daily occasion, strength preference, and ideal bottle size — with 1-click add-to-bag.
+- 👑 **Flagship Collection Spotlight**: House signature fragrances with dedicated storytelling and scent notes:
+  - **Crown Noir** (Men's Bold Flagship)
+  - **Cashmere Bloom** (Women's Elegant Flagship)
+  - **Azure VIP** (Men's Fresh & Calm Flagship)
+  - **Onyx Bloom** (Women's Bold & Sweet Flagship)
+- 💧 **Real-Time Size & Price Switcher**: Seamless 10ml (Pocket & Travel Atomizer) vs 30ml (Full Luxury Crystal Bottle) switcher directly on cards and product details.
+- 🛍️ **Slide-Out Shopping Bag Drawer**: Gender-neutral, modern slide-out cart with item counters, thumbnail previews, quantity steppers, and free delivery qualifiers.
+- 💬 **WhatsApp Express Checkout**: Instantly formats structured, professional receipts with customer items, selected bottle sizes, quantities, and totals in Tanzanian Shillings (TZS) sent directly to `+255 695 557 358`.
+- 💳 **Accepted Payment Methods**: Support for **Vodacom M-Pesa**, **Airtel Money**, **Selcom Pay**, **CRDB Bank (SimBanking)**, and **Cash on Delivery**.
+- 🚚 **Nationwide Delivery**: Fast 24–48 hour doorstep delivery to **all regions in Tanzania** with safe, protective packaging.
+- 🌿 **Fragrance Scent Notes**: Clear breakdown of Top, Heart, and Base notes, plus longevity and scent trail ratings.
 - 🎁 **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 25,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
+- ✨ **Premium Motion & Scroll Animations**: Staggered scroll reveals, floating hero bottle physics, header elevation on scroll, and a floating WhatsApp concierge button.
 
 ---
 
@@ -38,27 +40,27 @@ This repository powers the official subdomain **[scents.nolmart.com](https://sce
 
 ```
 scents.nolmart.com/
-├── index.html              # Main luxury landing page & interactive quiz
-├── products.html           # Full fragrance catalog with live filters & search
-├── product.html            # Dedicated product detail page with Scent Pyramid
-├── about.html              # Artisanal 60/40 formula story & brand philosophy
-├── contact.html            # Direct WhatsApp, phone, delivery & M-Pesa guide
+├── index.html              # Main luxury landing page, 5-step quiz & catalog
+├── products.html           # Full fragrance catalog with live category filters & search
+├── product.html            # Dedicated product detail page with scent notes & specs
+├── contact.html            # Contact, delivery across all regions & payment guide
 ├── CNAME                   # Custom domain pointer (scents.nolmart.com)
 ├── vercel.json             # Deployment headers, security rules & clean URLs
-├── package.json            # Node.js scripts for local serving
+├── package.json            # Lightweight Node scripts for local preview
 ├── css/
-│   └── style.css           # Luxury perfumery design system (Poppins + Playfair Display)
+│   └── style.css           # Luxury design system, animations & responsive styling
 ├── js/
 │   ├── config.js           # Central store configuration (WhatsApp number, currency)
-│   ├── products-data.js    # Exhaustive 27-fragrance catalog from SOP v3.1
-│   ├── cart.js             # LocalStorage cart state management & event dispatcher
+│   ├── products-data.js    # Exhaustive 27-fragrance catalog with notes & specs
+│   ├── cart.js             # LocalStorage cart state management & event bus
 │   ├── cart-drawer.js      # Sliding drawer UI & WhatsApp order formatter
-│   ├── scent-quiz.js       # Interactive 3-step recommendation engine
-│   └── main.js             # Main page controller & UI bindings
+│   ├── scent-quiz.js       # 5-step interactive scent matcher algorithm
+│   └── main.js             # Page controller, animations & UI bindings
 └── img/
-    ├── logo-horizontal.png  # Header navigation logo (High-DPI transparent)
-    ├── logo-stacked.png     # Flagship stacked logo
-    ├── logo-dark.png        # Luxury navy edition logo
+    ├── logo-transparent.png # Header navigation logo (transparent high-res)
+    ├── logo-horizontal.png  # Horizontal logo badge
+    ├── logo-stacked.png     # Stacked brand logo
+    ├── logo-dark.png        # Luxury dark edition logo
     ├── logo-icon.png        # Perfume bottle app icon
     ├── favicon.ico          # Browser tab icon
     └── products/            # 27 custom rendered luxury perfume bottle shots
@@ -91,7 +93,12 @@ npx serve . -p 3000
 
 ## 🌐 Deployment to Subdomain `scents.nolmart.com`
 
-### Option 1: Vercel (Recommended)
+### Option 1: GitHub Pages (Current Live Test)
+- **Test URL**: [https://noldy22.github.io/scents.nolmart.com/](https://noldy22.github.io/scents.nolmart.com/)
+- Repository Settings > **Pages** > Source: `Deploy from branch main / root`.
+- Custom domain `scents.nolmart.com` is configured in `CNAME`.
+
+### Option 2: Vercel (Production)
 1. In Vercel, click **Add New Project** and import the GitHub repository `Noldy22/scents.nolmart.com`.
 2. In Project Settings > **Domains**, add `scents.nolmart.com`.
 3. In your DNS provider (e.g., Cloudflare or cPanel for `nolmart.com`), add a CNAME record:
@@ -99,16 +106,12 @@ npx serve . -p 3000
    - **Name**: `scents`
    - **Target**: `cname.vercel-dns.com`
 
-### Option 2: GitHub Pages
-1. Go to repository Settings > **Pages** > Source: `Deploy from branch main / root`.
-2. Under Custom Domain, enter `scents.nolmart.com` (already preconfigured in `CNAME`).
-3. Add a CNAME in your DNS for `scents` pointing to `noldy22.github.io`.
-
 ---
 
 ## 🎨 Official Brand Palette
 
 - **Primary Navy**: `#0f386b`
+- **Deep Midnight**: `#081d38`
 - **Accent Vibrant Blue**: `#2174db`
 - **Champagne Gold**: `#c5a059` / `#d4af37`
 - **WhatsApp Green**: `#25D366`
@@ -119,6 +122,7 @@ npx serve . -p 3000
 
 ## 📞 Business Contact
 
-- **Parent Company**: NolMart ([nolmart.com](https://nolmart.com))
+- **Parent Brand**: NolMart ([nolmart.com](https://nolmart.com))
 - **WhatsApp Orders**: [+255 695 557 358](https://wa.me/255695557358)
-- **Nationwide Coverage**: Dar es Salaam, Arusha, Mwanza, Dodoma, Zanzibar
+- **Delivery Coverage**: All Regions in Tanzania
+- **Accepted Payments**: Vodacom M-Pesa, Airtel Money, Selcom Pay, CRDB Bank, Cash on Delivery

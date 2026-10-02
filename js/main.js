@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Announcement Bar dismiss / ticker
     initAnnouncement();
+
+    // 8. Luxury Scroll Animations & Header Elevation
+    initScrollAnimations();
 });
 
 // Mobile Nav Toggle
@@ -311,3 +314,62 @@ function initAnnouncement() {
     if (!bar) return;
     // Keep visible for high conversion reassurance
 }
+
+// 8. Luxury Scroll Animations
+function initScrollAnimations() {
+    // A. Header scroll elevation
+    const header = document.querySelector('.site-header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 25) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    }
+
+    // B. IntersectionObserver for Reveal Animations
+    function attachReveals() {
+        const targets = document.querySelectorAll(
+            '.flagship-card, .product-card, .why-feature-box, .testimonial-card, .scent-quiz-section, .hero-content, .hero-visual-stage, .bundle-showcase-card, .footer-grid'
+        );
+
+        targets.forEach((el, idx) => {
+            if (!el.classList.contains('reveal-up')) {
+                el.classList.add('reveal-up');
+                const stagger = (idx % 4) + 1;
+                el.classList.add(`stagger-${stagger}`);
+            }
+        });
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            document.querySelectorAll('.reveal-up:not(.is-revealed)').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.reveal-up').forEach(el => el.classList.add('is-revealed'));
+        }
+    }
+
+    // Initial attach
+    attachReveals();
+
+    // Re-observe when filter tabs change
+    document.querySelectorAll('.category-filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            setTimeout(attachReveals, 80);
+        });
+    });
+}
+

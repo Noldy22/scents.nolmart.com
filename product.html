@@ -11,7 +11,7 @@
 
     <!-- 1. ANNOUNCEMENT BANNER -->
     <div class="announcement-banner">
-        <span>🚚 <strong>Fast Delivery Across Tanzania</strong> • Same-Day Dar es Salaam Delivery | Pay via <strong>M-Pesa, Tigo Pesa, Airtel Money</strong> or Cash on Delivery</span>
+        <span>🚚 <strong>Fast Delivery to All Regions in Tanzania</strong> | Pay via <strong>Vodacom M-Pesa, Airtel Money, Selcom, CRDB</strong> or Cash on Delivery</span>
         <a href="contact.html">Learn More →</a>
     </div>
 
@@ -28,8 +28,7 @@
                 <a href="products.html" class="nav-link active">All Scents</a>
                 <a href="index.html#bundles" class="nav-link">Discovery Sets</a>
                 <a href="index.html#quiz" class="nav-link">Scent Matcher</a>
-                <a href="about.html" class="nav-link">Our Formula</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="contact.html" class="nav-link">Contact & Delivery</a>
             </nav>
 
             <div class="header-right-actions">
@@ -90,7 +89,7 @@
 
         <div class="cart-drawer-body">
             <div class="cart-empty-state" id="cartEmptyState">
-                <div class="cart-empty-icon">🌸</div>
+                <div class="cart-empty-icon">🛍️</div>
                 <h4>Your Bag is Empty</h4>
                 <p style="margin: 8px 0 20px; font-size: 0.88rem;">Explore our Flagships or try the 30-second Scent Quiz to discover your signature fragrance.</p>
                 <a href="products.html" class="btn btn-outline-primary">
@@ -107,7 +106,7 @@
                 <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
             </div>
             <div class="cart-delivery-note">
-                <span>🚚</span> Same-day delivery in Dar es Salaam | 24-48h Tanzania Upcountry
+                <span>🚚</span> Fast Delivery to All Regions in Tanzania (24–48h)
             </div>
             <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
                 💬 Complete Order on WhatsApp →
@@ -121,7 +120,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h2>NolMart Scents</h2>
-                    <p>The artisanal perfumery division of NolMart. Formulating concentrated Extrait de Parfum with 60% pure fragrance oils and long-lasting anchors for discerning fragrance lovers across Tanzania.</p>
+                    <p>The dedicated luxury perfume store by NolMart. High-quality, long-lasting fragrances and signature blends for men and women across Tanzania.</p>
                     <div class="footer-social-row">
                         <a href="https://instagram.com/_nolmart" target="_blank" class="footer-social-btn" aria-label="Instagram">📸</a>
                         <a href="https://tiktok.com/@_nolmart" target="_blank" class="footer-social-btn" aria-label="TikTok">🎵</a>
@@ -142,9 +141,8 @@
                 <div class="footer-links">
                     <h4>Customer Care</h4>
                     <ul>
-                        <li><a href="about.html">Our 60/40 Formula</a></li>
                         <li><a href="contact.html">Delivery Information</a></li>
-                        <li><a href="contact.html">Payment Methods (M-Pesa)</a></li>
+                        <li><a href="contact.html">Payment Methods (M-Pesa, Selcom, CRDB)</a></li>
                         <li><a href="contact.html">Contact & WhatsApp</a></li>
                         <li><a href="https://nolmart.com" target="_blank">Visit NolMart Main Store ↗</a></li>
                     </ul>
@@ -156,7 +154,7 @@
                     <a href="https://wa.me/255695557358" target="_blank" class="btn btn-whatsapp" style="display: inline-flex; margin-bottom: 14px;">
                         💬 +255 695 557 358
                     </a>
-                    <p style="font-size: 0.8rem; color: #64748b;">Dar es Salaam, Tanzania • Delivery nationwide</p>
+                    <p style="font-size: 0.8rem; color: #64748b;">Tanzania • Fast delivery to all regions</p>
                 </div>
             </div>
 
@@ -208,7 +206,7 @@
                     <div class="product-detail-gallery">
                         <img src="${product.imageUrl}" alt="${product.name}" id="mainDetailImage">
                         <div style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">
-                            ✨ 60% Pure Essential Fragrance Oil • High Sillage
+                            ✨ Premium Quality Fragrance • Lasts 12+ Hours
                         </div>
                     </div>
 
@@ -222,20 +220,20 @@
 
                         <div class="detail-price-box">
                             <span class="detail-price-main" id="dynamicPriceLabel">Tzs ${currentPrice.toLocaleString('en-US')}</span>
-                            <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 8px;">(Extrait de Parfum Strength)</span>
+                            <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 8px;">(Extra Long-Lasting)</span>
                         </div>
 
                         <!-- Bottle Size Selector -->
                         <div class="size-selector-box">
-                            <label>Select Bottle Volume:</label>
+                            <label>Select Bottle Size:</label>
                             <div class="size-options-grid">
                                 ${Object.keys(product.prices).map(size => {
                                     const pVal = product.prices[size].toLocaleString('en-US');
                                     const isActive = size === selectedSize ? 'active' : '';
                                     return `
                                         <div class="size-option-card ${isActive}" data-size="${size}">
-                                            <div class="size-option-title">${size}</div>
-                                            <div class="size-option-price">Tzs ${pVal}</div>
+                                             <div class="size-option-title">${size}</div>
+                                             <div class="size-option-price">Tzs ${pVal}</div>
                                         </div>
                                     `;
                                 }).join('')}
@@ -252,9 +250,9 @@
                             </button>
                         </div>
 
-                        <!-- Scent Pyramid -->
+                        <!-- Scent Notes -->
                         <div class="scent-pyramid-card">
-                            <h4>🌿 Fragrance Architecture & Notes</h4>
+                            <h4>🌿 Fragrance Scent Notes</h4>
                             <div class="pyramid-tier">
                                 <span class="tier-label">TOP NOTES:</span>
                                 <span class="tier-notes">${product.notes.top.join(', ')}</span>
@@ -272,15 +270,15 @@
                         <!-- Specs Table -->
                         <div style="background: var(--bg-cream); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; font-size: 0.88rem;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <strong style="color: var(--brand-navy);">Concentration:</strong>
-                                <span>60% Fragrance Oil Extrait</span>
+                                <strong style="color: var(--brand-navy);">Scent Type:</strong>
+                                <span>Long-Lasting Luxury Perfume</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                                 <strong style="color: var(--brand-navy);">Skin Longevity:</strong>
                                 <span>${product.longevity}</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <strong style="color: var(--brand-navy);">Projection & Sillage:</strong>
+                                <strong style="color: var(--brand-navy);">Scent Trail & Projection:</strong>
                                 <span>${product.sillage}</span>
                             </div>
                             <div style="display: flex; justify-content: space-between;">
@@ -342,7 +340,25 @@
                     `;
                 }).join('');
             }
+
+            // Header scroll effect
+            const header = document.querySelector('.site-header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 25) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                }, { passive: true });
+            }
         });
     </script>
+
+    <!-- Floating WhatsApp Concierge -->
+    <a href="https://wa.me/255695557358?text=Hello%20NolMart%20Scents!%20I'm%20shopping%20on%20your%20website%20and%20would%20like%20assistance." target="_blank" class="floating-wa-concierge" aria-label="Order on WhatsApp">
+        <span style="font-size: 1.25rem;">💬</span>
+        <span>WhatsApp Orders</span>
+    </a>
 </body>
 </html>

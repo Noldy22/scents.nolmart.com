@@ -180,13 +180,13 @@ function handleWhatsAppCheckout() {
 
     // Modal prompt for customer name & delivery destination
     const customerName = prompt("Enter your Name for the delivery receipt:") || "Customer";
-    const deliveryLocation = prompt("Enter your Delivery City or Area (e.g., Kinondoni Dar es Salaam, Arusha, Dodoma):") || "Tanzania";
+    const deliveryLocation = prompt("Enter your Delivery Location in Tanzania (City / Area):") || "Tanzania";
 
-    let message = `*🌸 NEW ORDER — NOLMART SCENTS*\n`;
+    let message = `*🛍️ NEW ORDER — NOLMART SCENTS*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
     message += `*Customer Details:*\n`;
     message += `• *Name:* ${customerName}\n`;
-    message += `• *Delivery Area:* ${deliveryLocation}\n\n`;
+    message += `• *Delivery Location:* ${deliveryLocation}\n\n`;
     message += `*Selected Fragrances:*\n`;
 
     cart.forEach((item, index) => {
@@ -198,8 +198,8 @@ function handleWhatsAppCheckout() {
     const total = getCartTotalPrice().toLocaleString('en-US');
     message += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
     message += `*Total Amount:* *Tzs ${total}*\n\n`;
-    message += `*Payment Preference:* (M-Pesa / Tigo Pesa / Airtel Money / Cash on Delivery)\n\n`;
-    message += `Please confirm my order and send payment & delivery instructions. Thank you!`;
+    message += `*Payment Preference:* (M-Pesa / Airtel Money / Selcom / CRDB Bank / Cash on Delivery)\n\n`;
+    message += `Please confirm my order and send payment & delivery details. Thank you!`;
 
     const encoded = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encoded}`;
@@ -216,14 +216,14 @@ export function directWhatsAppOrder(product, size = "30ml", quantity = 1) {
     const price = product.prices[size] || Object.values(product.prices)[0] || 0;
     const total = (price * quantity).toLocaleString('en-US');
 
-    let message = `*🌸 INSTANT ORDER — NOLMART SCENTS*\n`;
+    let message = `*✨ INSTANT ORDER — NOLMART SCENTS*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
     message += `Hello NolMart Scents! I would like to order:\n\n`;
     message += `• *Fragrance:* ${product.name}\n`;
     message += `• *Size:* ${size}\n`;
     message += `• *Quantity:* ${quantity}\n`;
     message += `• *Total Price:* *Tzs ${total}*\n\n`;
-    message += `Please share payment details (M-Pesa/Tigo Pesa/Airtel Money) and delivery timeline. Thank you!`;
+    message += `Please share payment details (M-Pesa / Airtel Money / Selcom / CRDB) and delivery timeline. Thank you!`;
 
     const encoded = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encoded}`;
