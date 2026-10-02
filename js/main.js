@@ -332,14 +332,12 @@ function initScrollAnimations() {
     // B. IntersectionObserver for Reveal Animations
     function attachReveals() {
         const targets = document.querySelectorAll(
-            '.flagship-card, .product-card, .why-feature-box, .testimonial-card, .scent-quiz-section, .hero-content, .hero-visual-stage, .bundle-showcase-card, .footer-grid'
+            '.flagship-card, .product-card, .why-feature-box, .testimonial-card, .bundle-showcase-card'
         );
 
-        targets.forEach((el, idx) => {
+        targets.forEach((el) => {
             if (!el.classList.contains('reveal-up')) {
                 el.classList.add('reveal-up');
-                const stagger = (idx % 4) + 1;
-                el.classList.add(`stagger-${stagger}`);
             }
         });
 
@@ -352,8 +350,8 @@ function initScrollAnimations() {
                     }
                 });
             }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -30px 0px'
+                threshold: 0.05,
+                rootMargin: '100px 0px -20px 0px'
             });
 
             document.querySelectorAll('.reveal-up:not(.is-revealed)').forEach(el => observer.observe(el));
