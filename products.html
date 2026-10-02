@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Fragrances — NolMart Scents Tanzania</title>
+    <meta name="description" content="Browse the full collection of NolMart Scents artisanal perfumes: Flagships, Signature Blends, Pure Extrait de Parfum, and Discovery Sets.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 1. ANNOUNCEMENT BANNER -->
+    <div class="announcement-banner">
+        <span>🚚 <strong>Fast Delivery Across Tanzania</strong> • Same-Day Dar es Salaam Delivery | Pay via <strong>M-Pesa, Tigo Pesa, Airtel Money</strong> or Cash on Delivery</span>
+        <a href="contact.html">Learn More →</a>
+    </div>
+
+    <!-- 2. SITE HEADER -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="header-brand" aria-label="NolMart Scents Home">
+                <img src="img/logo-horizontal.png" alt="NolMart Scents Logo" class="header-logo-img">
+            </a>
+
+            <nav class="main-nav" id="mainNavMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#flagships" class="nav-link">Flagships</a>
+                <a href="products.html" class="nav-link active">All Scents</a>
+                <a href="index.html#bundles" class="nav-link">Discovery Sets</a>
+                <a href="index.html#quiz" class="nav-link">Scent Matcher</a>
+                <a href="about.html" class="nav-link">Our Formula</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-right-actions">
+                <button class="header-icon-btn open-cart-btn" aria-label="View Shopping Bag">
+                    🛍️
+                    <span class="cart-badge-count">0</span>
+                </button>
+                <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. PAGE HERO -->
+    <section style="background: radial-gradient(circle at 50% 10%, rgba(33, 116, 219, 0.08) 0%, transparent 60%), #faf8f5; padding: 50px 0 30px; text-align: center; border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+            <span class="section-tag">Artisanal Perfume Wardrobe</span>
+            <h1 class="section-title" style="margin-bottom: 10px;">The Complete Fragrance Catalog</h1>
+            <p class="section-subtitle" style="margin: 0 auto;">Every formula is blended at 60% pure oil concentration for unrivaled projection and 12+ hour longevity on skin.</p>
+        </div>
+    </section>
+
+    <!-- 4. CATALOG SECTION -->
+    <main style="padding: 40px 0 90px; background: #fff;">
+        <div class="container">
+            <!-- Controls Bar: Search & Sort -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 30px;">
+                <div style="flex: 1; min-width: 260px; max-width: 480px; position: relative;">
+                    <input type="text" id="catalogSearchInput" placeholder="Search by name, note, or vibe (e.g. oud, vanilla, fresh)..." style="width: 100%; padding: 12px 18px 12px 42px; border: 1.5px solid var(--border-color); border-radius: var(--radius-full); font-size: 0.92rem; outline: none; font-family: inherit;">
+                    <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: var(--text-muted);">🔍</span>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Sort By:</label>
+                    <select id="catalogSortSelect" style="padding: 10px 16px; border: 1.5px solid var(--border-color); border-radius: var(--radius-full); font-size: 0.88rem; outline: none; font-family: inherit; background: #fff; cursor: pointer;">
+                        <option value="featured">Featured / Best Matches</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs-row" id="catalogFilterTabs">
+                <button class="category-filter-tab active" data-filter="all">All (27)</button>
+                <button class="category-filter-tab" data-filter="flagship">👑 Flagships</button>
+                <button class="category-filter-tab" data-filter="men">For Men</button>
+                <button class="category-filter-tab" data-filter="women">For Women</button>
+                <button class="category-filter-tab" data-filter="signature">Signature Blends</button>
+                <button class="category-filter-tab" data-filter="pure">Pure Scents</button>
+                <button class="category-filter-tab" data-filter="bundle">🎁 Discovery Sets</button>
+            </div>
+
+            <!-- Active Count & Results -->
+            <div id="catalogResultsCount" style="margin-bottom: 24px; font-size: 0.85rem; color: var(--text-muted);">
+                Showing 27 fragrances
+            </div>
+
+            <!-- Grid -->
+            <div class="products-grid" id="catalogGridContainer"></div>
+        </div>
+    </main>
+
+    <!-- 5. FLOATING CART DRAWER -->
+    <div class="cart-drawer-backdrop" id="cartDrawerBackdrop"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3 class="cart-drawer-title">
+                <span>🛍️</span> Your Shopping Bag
+            </h3>
+            <button class="cart-drawer-close-btn" id="closeCartDrawerBtn" aria-label="Close bag">&times;</button>
+        </div>
+
+        <div class="cart-drawer-body">
+            <div class="cart-empty-state" id="cartEmptyState">
+                <div class="cart-empty-icon">🌸</div>
+                <h4>Your Bag is Empty</h4>
+                <p style="margin: 8px 0 20px; font-size: 0.88rem;">Select a fragrance or discovery set to add to your bag.</p>
+            </div>
+
+            <div id="cartDrawerItems"></div>
+        </div>
+
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display: none;">
+            <div class="cart-subtotal-row">
+                <span class="cart-subtotal-label">Subtotal:</span>
+                <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
+            </div>
+            <div class="cart-delivery-note">
+                <span>🚚</span> Same-day delivery in Dar es Salaam | 24-48h Tanzania Upcountry
+            </div>
+            <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
+                💬 Complete Order on WhatsApp →
+            </button>
+        </div>
+    </div>
+
+    <!-- 6. SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>NolMart Scents</h2>
+                    <p>The artisanal perfumery division of NolMart. Formulating concentrated Extrait de Parfum with 60% pure fragrance oils and long-lasting anchors for discerning fragrance lovers across Tanzania.</p>
+                    <div class="footer-social-row">
+                        <a href="https://instagram.com/_nolmart" target="_blank" class="footer-social-btn" aria-label="Instagram">📸</a>
+                        <a href="https://tiktok.com/@_nolmart" target="_blank" class="footer-social-btn" aria-label="TikTok">🎵</a>
+                        <a href="https://wa.me/255695557358" target="_blank" class="footer-social-btn" aria-label="WhatsApp">💬</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="index.html#flagships">👑 Flagship Signatures</a></li>
+                        <li><a href="products.html?filter=signature">🌊 Signature Blends</a></li>
+                        <li><a href="products.html?filter=pure">🍬 Pure Fragrances</a></li>
+                        <li><a href="products.html?filter=bundle">🎁 Discovery Sets</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="about.html">Our 60/40 Formula</a></li>
+                        <li><a href="contact.html">Delivery Information</a></li>
+                        <li><a href="contact.html">Payment Methods (M-Pesa)</a></li>
+                        <li><a href="contact.html">Contact & WhatsApp</a></li>
+                        <li><a href="https://nolmart.com" target="_blank">Visit NolMart Main Store ↗</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Direct Contact</h4>
+                    <p style="margin-bottom: 12px; font-size: 0.88rem;">Need advice or a custom order?</p>
+                    <a href="https://wa.me/255695557358" target="_blank" class="btn btn-whatsapp" style="display: inline-flex; margin-bottom: 14px;">
+                        💬 +255 695 557 358
+                    </a>
+                    <p style="font-size: 0.8rem; color: #64748b;">Dar es Salaam, Tanzania • Delivery nationwide</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>
+                    &copy; 2026 <strong>NolMart Scents</strong> (A sub-brand of <a href="https://nolmart.com" target="_blank">NolMart</a>). All rights reserved.
+                </div>
+                <div>
+                    Powered by NolMart E-Commerce Architecture • Subdomain: <a href="https://scents.nolmart.com">scents.nolmart.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Products Page Script -->
+    <script type="module">
+        import { PRODUCTS, getProductById } from './js/products-data.js';
+        import { addItemToCart } from './js/cart.js';
+        import { initCartDrawer, openCartDrawer, directWhatsAppOrder, showToast } from './js/cart-drawer.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCartDrawer();
+
+            // Mobile nav
+            const burger = document.getElementById('mobileMenuToggle');
+            const navMenu = document.getElementById('mainNavMenu');
+            if (burger && navMenu) {
+                burger.addEventListener('click', () => {
+                    burger.classList.toggle('active');
+                    navMenu.classList.toggle('open');
+                });
+            }
+
+            const searchInput = document.getElementById('catalogSearchInput');
+            const sortSelect = document.getElementById('catalogSortSelect');
+            const filterTabs = document.querySelectorAll('#catalogFilterTabs button');
+            const gridContainer = document.getElementById('catalogGridContainer');
+            const countLabel = document.getElementById('catalogResultsCount');
+
+            // Read query param if passed e.g. products.html?filter=flagship
+            const urlParams = new URLSearchParams(window.location.search);
+            let activeFilter = urlParams.get('filter') || 'all';
+
+            filterTabs.forEach(tab => {
+                if (tab.dataset.filter === activeFilter) {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                }
+                tab.addEventListener('click', () => {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    activeFilter = tab.dataset.filter;
+                    renderCatalog();
+                });
+            });
+
+            if (searchInput) searchInput.addEventListener('input', renderCatalog);
+            if (sortSelect) sortSelect.addEventListener('change', renderCatalog);
+
+            function renderCatalog() {
+                const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+                const sortBy = sortSelect ? sortSelect.value : 'featured';
+
+                let list = PRODUCTS.filter(p => {
+                    // Category filter
+                    if (activeFilter === 'flagship' && !p.isFlagship) return false;
+                    if (activeFilter === 'men' && p.gender !== 'men' && p.gender !== 'unisex') return false;
+                    if (activeFilter === 'women' && p.gender !== 'women' && p.gender !== 'unisex') return false;
+                    if (activeFilter === 'signature' && p.category !== 'signature') return false;
+                    if (activeFilter === 'pure' && p.category !== 'pure') return false;
+                    if (activeFilter === 'bundle' && p.category !== 'bundle') return false;
+
+                    // Search query
+                    if (query) {
+                        const inName = p.name.toLowerCase().includes(query);
+                        const inDesc = p.description.toLowerCase().includes(query);
+                        const inTag = p.tagline.toLowerCase().includes(query);
+                        const inNotes = Object.values(p.notes).flat().some(n => n.toLowerCase().includes(query));
+                        if (!inName && !inDesc && !inTag && !inNotes) return false;
+                    }
+
+                    return true;
+                });
+
+                // Sorting
+                if (sortBy === 'price-low') {
+                    list.sort((a, b) => {
+                        const pA = a.prices["10ml"] || Object.values(a.prices)[0];
+                        const pB = b.prices["10ml"] || Object.values(b.prices)[0];
+                        return pA - pB;
+                    });
+                } else if (sortBy === 'price-high') {
+                    list.sort((a, b) => {
+                        const pA = a.prices["30ml"] || Object.values(a.prices)[0];
+                        const pB = b.prices["30ml"] || Object.values(b.prices)[0];
+                        return pB - pA;
+                    });
+                } else if (sortBy === 'name') {
+                    list.sort((a, b) => a.name.localeCompare(b.name));
+                }
+
+                if (countLabel) {
+                    countLabel.textContent = `Showing ${list.length} fragrance${list.length === 1 ? '' : 's'}`;
+                }
+
+                if (list.length === 0) {
+                    gridContainer.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--text-muted);">
+                            <h3>No fragrances found matching your search</h3>
+                            <p style="margin-top: 8px;">Try clearing filters or search terms like "vanilla", "oud", or "floral".</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                gridContainer.innerHTML = list.map(p => {
+                    const has10 = !!p.prices["10ml"];
+                    const has30 = !!p.prices["30ml"];
+                    const defaultSize = p.defaultSize || "30ml";
+                    const defaultPrice = p.prices[defaultSize] || Object.values(p.prices)[0] || 0;
+
+                    return `
+                        <div class="product-card" data-product-id="${p.id}">
+                            <div class="product-badge-tag">${p.badge}</div>
+                            <a href="product.html?id=${p.id}" class="product-card-link">
+                                <div class="product-img-box">
+                                    <img src="${p.imageUrl}" alt="${p.name}" loading="lazy">
+                                </div>
+                            </a>
+                            <div class="product-info-box">
+                                <div class="product-cat-label">${p.category.toUpperCase()} • ${p.gender.toUpperCase()}</div>
+                                <h4 class="product-title"><a href="product.html?id=${p.id}">${p.name}</a></h4>
+                                <p class="product-short-notes">${p.notes.top.slice(0, 2).join(' • ')}</p>
+
+                                ${(has10 && has30) ? `
+                                    <div class="product-card-sizes">
+                                        <button class="card-size-opt active" data-size="30ml">30ml</button>
+                                        <button class="card-size-opt" data-size="10ml">10ml</button>
+                                    </div>
+                                ` : `
+                                    <div class="product-card-sizes">
+                                        <span class="single-size-label">${defaultSize}</span>
+                                    </div>
+                                `}
+
+                                <div class="product-price-row">
+                                    <span class="product-price-val">Tzs ${defaultPrice.toLocaleString('en-US')}</span>
+                                </div>
+
+                                <div class="product-action-row">
+                                    <button class="btn btn-outline-primary card-add-bag-btn" data-id="${p.id}" data-size="${defaultSize}">
+                                        🛒 Add
+                                    </button>
+                                    <button class="btn btn-whatsapp card-wa-buy-btn" data-id="${p.id}" data-size="${defaultSize}">
+                                        Order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                attachEvents();
+            }
+
+            function attachEvents() {
+                // Size switcher clicks
+                gridContainer.querySelectorAll('.product-card').forEach(card => {
+                    const productId = card.dataset.productId;
+                    const product = getProductById(productId);
+                    if (!product) return;
+
+                    const sizeBtns = card.querySelectorAll('.card-size-opt');
+                    const priceVal = card.querySelector('.product-price-val');
+                    const addBtn = card.querySelector('.card-add-bag-btn');
+                    const waBtn = card.querySelector('.card-wa-buy-btn');
+
+                    sizeBtns.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            sizeBtns.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+
+                            const chosenSize = btn.dataset.size;
+                            const newPrice = product.prices[chosenSize];
+
+                            if (priceVal && newPrice) {
+                                priceVal.textContent = `Tzs ${newPrice.toLocaleString('en-US')}`;
+                            }
+
+                            if (addBtn) addBtn.dataset.size = chosenSize;
+                            if (waBtn) waBtn.dataset.size = chosenSize;
+                        });
+                    });
+                });
+
+                // Add to bag
+                gridContainer.querySelectorAll('.card-add-bag-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const id = btn.dataset.id;
+                        const size = btn.dataset.size || "30ml";
+                        const product = getProductById(id);
+                        if (product) {
+                            addItemToCart(product, size, 1);
+                            showToast(`Added ${product.name} (${size}) to bag!`);
+                            openCartDrawer();
+                        }
+                    });
+                });
+
+                // Buy on WhatsApp
+                gridContainer.querySelectorAll('.card-wa-buy-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const id = btn.dataset.id;
+                        const size = btn.dataset.size || "30ml";
+                        const product = getProductById(id);
+                        if (product) {
+                            directWhatsAppOrder(product, size, 1);
+                        }
+                    });
+                });
+            }
+
+            renderCatalog();
+        });
+    </script>
+</body>
+</html>

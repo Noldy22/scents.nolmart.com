@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details — NolMart Scents</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 1. ANNOUNCEMENT BANNER -->
+    <div class="announcement-banner">
+        <span>🚚 <strong>Fast Delivery Across Tanzania</strong> • Same-Day Dar es Salaam Delivery | Pay via <strong>M-Pesa, Tigo Pesa, Airtel Money</strong> or Cash on Delivery</span>
+        <a href="contact.html">Learn More →</a>
+    </div>
+
+    <!-- 2. SITE HEADER -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="header-brand" aria-label="NolMart Scents Home">
+                <img src="img/logo-horizontal.png" alt="NolMart Scents Logo" class="header-logo-img">
+            </a>
+
+            <nav class="main-nav" id="mainNavMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#flagships" class="nav-link">Flagships</a>
+                <a href="products.html" class="nav-link active">All Scents</a>
+                <a href="index.html#bundles" class="nav-link">Discovery Sets</a>
+                <a href="index.html#quiz" class="nav-link">Scent Matcher</a>
+                <a href="about.html" class="nav-link">Our Formula</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-right-actions">
+                <button class="header-icon-btn open-cart-btn" aria-label="View Shopping Bag">
+                    🛍️
+                    <span class="cart-badge-count">0</span>
+                </button>
+                <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. BREADCRUMBS -->
+    <div style="background: #fff; border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+        <div class="container" style="font-size: 0.85rem; color: var(--text-muted);">
+            <a href="index.html" style="color: var(--brand-blue);">Home</a> &gt; 
+            <a href="products.html" style="color: var(--brand-blue);">All Scents</a> &gt; 
+            <span id="breadcrumbCurrentName" style="color: var(--text-primary); font-weight: 600;">Fragrance</span>
+        </div>
+    </div>
+
+    <!-- 4. PRODUCT DETAIL SECTION -->
+    <main class="product-detail-section">
+        <div class="container">
+            <div class="product-detail-grid" id="productDetailContainer">
+                <!-- Dynamically injected -->
+                <div style="text-align: center; padding: 60px 0; color: var(--text-muted); grid-column: 1 / -1;">
+                    Loading fragrance details...
+                </div>
+            </div>
+
+            <!-- RELATED PRODUCTS SECTION -->
+            <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-color);">
+                <div style="text-align: center; margin-bottom: 36px;">
+                    <span class="section-tag">You May Also Admire</span>
+                    <h3 class="section-title">Complementary Fragrances</h3>
+                </div>
+                <div class="products-grid" id="relatedProductsContainer">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 5. FLOATING CART DRAWER -->
+    <div class="cart-drawer-backdrop" id="cartDrawerBackdrop"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3 class="cart-drawer-title">
+                <span>🛍️</span> Your Shopping Bag
+            </h3>
+            <button class="cart-drawer-close-btn" id="closeCartDrawerBtn" aria-label="Close bag">&times;</button>
+        </div>
+
+        <div class="cart-drawer-body">
+            <div class="cart-empty-state" id="cartEmptyState">
+                <div class="cart-empty-icon">🌸</div>
+                <h4>Your Bag is Empty</h4>
+                <p style="margin: 8px 0 20px; font-size: 0.88rem;">Explore our Flagships or try the 30-second Scent Quiz to discover your signature fragrance.</p>
+                <a href="products.html" class="btn btn-outline-primary">
+                    Browse All Scents
+                </a>
+            </div>
+
+            <div id="cartDrawerItems"></div>
+        </div>
+
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display: none;">
+            <div class="cart-subtotal-row">
+                <span class="cart-subtotal-label">Subtotal:</span>
+                <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
+            </div>
+            <div class="cart-delivery-note">
+                <span>🚚</span> Same-day delivery in Dar es Salaam | 24-48h Tanzania Upcountry
+            </div>
+            <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
+                💬 Complete Order on WhatsApp →
+            </button>
+        </div>
+    </div>
+
+    <!-- 6. SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>NolMart Scents</h2>
+                    <p>The artisanal perfumery division of NolMart. Formulating concentrated Extrait de Parfum with 60% pure fragrance oils and long-lasting anchors for discerning fragrance lovers across Tanzania.</p>
+                    <div class="footer-social-row">
+                        <a href="https://instagram.com/_nolmart" target="_blank" class="footer-social-btn" aria-label="Instagram">📸</a>
+                        <a href="https://tiktok.com/@_nolmart" target="_blank" class="footer-social-btn" aria-label="TikTok">🎵</a>
+                        <a href="https://wa.me/255695557358" target="_blank" class="footer-social-btn" aria-label="WhatsApp">💬</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="index.html#flagships">👑 Flagship Signatures</a></li>
+                        <li><a href="products.html?cat=signature">🌊 Signature Blends</a></li>
+                        <li><a href="products.html?cat=pure">🍬 Pure Fragrances</a></li>
+                        <li><a href="products.html?cat=bundle">🎁 Discovery Sets</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="about.html">Our 60/40 Formula</a></li>
+                        <li><a href="contact.html">Delivery Information</a></li>
+                        <li><a href="contact.html">Payment Methods (M-Pesa)</a></li>
+                        <li><a href="contact.html">Contact & WhatsApp</a></li>
+                        <li><a href="https://nolmart.com" target="_blank">Visit NolMart Main Store ↗</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Direct Contact</h4>
+                    <p style="margin-bottom: 12px; font-size: 0.88rem;">Need advice or a custom order?</p>
+                    <a href="https://wa.me/255695557358" target="_blank" class="btn btn-whatsapp" style="display: inline-flex; margin-bottom: 14px;">
+                        💬 +255 695 557 358
+                    </a>
+                    <p style="font-size: 0.8rem; color: #64748b;">Dar es Salaam, Tanzania • Delivery nationwide</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>
+                    &copy; 2026 <strong>NolMart Scents</strong> (A sub-brand of <a href="https://nolmart.com" target="_blank">NolMart</a>). All rights reserved.
+                </div>
+                <div>
+                    Powered by NolMart E-Commerce Architecture • Subdomain: <a href="https://scents.nolmart.com">scents.nolmart.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dedicated Product Detail Script -->
+    <script type="module">
+        import { PRODUCTS, getProductById } from './js/products-data.js';
+        import { addItemToCart } from './js/cart.js';
+        import { initCartDrawer, openCartDrawer, directWhatsAppOrder, showToast } from './js/cart-drawer.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCartDrawer();
+
+            // Mobile nav
+            const burger = document.getElementById('mobileMenuToggle');
+            const navMenu = document.getElementById('mainNavMenu');
+            if (burger && navMenu) {
+                burger.addEventListener('click', () => {
+                    burger.classList.toggle('active');
+                    navMenu.classList.toggle('open');
+                });
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || "crown-noir";
+            const product = getProductById(productId) || PRODUCTS[0];
+
+            document.title = `${product.name} — NolMart Scents Extrait de Parfum`;
+            const breadcrumbEl = document.getElementById('breadcrumbCurrentName');
+            if (breadcrumbEl) breadcrumbEl.textContent = product.name;
+
+            const container = document.getElementById('productDetailContainer');
+            let selectedSize = product.defaultSize || Object.keys(product.prices)[0] || "30ml";
+
+            function renderDetail() {
+                const currentPrice = product.prices[selectedSize] || Object.values(product.prices)[0];
+
+                container.innerHTML = `
+                    <div class="product-detail-gallery">
+                        <img src="${product.imageUrl}" alt="${product.name}" id="mainDetailImage">
+                        <div style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">
+                            ✨ 60% Pure Essential Fragrance Oil • High Sillage
+                        </div>
+                    </div>
+
+                    <div class="product-detail-content">
+                        <span class="detail-badge-pill">${product.badge}</span>
+                        <h1 class="detail-title">${product.name}</h1>
+                        <p class="detail-tagline">${product.tagline}</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1.05rem; line-height: 1.7;">
+                            ${product.description}
+                        </p>
+
+                        <div class="detail-price-box">
+                            <span class="detail-price-main" id="dynamicPriceLabel">Tzs ${currentPrice.toLocaleString('en-US')}</span>
+                            <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 8px;">(Extrait de Parfum Strength)</span>
+                        </div>
+
+                        <!-- Bottle Size Selector -->
+                        <div class="size-selector-box">
+                            <label>Select Bottle Volume:</label>
+                            <div class="size-options-grid">
+                                ${Object.keys(product.prices).map(size => {
+                                    const pVal = product.prices[size].toLocaleString('en-US');
+                                    const isActive = size === selectedSize ? 'active' : '';
+                                    return `
+                                        <div class="size-option-card ${isActive}" data-size="${size}">
+                                            <div class="size-option-title">${size}</div>
+                                            <div class="size-option-price">Tzs ${pVal}</div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Quantity and Action Buttons -->
+                        <div class="detail-actions">
+                            <button class="btn btn-primary" id="detailAddToCartBtn">
+                                🛒 Add to Shopping Bag
+                            </button>
+                            <button class="btn btn-whatsapp" id="detailWhatsAppBtn">
+                                💬 Buy Now on WhatsApp
+                            </button>
+                        </div>
+
+                        <!-- Scent Pyramid -->
+                        <div class="scent-pyramid-card">
+                            <h4>🌿 Fragrance Architecture & Notes</h4>
+                            <div class="pyramid-tier">
+                                <span class="tier-label">TOP NOTES:</span>
+                                <span class="tier-notes">${product.notes.top.join(', ')}</span>
+                            </div>
+                            <div class="pyramid-tier">
+                                <span class="tier-label">HEART NOTES:</span>
+                                <span class="tier-notes">${product.notes.heart.join(', ')}</span>
+                            </div>
+                            <div class="pyramid-tier">
+                                <span class="tier-label">BASE NOTES:</span>
+                                <span class="tier-notes">${product.notes.base.join(', ')}</span>
+                            </div>
+                        </div>
+
+                        <!-- Specs Table -->
+                        <div style="background: var(--bg-cream); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; font-size: 0.88rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <strong style="color: var(--brand-navy);">Concentration:</strong>
+                                <span>60% Fragrance Oil Extrait</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <strong style="color: var(--brand-navy);">Skin Longevity:</strong>
+                                <span>${product.longevity}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <strong style="color: var(--brand-navy);">Projection & Sillage:</strong>
+                                <span>${product.sillage}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: var(--brand-navy);">Ideal Occasion:</strong>
+                                <span>${product.bestFor}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Size switcher clicks
+                container.querySelectorAll('.size-option-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        selectedSize = card.dataset.size;
+                        renderDetail();
+                    });
+                });
+
+                // Add to bag
+                document.getElementById('detailAddToCartBtn').addEventListener('click', () => {
+                    addItemToCart(product, selectedSize, 1);
+                    showToast(`Added ${product.name} (${selectedSize}) to bag!`);
+                    openCartDrawer();
+                });
+
+                // Buy on WhatsApp
+                document.getElementById('detailWhatsAppBtn').addEventListener('click', () => {
+                    directWhatsAppOrder(product, selectedSize, 1);
+                });
+            }
+
+            renderDetail();
+
+            // Render Related Products
+            const relatedContainer = document.getElementById('relatedProductsContainer');
+            if (relatedContainer) {
+                const related = PRODUCTS.filter(p => p.id !== product.id && (p.category === product.category || p.gender === product.gender)).slice(0, 4);
+                relatedContainer.innerHTML = related.map(rp => {
+                    const price = Object.values(rp.prices)[0].toLocaleString('en-US');
+                    return `
+                        <div class="product-card" data-product-id="${rp.id}">
+                            <div class="product-badge-tag">${rp.badge}</div>
+                            <a href="product.html?id=${rp.id}" class="product-card-link">
+                                <div class="product-img-box">
+                                    <img src="${rp.imageUrl}" alt="${rp.name}">
+                                </div>
+                            </a>
+                            <div class="product-info-box">
+                                <div class="product-cat-label">${rp.category.toUpperCase()}</div>
+                                <h4 class="product-title"><a href="product.html?id=${rp.id}">${rp.name}</a></h4>
+                                <div class="product-price-row">
+                                    <span class="product-price-val">Tzs ${price}</span>
+                                </div>
+                                <a href="product.html?id=${rp.id}" class="btn btn-outline-primary" style="margin-top: auto; font-size: 0.8rem; padding: 8px;">
+                                    View Fragrance →
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        });
+    </script>
+</body>
+</html>

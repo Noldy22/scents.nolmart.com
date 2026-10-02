@@ -1,0 +1,21 @@
+{
+  "name": "scents.nolmart.com",
+  "version": "1.0.0",
+  "description": "NolMart Scents — Luxury Artisanal Perfumery Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000"
+  },
+  "keywords": [
+    "perfume",
+    "fragrance",
+    "nolmart",
+    "nolmart-scents",
+    "tanzania",
+    "e-commerce",
+    "extrait-de-parfum"
+  ],
+  "author": "Noldy22",
+  "license": "ISC"
+}

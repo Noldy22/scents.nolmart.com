@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NolMart Scents — Luxury Artisanal Perfumes & Signature Blends | Tanzania</title>
+    <meta name="description" content="Shop luxury artisanal perfumes crafted with 60% pure fragrance oil for 12+ hours longevity. Flagship scents, signature blends, and 10ml/30ml discovery bottles. Fast delivery across Tanzania.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 1. TOP ANNOUNCEMENT BANNER -->
+    <div class="announcement-banner">
+        <span>🚚 <strong>Fast Delivery Across Tanzania</strong> • Same-Day Dar es Salaam Delivery | Pay via <strong>M-Pesa, Tigo Pesa, Airtel Money</strong> or Cash on Delivery</span>
+        <a href="contact.html">Learn More →</a>
+    </div>
+
+    <!-- 2. SITE HEADER -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="header-brand" aria-label="NolMart Scents Home">
+                <img src="img/logo-horizontal.png" alt="NolMart Scents Logo" class="header-logo-img">
+            </a>
+
+            <nav class="main-nav" id="mainNavMenu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="#flagships" class="nav-link">Flagships</a>
+                <a href="#catalog" class="nav-link">Shop Scents</a>
+                <a href="#bundles" class="nav-link">Discovery Sets</a>
+                <a href="#quiz" class="nav-link">Scent Matcher</a>
+                <a href="about.html" class="nav-link">Our Formula</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-right-actions">
+                <button class="header-icon-btn" id="openSearchModalBtn" aria-label="Search fragrances">
+                    🔍
+                </button>
+                <button class="header-icon-btn open-cart-btn" aria-label="View Shopping Bag">
+                    🛍️
+                    <span class="cart-badge-count">0</span>
+                </button>
+                <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. HERO SECTION -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    ✨ <span>Extrait de Parfum • 60% Oil Concentration</span>
+                </div>
+                <h1 class="hero-title">
+                    Artisanal Fragrance. <span>Uncompromising</span> Longevity.
+                </h1>
+                <p class="hero-description">
+                    Handcrafted in Tanzania using 60% pure essential fragrance oils and French long-lasting fixatives. Experience rich projection that lasts 12+ hours without fading away.
+                </p>
+
+                <div class="hero-ctas">
+                    <a href="#flagships" class="btn btn-primary">
+                        👑 Explore Flagships
+                    </a>
+                    <a href="#quiz" class="btn btn-gold">
+                        🔮 Find Your Scent (Quiz)
+                    </a>
+                    <a href="https://wa.me/255695557358?text=Hello%20NolMart%20Scents!%20I'm%20looking%20for%20a%20signature%20perfume%20recommendation." target="_blank" class="btn btn-whatsapp">
+                        💬 Chat with Perfumer
+                    </a>
+                </div>
+
+                <div class="hero-trust-row">
+                    <div class="trust-item">
+                        <div class="trust-item-icon">💧</div>
+                        <span>60% Pure Oil (Extrait)</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-item-icon">⏳</div>
+                        <span>12+ Hours Sillage</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-item-icon">🇹🇿</div>
+                        <span>Dar Same-Day Delivery</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual-stage">
+                <div class="hero-main-card">
+                    <img src="img/products/crown-noir.png" alt="Crown Noir - NolMart Scents Flagship" class="hero-bottle-img">
+                    <div class="hero-floating-pill">
+                        👑 Crown Noir • Men's Flagship Scent
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. INTERACTIVE SCENT MATCHER QUIZ -->
+    <section class="scent-quiz-section" id="quiz">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <span class="section-tag">AI Fragrance Matcher</span>
+                <h2 class="section-title">Find Your Signature Scent</h2>
+                <p class="section-subtitle" style="margin: 0 auto 30px;">Answer 3 quick questions and let our master formulation engine match you with your dream fragrance in 30 seconds.</p>
+            </div>
+
+            <div class="quiz-wrapper">
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                </div>
+
+                <div id="scentQuizForm">
+                    <!-- Step 1: Target -->
+                    <div class="quiz-step active" data-step="1">
+                        <h3 class="quiz-question">1. Who are you choosing this fragrance for?</h3>
+                        <p class="quiz-subtitle">We tailor scent notes to personal style and skin chemistry.</p>
+                        <div class="quiz-options-grid">
+                            <button type="button" class="quiz-option-btn" data-group="gender" data-value="men">
+                                <span class="quiz-opt-icon">👔</span>
+                                <span class="quiz-opt-label">For Him</span>
+                                <span class="quiz-opt-desc">Commanding, fresh, or smoky</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn selected" data-group="gender" data-value="women">
+                                <span class="quiz-opt-icon">👗</span>
+                                <span class="quiz-opt-label">For Her</span>
+                                <span class="quiz-opt-desc">Sweet, floral, or sensual</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="gender" data-value="unisex">
+                                <span class="quiz-opt-icon">✨</span>
+                                <span class="quiz-opt-label">Unisex / Shared</span>
+                                <span class="quiz-opt-desc">Modern, versatile, boundary-free</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Scent Vibe -->
+                    <div class="quiz-step" data-step="2">
+                        <h3 class="quiz-question">2. Which fragrance profile attracts you most?</h3>
+                        <p class="quiz-subtitle">Choose the mood you want to evoke when you walk into a room.</p>
+                        <div class="quiz-options-grid">
+                            <button type="button" class="quiz-option-btn selected" data-group="vibe" data-value="bold">
+                                <span class="quiz-opt-icon">🌙</span>
+                                <span class="quiz-opt-label">Bold & Smoky</span>
+                                <span class="quiz-opt-desc">Oud, cardamom, dark woods</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="vibe" data-value="sweet">
+                                <span class="quiz-opt-icon">🍬</span>
+                                <span class="quiz-opt-label">Sweet & Gourmand</span>
+                                <span class="quiz-opt-desc">Vanilla, marshmallow, spun sugar</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="vibe" data-value="floral">
+                                <span class="quiz-opt-icon">🌸</span>
+                                <span class="quiz-opt-label">Powdery & Floral</span>
+                                <span class="quiz-opt-desc">Peach blossom, iris, romantic rose</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="vibe" data-value="fresh">
+                                <span class="quiz-opt-icon">🌊</span>
+                                <span class="quiz-opt-label">Clean & Aquatic</span>
+                                <span class="quiz-opt-desc">Sea salt, mint, crisp bergamot</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Occasion -->
+                    <div class="quiz-step" data-step="3">
+                        <h3 class="quiz-question">3. When will you wear this fragrance most?</h3>
+                        <p class="quiz-subtitle">Helps us calibrate projection strength and sillage.</p>
+                        <div class="quiz-options-grid">
+                            <button type="button" class="quiz-option-btn selected" data-group="occasion" data-value="night">
+                                <span class="quiz-opt-icon">🍸</span>
+                                <span class="quiz-opt-label">Nightlife & Evenings</span>
+                                <span class="quiz-opt-desc">Parties, dinner dates, celebrations</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="occasion" data-value="daily">
+                                <span class="quiz-opt-icon">💼</span>
+                                <span class="quiz-opt-label">Everyday & Office</span>
+                                <span class="quiz-opt-desc">Professional, clean, signature scent</span>
+                            </button>
+                            <button type="button" class="quiz-option-btn" data-group="occasion" data-value="romantic">
+                                <span class="quiz-opt-icon">🌹</span>
+                                <span class="quiz-opt-label">Romantic Moments</span>
+                                <span class="quiz-opt-desc">Intimate, magnetic, captivating</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-nav-row">
+                        <button type="button" class="btn btn-outline-primary" id="quizPrevBtn" style="visibility: hidden;">
+                            ← Previous
+                        </button>
+                        <button type="button" class="btn btn-primary" id="quizNextBtn">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Result Container (populated dynamically) -->
+                <div id="scentQuizResult" style="display: none;">
+                    <div id="quizMatchContainer"></div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button type="button" class="btn btn-outline-primary" id="retakeQuizBtn">
+                            🔄 Retake Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. THE FLAGSHIP COLLECTION -->
+    <section class="flagships-section" id="flagships">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 48px;">
+                <span class="section-tag" style="background: var(--brand-gold-light); color: var(--brand-gold);">Exclusive Formulations</span>
+                <h2 class="section-title">The Flagship Signatures</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Our crown jewel proprietary house blends. Compounded with rare essential oils and aged to perfection for those who demand an unmistakable signature presence.</p>
+            </div>
+
+            <div class="flagships-grid" id="flagshipsContainer">
+                <!-- Dynamically populated from js/main.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. WHY CHOOSE NOLMART SCENTS? -->
+    <section class="why-section">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <span class="section-tag" style="background: rgba(33, 116, 219, 0.2); color: #7dd3fc;">The NolMart Standard</span>
+                <h2 class="section-title" style="color: #fff;">Why Our Perfumes Last While Others Fade</h2>
+                <p style="color: #94a3b8; font-size: 1.05rem;">Most commercial sprays sold in retail are Eau de Toilette (EDT) diluted with 85% water and alcohol. NolMart Scents operates on a strict artisanal standard.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-feature-box">
+                    <div class="why-icon">💧</div>
+                    <h3>60% Oil vs 15% Standard</h3>
+                    <p>We blend 6.0ml pure concentrated fragrance oil per 10ml bottle (and 18ml per 30ml bottle). That is 4x higher oil density than standard mall perfumes.</p>
+                </div>
+                <div class="why-feature-box">
+                    <div class="why-icon">🧪</div>
+                    <h3>3-Drop Fixative Anchor</h3>
+                    <p>Every bottle is infused with 3 precise drops of specialized molecular fixative that binds the fragrance notes to your skin oils, preventing premature evaporation.</p>
+                </div>
+                <div class="why-feature-box">
+                    <div class="why-icon">⏳</div>
+                    <h3>Artisanal 15-Min Maturation</h3>
+                    <p>Unlike rushed mass production, each signature batch is hand-blended and rested for up to 15 minutes allowing top, heart, and base notes to marry seamlessly.</p>
+                </div>
+                <div class="why-feature-box">
+                    <div class="why-icon">🎒</div>
+                    <h3>Pocket 10ml & Luxury 30ml</h3>
+                    <p>Carry your favorite scent everywhere in our leakproof 10ml pocket atomizers, or dress your vanity with our heavy-bottom 30ml luxury crystal bottles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PRODUCTS CATALOG & BROWSER -->
+    <section class="products-section" id="catalog">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: 24px;">
+                <div>
+                    <span class="section-tag">Full Fragrance Wardrobe</span>
+                    <h2 class="section-title">Explore All Scents</h2>
+                </div>
+                <div style="color: var(--text-muted); font-size: 0.9rem;">
+                    Showing artisanal Extrait de Parfum creations
+                </div>
+            </div>
+
+            <!-- Filter tabs -->
+            <div class="filter-tabs-row">
+                <button class="category-filter-tab active" data-category="all">All Fragrances</button>
+                <button class="category-filter-tab" data-category="flagships">👑 Flagships</button>
+                <button class="category-filter-tab" data-category="men">Men's Scents</button>
+                <button class="category-filter-tab" data-category="women">Women's Scents</button>
+                <button class="category-filter-tab" data-category="signature">Signature Blends</button>
+                <button class="category-filter-tab" data-category="pure">Pure Scents</button>
+                <button class="category-filter-tab" data-category="bundles">🎁 Discovery Sets</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGridContainer">
+                <!-- Dynamically injected by js/main.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. DISCOVERY SETS & BUNDLES HIGHLIGHT -->
+    <section class="products-section" id="bundles" style="background: var(--bg-cream); border-top: 1px solid var(--border-color);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <span class="section-tag" style="background: #fef3c7; color: #b45309;">Special Offerings</span>
+                <h2 class="section-title">Discovery Sets & Gift Boxes</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Can't decide on just one? Try our curated multi-scent sets or gift your loved one an unforgettable olfactory experience.</p>
+            </div>
+
+            <div style="background: #fff; border-radius: var(--radius-lg); border: 2px solid var(--brand-gold); padding: 36px; box-shadow: var(--shadow-lg); display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: center;">
+                <div style="text-align: center;">
+                    <img src="img/products/bundle-try-and-buy.png" alt="Try & Buy Discovery Set" style="max-height: 280px; margin: 0 auto;">
+                </div>
+                <div>
+                    <span style="background: #b45309; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: var(--radius-full);">MOST POPULAR STARTER PACK</span>
+                    <h3 style="font-size: 1.8rem; color: var(--brand-navy-dark); margin: 10px 0 6px;">"Try & Buy" Discovery Set</h3>
+                    <p style="font-size: 1.1rem; color: var(--brand-blue); font-weight: 600; margin-bottom: 12px;">3 × 10ml Atomizers of Any Scents You Choose</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Pick any 3 pure scents or signature blends from our entire collection. Keep one in your car, one at the office, and one at home. Full 60% oil concentration in handbag/pocket atomizers.</p>
+                    
+                    <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
+                        <span style="font-size: 2rem; font-weight: 700; color: var(--brand-navy);">Tzs 25,000</span>
+                        <span style="font-size: 1.1rem; color: var(--text-muted); text-decoration: line-through;">Tzs 30,000</span>
+                        <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">(Save Tzs 5,000)</span>
+                    </div>
+
+                    <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                        <button class="btn btn-primary add-to-bag-btn" data-id="bundle-try-and-buy" data-size="3x10ml">
+                            🛒 Add Discovery Set to Bag
+                        </button>
+                        <button class="btn btn-whatsapp wa-quick-btn" data-id="bundle-try-and-buy" data-size="3x10ml">
+                            💬 Instant Order on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. VERIFIED CUSTOMER REVIEWS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 48px;">
+                <span class="section-tag">Real Feedback</span>
+                <h2 class="section-title">Loved by Scent Lovers Across Tanzania</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">Over 1,200+ bottles delivered to customers in Dar es Salaam, Arusha, Mwanza, Dodoma, and Zanzibar.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"Crown Noir is simply on another level. I sprayed it before my morning meeting in Posta, and by 9 PM at night after dinner, people were still asking me what fragrance I was wearing. The longevity is real!"</p>
+                    <div class="author-info">
+                        <h5>Amani M.</h5>
+                        <span>Dar es Salaam • Verified Buyer</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"Cashmere Bloom is the softest, most luxurious floral scent I've owned. It smells expensive and powdery without irritating my nose. I ordered the 30ml and received it the same afternoon via WhatsApp checkout!"</p>
+                    <div class="author-info">
+                        <h5>Fatma K.</h5>
+                        <span>Kinondoni, Dar • Verified Buyer</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"The Try & Buy set is genius. I got Obsidian Reef, Vanilla 28, and 212 VIP Men. Obsidian Reef is by far my favorite—dark oud cut with crisp ocean breeze. 10/10 recommend NolMart Scents."</p>
+                    <div class="author-info">
+                        <h5>Kelvin S.</h5>
+                        <span>Arusha • Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FLOATING CART DRAWER -->
+    <div class="cart-drawer-backdrop" id="cartDrawerBackdrop"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3 class="cart-drawer-title">
+                <span>🛍️</span> Your Shopping Bag
+            </h3>
+            <button class="cart-drawer-close-btn" id="closeCartDrawerBtn" aria-label="Close bag">&times;</button>
+        </div>
+
+        <div class="cart-drawer-body">
+            <div class="cart-empty-state" id="cartEmptyState">
+                <div class="cart-empty-icon">🌸</div>
+                <h4>Your Bag is Empty</h4>
+                <p style="margin: 8px 0 20px; font-size: 0.88rem;">Explore our Flagships or try the 30-second Scent Quiz to discover your signature fragrance.</p>
+                <a href="#flagships" class="btn btn-outline-primary" onclick="closeCartDrawer()">
+                    Browse Scents
+                </a>
+            </div>
+
+            <div id="cartDrawerItems">
+                <!-- Cart items injected dynamically -->
+            </div>
+        </div>
+
+        <div class="cart-drawer-footer" id="cartDrawerFooter" style="display: none;">
+            <div class="cart-subtotal-row">
+                <span class="cart-subtotal-label">Subtotal:</span>
+                <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
+            </div>
+            <div class="cart-delivery-note">
+                <span>🚚</span> Same-day delivery in Dar es Salaam | 24-48h Tanzania Upcountry
+            </div>
+            <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
+                💬 Complete Order on WhatsApp →
+            </button>
+        </div>
+    </div>
+
+    <!-- 11. SEARCH MODAL -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-box">
+            <div class="search-input-header">
+                <span style="font-size: 1.2rem;">🔍</span>
+                <input type="text" id="siteSearchInput" placeholder="Search by scent name, note (vanilla, oud, mint), or vibe..." autocomplete="off">
+                <button id="closeSearchModalBtn" style="background: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer;">&times;</button>
+            </div>
+            <div class="search-results-list" id="searchResultsContainer">
+                <p class="search-empty-hint">Type at least 2 characters to search fragrances...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12. STICKY MOBILE BOTTOM BAR -->
+    <div class="mobile-sticky-bar">
+        <div class="mobile-bar-content">
+            <div class="mobile-bag-summary">
+                <span class="mobile-bag-label">Bag Total:</span>
+                <span class="mobile-bag-total" id="mobileBarTotal">Tzs 0</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn btn-outline-primary open-cart-btn" style="padding: 10px 16px; font-size: 0.85rem;">
+                    🛍️ View Bag
+                </button>
+                <a href="https://wa.me/255695557358?text=Hello%20NolMart%20Scents!%20I%20would%20like%20to%20order%20perfume." target="_blank" class="btn btn-whatsapp" style="padding: 10px 16px; font-size: 0.85rem;">
+                    💬 WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13. SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>NolMart Scents</h2>
+                    <p>The artisanal perfumery division of NolMart. Formulating concentrated Extrait de Parfum with 60% pure fragrance oils and long-lasting anchors for discerning fragrance lovers across Tanzania.</p>
+                    <div class="footer-social-row">
+                        <a href="https://instagram.com/_nolmart" target="_blank" class="footer-social-btn" aria-label="Instagram">📸</a>
+                        <a href="https://tiktok.com/@_nolmart" target="_blank" class="footer-social-btn" aria-label="TikTok">🎵</a>
+                        <a href="https://wa.me/255695557358" target="_blank" class="footer-social-btn" aria-label="WhatsApp">💬</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="#flagships">👑 Flagship Signatures</a></li>
+                        <li><a href="#catalog">🌊 Signature Blends</a></li>
+                        <li><a href="#catalog">🍬 Pure Fragrances</a></li>
+                        <li><a href="#bundles">🎁 Discovery Sets</a></li>
+                        <li><a href="#quiz">🔮 Scent Matcher Quiz</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="about.html">Our 60/40 Formula</a></li>
+                        <li><a href="contact.html">Delivery Information</a></li>
+                        <li><a href="contact.html">Payment Methods (M-Pesa)</a></li>
+                        <li><a href="contact.html">Contact & WhatsApp</a></li>
+                        <li><a href="https://nolmart.com" target="_blank">Visit NolMart Main Store ↗</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Direct Contact</h4>
+                    <p style="margin-bottom: 12px; font-size: 0.88rem;">Need advice or a custom order?</p>
+                    <a href="https://wa.me/255695557358" target="_blank" class="btn btn-whatsapp" style="display: inline-flex; margin-bottom: 14px;">
+                        💬 +255 695 557 358
+                    </a>
+                    <p style="font-size: 0.8rem; color: #64748b;">Dar es Salaam, Tanzania • Delivery nationwide</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>
+                    &copy; 2026 <strong>NolMart Scents</strong> (A sub-brand of <a href="https://nolmart.com" target="_blank">NolMart</a>). All rights reserved.
+                </div>
+                <div>
+                    Powered by NolMart E-Commerce Architecture • Subdomain: <a href="https://scents.nolmart.com">scents.nolmart.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
