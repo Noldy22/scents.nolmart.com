@@ -262,9 +262,6 @@ function calculateAndRenderResult(answers) {
         addBtn.addEventListener('click', () => {
             addItemToCart(matchedProduct, activeSize, 1);
             showToast(`Added ${matchedProduct.name} (${activeSize}) to your bag!`);
-            setTimeout(() => {
-                openCartDrawer();
-            }, 400);
         });
     }
 

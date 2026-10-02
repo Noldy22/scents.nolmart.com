@@ -233,7 +233,6 @@ function attachCardEventListeners(container) {
             if (product) {
                 addItemToCart(product, size, 1);
                 showToast(`Added ${product.name} (${size}) to shopping bag!`);
-                openCartDrawer();
             }
         });
     });

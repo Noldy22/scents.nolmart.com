@@ -53,6 +53,16 @@ export function openCartDrawer() {
         drawer.classList.add('open');
         backdrop.classList.add('open');
         document.body.style.overflow = 'hidden';
+
+        // Pre-fill customer details from localStorage if available
+        try {
+            const savedName = localStorage.getItem('nolmart_customer_name');
+            const savedLoc = localStorage.getItem('nolmart_customer_location');
+            const nameEl = document.getElementById('cartCustomerName');
+            const locEl = document.getElementById('cartDeliveryLocation');
+            if (savedName && nameEl && !nameEl.value) nameEl.value = savedName;
+            if (savedLoc && locEl && !locEl.value) locEl.value = savedLoc;
+        } catch(e) {}
     }
 }
 
@@ -178,15 +188,36 @@ function handleWhatsAppCheckout() {
         return;
     }
 
-    // Modal prompt for customer name & delivery destination
-    const customerName = prompt("Enter your Name for the delivery receipt:") || "Customer";
-    const deliveryLocation = prompt("Enter your Delivery Location in Tanzania (City / Area):") || "Tanzania";
+    const nameInput = document.getElementById('cartCustomerName');
+    const locationInput = document.getElementById('cartDeliveryLocation');
+    const paymentSelect = document.getElementById('cartPaymentPref');
+
+    const customerName = nameInput ? nameInput.value.trim() : '';
+    const deliveryLocation = locationInput ? locationInput.value.trim() : '';
+    const paymentMethod = paymentSelect ? paymentSelect.value : 'Vodacom M-Pesa';
+
+    if (!customerName) {
+        if (nameInput) {
+            nameInput.classList.add('input-error');
+            nameInput.focus();
+            setTimeout(() => nameInput.classList.remove('input-error'), 2500);
+        }
+        showToast("Please enter your name for the delivery receipt", 3000);
+        return;
+    }
+
+    // Persist details locally for repeat orders
+    try {
+        localStorage.setItem('nolmart_customer_name', customerName);
+        if (deliveryLocation) localStorage.setItem('nolmart_customer_location', deliveryLocation);
+    } catch(e) {}
 
     let message = `*🛍️ NEW ORDER — NOLMART SCENTS*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
     message += `*Customer Details:*\n`;
     message += `• *Name:* ${customerName}\n`;
-    message += `• *Delivery Location:* ${deliveryLocation}\n\n`;
+    message += `• *Delivery Location:* ${deliveryLocation || "All Regions in Tanzania"}\n`;
+    message += `• *Payment Preference:* ${paymentMethod}\n\n`;
     message += `*Selected Fragrances:*\n`;
 
     cart.forEach((item, index) => {
@@ -198,17 +229,16 @@ function handleWhatsAppCheckout() {
     const total = getCartTotalPrice().toLocaleString('en-US');
     message += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
     message += `*Total Amount:* *Tzs ${total}*\n\n`;
-    message += `*Payment Preference:* (M-Pesa / Airtel Money / Selcom / CRDB Bank / Cash on Delivery)\n\n`;
     message += `Please confirm my order and send payment & delivery details. Thank you!`;
 
     const encoded = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encoded}`;
+    // Universal WhatsApp link directly intercepted by mobile apps
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${CONFIG.WHATSAPP_NUMBER}&text=${encoded}`;
 
-    showToast("Opening WhatsApp order checkout...", 2000);
+    showToast("Connecting to WhatsApp...", 2000);
 
-    setTimeout(() => {
-        window.open(whatsappUrl, '_blank');
-    }, 800);
+    // Direct synchronous navigation ensures WhatsApp opens on all mobile devices without popup blockers
+    window.location.href = whatsappUrl;
 }
 
 // Single-product Instant WhatsApp Buy Now
@@ -226,8 +256,8 @@ export function directWhatsAppOrder(product, size = "30ml", quantity = 1) {
     message += `Please share payment details (M-Pesa / Airtel Money / Selcom / CRDB) and delivery timeline. Thank you!`;
 
     const encoded = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encoded}`;
-    window.open(whatsappUrl, '_blank');
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${CONFIG.WHATSAPP_NUMBER}&text=${encoded}`;
+    window.location.href = whatsappUrl;
 }
 
 // Toast notification helper

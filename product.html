@@ -101,6 +101,31 @@
         </div>
 
         <div class="cart-drawer-footer" id="cartDrawerFooter" style="display: none;">
+            <!-- Customer checkout fields styled according to theme -->
+            <div class="cart-checkout-form" id="cartCheckoutForm">
+                <div class="cart-form-header">
+                    <span>📋</span> Delivery & Contact Details
+                </div>
+                <div class="cart-input-field">
+                    <label for="cartCustomerName">Your Name *</label>
+                    <input type="text" id="cartCustomerName" placeholder="Enter your full name" autocomplete="name" required>
+                </div>
+                <div class="cart-input-field">
+                    <label for="cartDeliveryLocation">Delivery Region / Area</label>
+                    <input type="text" id="cartDeliveryLocation" placeholder="e.g. Dar es Salaam / Arusha / Dodoma..." autocomplete="address-level2">
+                </div>
+                <div class="cart-input-field">
+                    <label for="cartPaymentPref">Preferred Payment</label>
+                    <select id="cartPaymentPref">
+                        <option value="Vodacom M-Pesa">📱 Vodacom M-Pesa</option>
+                        <option value="Airtel Money">📲 Airtel Money</option>
+                        <option value="Selcom Pay">💳 Selcom Pay</option>
+                        <option value="CRDB Bank (SimBanking)">🏦 CRDB Bank (SimBanking)</option>
+                        <option value="Cash on Delivery">💵 Cash on Delivery</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="cart-subtotal-row">
                 <span class="cart-subtotal-label">Subtotal:</span>
                 <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
@@ -160,10 +185,7 @@
 
             <div class="footer-bottom">
                 <div>
-                    &copy; 2026 <strong>NolMart Scents</strong> (A sub-brand of <a href="https://nolmart.com" target="_blank">NolMart</a>). All rights reserved.
-                </div>
-                <div>
-                    Powered by NolMart E-Commerce Architecture • Subdomain: <a href="https://scents.nolmart.com">scents.nolmart.com</a>
+                    &copy; 2026 <strong>NolMart Scents</strong>. All rights reserved.
                 </div>
             </div>
         </div>
@@ -203,21 +225,69 @@
                 const currentPrice = product.prices[selectedSize] || Object.values(product.prices)[0];
 
                 container.innerHTML = `
+                    <!-- 1. Scent Name & Classification -->
+                    <div class="detail-header-box">
+                        <span class="detail-badge-pill">${product.badge}</span>
+                        <h1 class="detail-title">${product.name}</h1>
+                        <p class="detail-tagline">${product.tagline}</p>
+                    </div>
+
+                    <!-- 2. Product Description -->
+                    <div class="detail-desc-box">
+                        <p class="detail-description-text">
+                            ${product.description}
+                        </p>
+                    </div>
+
+                    <!-- 3. Product Image Gallery -->
                     <div class="product-detail-gallery">
                         <img src="${product.imageUrl}" alt="${product.name}" id="mainDetailImage">
-                        <div style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">
+                        <div style="margin-top: 14px; font-size: 0.85rem; color: var(--text-muted);">
                             ✨ Premium Quality Fragrance • Lasts 12+ Hours
                         </div>
                     </div>
 
-                    <div class="product-detail-content">
-                        <span class="detail-badge-pill">${product.badge}</span>
-                        <h1 class="detail-title">${product.name}</h1>
-                        <p class="detail-tagline">${product.tagline}</p>
-                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1.05rem; line-height: 1.7;">
-                            ${product.description}
-                        </p>
+                    <!-- 4. Fragrance Scent Notes & Other Description -->
+                    <div class="detail-notes-box">
+                        <div class="scent-pyramid-card">
+                            <h4>🌿 Fragrance Scent Notes</h4>
+                            <div class="pyramid-tier">
+                                <span class="tier-label">TOP NOTES:</span>
+                                <span class="tier-notes">${product.notes.top.join(', ')}</span>
+                            </div>
+                            <div class="pyramid-tier">
+                                <span class="tier-label">HEART NOTES:</span>
+                                <span class="tier-notes">${product.notes.heart.join(', ')}</span>
+                            </div>
+                            <div class="pyramid-tier">
+                                <span class="tier-label">BASE NOTES:</span>
+                                <span class="tier-notes">${product.notes.base.join(', ')}</span>
+                            </div>
+                        </div>
 
+                        <!-- Specs Table -->
+                        <div class="specs-table-card" style="background: var(--bg-cream); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; font-size: 0.88rem; margin-top: 20px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <strong style="color: var(--brand-navy);">Scent Type:</strong>
+                                <span>Long-Lasting Luxury Perfume</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <strong style="color: var(--brand-navy);">Skin Longevity:</strong>
+                                <span>${product.longevity}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <strong style="color: var(--brand-navy);">Scent Trail & Projection:</strong>
+                                <span>${product.sillage}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: var(--brand-navy);">Ideal Occasion:</strong>
+                                <span>${product.bestFor}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Price & Checkout Buttons -->
+                    <div class="detail-purchase-box">
                         <div class="detail-price-box">
                             <span class="detail-price-main" id="dynamicPriceLabel">Tzs ${currentPrice.toLocaleString('en-US')}</span>
                             <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 8px;">(Extra Long-Lasting)</span>
@@ -249,43 +319,6 @@
                                 💬 Buy Now on WhatsApp
                             </button>
                         </div>
-
-                        <!-- Scent Notes -->
-                        <div class="scent-pyramid-card">
-                            <h4>🌿 Fragrance Scent Notes</h4>
-                            <div class="pyramid-tier">
-                                <span class="tier-label">TOP NOTES:</span>
-                                <span class="tier-notes">${product.notes.top.join(', ')}</span>
-                            </div>
-                            <div class="pyramid-tier">
-                                <span class="tier-label">HEART NOTES:</span>
-                                <span class="tier-notes">${product.notes.heart.join(', ')}</span>
-                            </div>
-                            <div class="pyramid-tier">
-                                <span class="tier-label">BASE NOTES:</span>
-                                <span class="tier-notes">${product.notes.base.join(', ')}</span>
-                            </div>
-                        </div>
-
-                        <!-- Specs Table -->
-                        <div style="background: var(--bg-cream); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; font-size: 0.88rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <strong style="color: var(--brand-navy);">Scent Type:</strong>
-                                <span>Long-Lasting Luxury Perfume</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <strong style="color: var(--brand-navy);">Skin Longevity:</strong>
-                                <span>${product.longevity}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <strong style="color: var(--brand-navy);">Scent Trail & Projection:</strong>
-                                <span>${product.sillage}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between;">
-                                <strong style="color: var(--brand-navy);">Ideal Occasion:</strong>
-                                <span>${product.bestFor}</span>
-                            </div>
-                        </div>
                     </div>
                 `;
 
@@ -301,7 +334,6 @@
                 document.getElementById('detailAddToCartBtn').addEventListener('click', () => {
                     addItemToCart(product, selectedSize, 1);
                     showToast(`Added ${product.name} (${selectedSize}) to bag!`);
-                    openCartDrawer();
                 });
 
                 // Buy on WhatsApp

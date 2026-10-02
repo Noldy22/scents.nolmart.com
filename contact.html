@@ -134,9 +134,37 @@
             <div id="cartDrawerItems"></div>
         </div>
         <div class="cart-drawer-footer" id="cartDrawerFooter" style="display: none;">
+            <!-- Customer checkout fields styled according to theme -->
+            <div class="cart-checkout-form" id="cartCheckoutForm">
+                <div class="cart-form-header">
+                    <span>📋</span> Delivery & Contact Details
+                </div>
+                <div class="cart-input-field">
+                    <label for="cartCustomerName">Your Name *</label>
+                    <input type="text" id="cartCustomerName" placeholder="Enter your full name" autocomplete="name" required>
+                </div>
+                <div class="cart-input-field">
+                    <label for="cartDeliveryLocation">Delivery Region / Area</label>
+                    <input type="text" id="cartDeliveryLocation" placeholder="e.g. Dar es Salaam / Arusha / Dodoma..." autocomplete="address-level2">
+                </div>
+                <div class="cart-input-field">
+                    <label for="cartPaymentPref">Preferred Payment</label>
+                    <select id="cartPaymentPref">
+                        <option value="Vodacom M-Pesa">📱 Vodacom M-Pesa</option>
+                        <option value="Airtel Money">📲 Airtel Money</option>
+                        <option value="Selcom Pay">💳 Selcom Pay</option>
+                        <option value="CRDB Bank (SimBanking)">🏦 CRDB Bank (SimBanking)</option>
+                        <option value="Cash on Delivery">💵 Cash on Delivery</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="cart-subtotal-row">
                 <span class="cart-subtotal-label">Subtotal:</span>
                 <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
+            </div>
+            <div class="cart-delivery-note">
+                <span>🚚</span> Fast Delivery to All Regions in Tanzania (24–48h)
             </div>
             <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
                 💬 Complete Order on WhatsApp →
@@ -170,7 +198,6 @@
             </div>
             <div class="footer-bottom">
                 <div>&copy; 2026 <strong>NolMart Scents</strong>. All rights reserved.</div>
-                <div><a href="https://scents.nolmart.com">scents.nolmart.com</a> • A sub-brand of <a href="https://nolmart.com" target="_blank">NolMart</a></div>
             </div>
         </div>
     </footer>
