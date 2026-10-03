@@ -124,15 +124,15 @@ function calculateAndRenderResult(answers) {
     } else if (answers.gender === "men") {
         if (answers.vibe === "woody" || answers.intensity === "bold" || answers.occasion === "night") {
             matchedId = "crown-noir"; // Men's Bold Flagship
-            runnerUpId = "obsidian-reef";
+            runnerUpId = "club-de-nuit";
             matchReason = "Matched for commanding presence, rich smoky woods, and all-day confidence.";
         } else if (answers.vibe === "fresh" || answers.occasion === "casual") {
-            matchedId = "212-vip-men";
-            runnerUpId = "azure-vip";
-            matchReason = "Matched for crisp mint, fresh citrus, and modern clean nightlife energy.";
+            matchedId = "sauvage-dior";
+            runnerUpId = "212-vip-men";
+            matchReason = "Matched for radiant Calabrian bergamot, fresh Sichuan pepper, and magnetic ambroxan energy.";
         } else {
             matchedId = "azure-vip"; // Men's Calm Flagship
-            runnerUpId = "crown-noir";
+            runnerUpId = "sauvage-dior";
             matchReason = "Matched for smooth vanilla, fresh bergamot, and refined office elegance.";
         }
     } else if (answers.gender === "women") {
@@ -141,16 +141,16 @@ function calculateAndRenderResult(answers) {
             runnerUpId = "cashmere-bloom";
             matchReason = "Matched for deep, seductive woody notes balanced with romantic floral petals.";
         } else if (answers.vibe === "sweet" || answers.vibe === "gourmand") {
-            matchedId = "marshmallow";
-            runnerUpId = "cashmere-bloom";
-            matchReason = "Matched for cozy, irresistible sweet spun sugar, vanilla, and comfort.";
+            matchedId = "strawberry";
+            runnerUpId = "marshmallow";
+            matchReason = "Matched for irresistible sweet wild strawberries, confectionery sugar, and cheerful warmth.";
         } else if (answers.vibe === "floral" || answers.occasion === "work") {
             matchedId = "burberry-weekend";
             runnerUpId = "cashmere-bloom";
             matchReason = "Matched for graceful powdery florals, mandarin freshness, and poise.";
         } else {
             matchedId = "cashmere-bloom"; // Women's Elegant Flagship
-            runnerUpId = "onyx-bloom";
+            runnerUpId = "strawberry";
             matchReason = "Matched for approachable luxury, powdery elegance, and sweet warmth that draws compliments.";
         }
     } else { // Unisex / Shared

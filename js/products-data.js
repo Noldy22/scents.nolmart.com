@@ -605,6 +605,111 @@ export const PRODUCTS = [
         sillage: "Moderate",
         imageUrl: "img/products/now-rave.png"
     },
+    {
+        id: "club-de-nuit",
+        name: "Club de Nuit",
+        tagline: "The Seductive Magnet — Smoky Birch & Sparkling Citrus",
+        category: "pure",
+        gender: "men",
+        badge: "NEW ARRIVAL",
+        isFlagship: false,
+        isBestseller: true,
+        prices: {
+            "10ml": 10000,
+            "30ml": 30000
+        },
+        defaultSize: "30ml",
+        description: "A world-famous powerhouse men's fragrance oil. Opens with crisp, vibrant lemon, blackcurrant, and apple before developing into a rich, smoky birch wood heart and an intoxicating ambergris and patchouli base. Intense, captivating, and draws compliments everywhere.",
+        bestFor: "Evening outings, dates, office signature wear, high-impact first impressions.",
+        character: "Smoky Woods • Crisp Citrus • Seductive • Magnetic",
+        notes: {
+            top: ["Lemon", "Blackcurrant", "Apple", "Bergamot"],
+            heart: ["Smoky Birch", "Jasmine", "Rose"],
+            base: ["Ambergris", "Musk", "Patchouli", "Vanilla"]
+        },
+        longevity: "12–16 Hours",
+        sillage: "Strong (Unforgettable)",
+        imageUrl: "img/products/club-de-nuit.png"
+    },
+    {
+        id: "sauvage-dior",
+        name: "Sauvage Dior",
+        tagline: "Raw Masculinity — Radiant Calabrian Bergamot & Warm Ambroxan",
+        category: "pure",
+        gender: "men",
+        badge: "NEW ARRIVAL",
+        isFlagship: false,
+        isBestseller: true,
+        prices: {
+            "10ml": 10000,
+            "30ml": 30000
+        },
+        defaultSize: "30ml",
+        description: "An iconic modern masculine signature. Crisp, radiant Calabrian bergamot infused with spicy Sichuan pepper, settling over an intoxicating, woody trail of warm ambroxan and cedarwood. Effortlessly fresh, rugged, and magnetic.",
+        bestFor: "Daily signature scent, active workdays, hot weather, casual and evening wear.",
+        character: "Fresh Spicy • Radiant Bergamot • Ambroxan • Rugged & Clean",
+        notes: {
+            top: ["Calabrian Bergamot", "Sichuan Pepper"],
+            heart: ["Lavender", "Pink Pepper", "Vetiver", "Patchouli"],
+            base: ["Warm Ambroxan", "Cedarwood", "Labdanum"]
+        },
+        longevity: "10–14 Hours",
+        sillage: "Heavy (Radiant)",
+        imageUrl: "img/products/sauvage-dior.png"
+    },
+    {
+        id: "strawberry",
+        name: "Strawberry",
+        tagline: "Juicy Wild Berries & Sweet Vanilla Sugar",
+        category: "pure",
+        gender: "women",
+        badge: "NEW ARRIVAL",
+        isFlagship: false,
+        isBestseller: true,
+        prices: {
+            "10ml": 10000,
+            "30ml": 30000
+        },
+        defaultSize: "30ml",
+        description: "An irresistible burst of fresh, ripe red strawberries kissed with sweet confectionery sugar and a touch of warm vanilla. Sweet, joyful, and utterly delicious — like sunshine and freshly picked summer berries.",
+        bestFor: "Everyday sweet signature, cheerful outings, weekend dates, mood-lifting wear.",
+        character: "Fruity Sweet • Wild Strawberries • Cheerful • Delicious",
+        notes: {
+            top: ["Fresh Wild Strawberry", "Red Currant", "Sparkling Citrus"],
+            heart: ["Strawberry Blossom", "Raspberry Nectar", "Spun Sugar"],
+            base: ["Whipped Vanilla", "Soft White Musk"]
+        },
+        longevity: "8–12 Hours",
+        sillage: "Moderate",
+        imageUrl: "img/products/strawberry.png"
+    },
+
+    // --- 🚗 CAR AIR FRESHENERS (HANGING REARVIEW MIRROR DIFFUSERS) ---
+    {
+        id: "car-freshener-strawberry",
+        name: "Strawberry Car Air Freshener",
+        tagline: "Luxury Hanging Diffuser — 100% Pure Undiluted Strawberry Oil",
+        category: "car-freshener",
+        gender: "unisex",
+        badge: "NEW PRODUCT",
+        isFlagship: false,
+        isBestseller: true,
+        prices: {
+            "8ml Hanging Diffuser": 10000
+        },
+        defaultSize: "8ml Hanging Diffuser",
+        description: "Upgrade your daily drive with NolMart's luxury hanging car air freshener. Crafted with a premium faceted glass bottle and an absorbent natural wooden diffuser cap that gently hangs from your car's middle rear-view mirror. Infused with 100% pure, undiluted wild strawberry oil that fills your cabin with an irresistible, mouth-watering berry fragrance that lasts for up to 60 days without artificial sprays or chemicals.",
+        bestFor: "Car interior rearview mirror hanging, wardrobe freshness, compact office nooks.",
+        character: "Natural Wood Diffuser • 100% Pure Oil • Juicy Strawberry • Long Lasting",
+        notes: {
+            top: ["Fresh Wild Strawberry", "Sparkling Berry Zest"],
+            heart: ["Strawberry Nectar", "Sweet Fruity Blossom"],
+            base: ["Warm Vanilla Undertone", "Porous Beechwood Diffuser"]
+        },
+        longevity: "45–60 Days Continuous Diffusion",
+        sillage: "Full Cabin Scent Coverage",
+        imageUrl: "img/products/car-freshener-strawberry.png"
+    },
 
     // --- 🎁 DISCOVERY BUNDLES & GIFT SETS (HIGH CONVERSION UP-SELLS) ---
     {

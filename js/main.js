@@ -122,6 +122,8 @@ function renderProductsGrid() {
             items = PRODUCTS.filter(p => p.category === 'pure');
         } else if (category === 'signature') {
             items = PRODUCTS.filter(p => p.category === 'signature');
+        } else if (category === 'car-freshener') {
+            items = PRODUCTS.filter(p => p.category === 'car-freshener');
         } else if (category === 'bundles') {
             items = PRODUCTS.filter(p => p.category === 'bundle');
         }

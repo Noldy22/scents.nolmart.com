@@ -78,18 +78,19 @@
 
             <!-- Filter Tabs -->
             <div class="filter-tabs-row" id="catalogFilterTabs">
-                <button class="category-filter-tab active" data-filter="all">All (27)</button>
+                <button class="category-filter-tab active" data-filter="all">All (31)</button>
                 <button class="category-filter-tab" data-filter="flagship">👑 Flagships</button>
                 <button class="category-filter-tab" data-filter="men">For Men</button>
                 <button class="category-filter-tab" data-filter="women">For Women</button>
                 <button class="category-filter-tab" data-filter="signature">Signature Blends</button>
                 <button class="category-filter-tab" data-filter="pure">Pure Scents</button>
+                <button class="category-filter-tab" data-filter="car-freshener">🚗 Car Fresheners</button>
                 <button class="category-filter-tab" data-filter="bundle">🎁 Discovery Sets</button>
             </div>
 
             <!-- Active Count & Results -->
             <div id="catalogResultsCount" style="margin-bottom: 24px; font-size: 0.85rem; color: var(--text-muted);">
-                Showing 27 fragrances
+                Showing 31 fragrances
             </div>
 
             <!-- Grid -->
@@ -190,6 +191,7 @@
                         <li><a href="index.html#flagships">👑 Flagship Signatures</a></li>
                         <li><a href="products.html?filter=signature">🌊 Signature Blends</a></li>
                         <li><a href="products.html?filter=pure">🍬 Pure Fragrances</a></li>
+                        <li><a href="products.html?filter=car-freshener">🚗 Car Air Fresheners</a></li>
                         <li><a href="products.html?filter=bundle">🎁 Discovery Sets</a></li>
                     </ul>
                 </div>
@@ -278,6 +280,7 @@
                     if (activeFilter === 'women' && p.gender !== 'women' && p.gender !== 'unisex') return false;
                     if (activeFilter === 'signature' && p.category !== 'signature') return false;
                     if (activeFilter === 'pure' && p.category !== 'pure') return false;
+                    if (activeFilter === 'car-freshener' && p.category !== 'car-freshener') return false;
                     if (activeFilter === 'bundle' && p.category !== 'bundle') return false;
 
                     // Search query
