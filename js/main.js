@@ -63,6 +63,7 @@ function renderFlagshipShowcase() {
     const flagships = getFlagshipProducts();
 
     container.innerHTML = flagships.map(p => {
+        const price6 = p.prices["6ml"] ? `Tzs ${p.prices["6ml"].toLocaleString('en-US')}` : '';
         const price10 = p.prices["10ml"] ? `Tzs ${p.prices["10ml"].toLocaleString('en-US')}` : '';
         const price30 = p.prices["30ml"] ? `Tzs ${p.prices["30ml"].toLocaleString('en-US')}` : '';
 
@@ -84,6 +85,7 @@ function renderFlagshipShowcase() {
                     <div class="size-switch-wrap">
                         <button class="size-pill-btn active" data-size="30ml">30ml (${price30})</button>
                         <button class="size-pill-btn" data-size="10ml">10ml (${price10})</button>
+                        ${price6 ? `<button class="size-pill-btn" data-size="6ml">6ml (${price6})</button>` : ''}
                     </div>
 
                     <div class="flagship-card-actions">
@@ -152,6 +154,7 @@ function renderProductsGrid() {
                             <div class="product-card-sizes">
                                 <button class="card-size-opt active" data-size="30ml">30ml</button>
                                 <button class="card-size-opt" data-size="10ml">10ml</button>
+                                ${p.prices["6ml"] ? `<button class="card-size-opt" data-size="6ml">6ml</button>` : ''}
                             </div>
                         ` : `
                             <div class="product-card-sizes">
@@ -302,7 +305,7 @@ function initSearch() {
                     <div class="search-item-info">
                         <h5>${p.name}</h5>
                         <p>${p.tagline}</p>
-                        <span class="search-item-price">From Tzs ${(p.prices["10ml"] || Object.values(p.prices)[0]).toLocaleString('en-US')}</span>
+                        <span class="search-item-price">From Tzs ${(p.prices["6ml"] || p.prices["10ml"] || Object.values(p.prices)[0]).toLocaleString('en-US')}</span>
                     </div>
                 </a>
             `).join('');

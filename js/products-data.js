@@ -13,8 +13,9 @@ export const PRODUCTS = [
         isFlagship: true,
         isBestseller: true,
         prices: {
-            "10ml": 18000,
-            "30ml": 50000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "NolMart's flagship men's signature scent. A crisp, sparkling citrus-fresh opening gives way to deep, rich smoky woods and warm amber. Fresh and confident up top, commanding and warm underneath — designed to transition seamlessly from daily office meetings to evening outings without fading away.",
@@ -39,8 +40,9 @@ export const PRODUCTS = [
         isFlagship: true,
         isBestseller: true,
         prices: {
-            "10ml": 18000,
-            "30ml": 50000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "NolMart's flagship women's signature scent. Soft sweet vanilla comfort gently wrapped in delicate powdery floral elegance. Sweet, graceful, and warm — an everyday luxury perfume that draws genuine compliments everywhere you go.",
@@ -65,8 +67,9 @@ export const PRODUCTS = [
         isFlagship: true,
         isBestseller: false,
         prices: {
-            "10ml": 18000,
-            "30ml": 50000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "NolMart's men's calm flagship scent. A fresh, bright citrus opening that settles into a smooth, warm bourbon vanilla base. Clean, effortless, and charming — it projects quiet confidence and style throughout your day.",
@@ -91,8 +94,9 @@ export const PRODUCTS = [
         isFlagship: true,
         isBestseller: false,
         prices: {
-            "10ml": 18000,
-            "30ml": 50000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "NolMart's bold women's flagship. Rich, deep smoky woods softened and contrasted by delicate, sweet romantic flower petals. A captivating, magnetic fragrance for special moments when you want to leave an unforgettable impression.",
@@ -119,8 +123,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 14000,
-            "30ml": 40000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "A dark, fresh ocean scent. Deep warm woods meet the crisp, refreshing breeze of the sea. Mysterious, fresh, and attractive for anyone who loves unique fragrances.",
@@ -145,7 +150,8 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 12000,
+            "6ml": 7000,
+            "10ml": 15000,
             "30ml": 35000
         },
         defaultSize: "30ml",
@@ -171,8 +177,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 12000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "A burst of dynamic energy and clean freshness. Crisp sweet melon and green notes balanced with smooth, creamy coconut warmth.",
@@ -197,7 +204,8 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 12000,
+            "6ml": 7000,
+            "10ml": 15000,
             "30ml": 35000
         },
         defaultSize: "30ml",
@@ -223,8 +231,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
+            "6ml": 7000,
             "10ml": 15000,
-            "30ml": 45000
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "An exotic luxury perfume combining fresh coconut, rich sweet vanilla, and energetic citrus notes. Rich, long-lasting, and uplifting.",
@@ -249,7 +258,8 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 12000,
+            "6ml": 7000,
+            "10ml": 15000,
             "30ml": 35000
         },
         defaultSize: "30ml",
@@ -275,8 +285,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 12000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "The ultimate revitalizing fresh scent. Crisp ocean breeze colliding with clean, energizing citrus notes.",
@@ -301,8 +312,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
+            "6ml": 7000,
             "10ml": 15000,
-            "30ml": 45000
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "Deep, warm luxury. Rich woody notes with warm cardamom spice, wrapped in smooth sweet vanilla.",
@@ -327,7 +339,8 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 12000,
+            "6ml": 7000,
+            "10ml": 15000,
             "30ml": 35000
         },
         defaultSize: "30ml",
@@ -353,8 +366,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 12000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "Like a refreshing swim in crystal clear ocean waters. Cool sea breeze meets smooth island coconut milk.",
@@ -381,8 +395,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "A confectionery dream. Fluffy spun sugar, sweet vanilla cream, and cozy marshmallow accords. Universally adored, comforting, and an instant mood-lifter.",
@@ -407,8 +422,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "Relaxed, composed, and undeniably elegant. A zesty mandarin and sage opening transitioning gracefully into a powdery floral bouquet of hyacinth, iris, and nectarine.",
@@ -433,8 +449,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "Modern, magnetic, and ready for the spotlight. Crisp frozen mint and sparkling passionfruit top notes over a smooth, slightly spicy woody amber base.",
@@ -459,8 +476,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "The gold standard of sweet island fragrances. Decadent warm coconut kissed by soothing vanilla and calming aloe vera. Like warm sunbeams on bare skin.",
@@ -485,8 +503,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "Not your ordinary sweet vanilla. A rich, mature, boozy Madagascar vanilla infused with brown sugar, amber, and tonka bean. An intoxicating masterpiece on its own or layered.",
@@ -511,8 +530,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "An airy, fluttery blend of sparkling pear, peach nectar, and delicate pink florals wrapped in sheer vanilla chiffon. Soft, feminine, and utterly charming.",
@@ -537,8 +557,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 12000,
-            "30ml": 40000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "An amber-drenched, woody oriental fragrance with a tantalizing, delectable heart. Captures the aspect of the person who relishes in immoderation and dares to be extraordinary.",
@@ -563,8 +584,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "The cleanest breath of ocean air. Crisp marine water, sea salt crystals, and bleached driftwood. Crisp, non-greasy, and infinitely refreshing.",
@@ -589,8 +611,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "Bright, zesty, and pulsating with life. Energetic watermelon rind, green mandarin, and crisp herbs over clean woods. A modern crowd-pleaser that never feels heavy.",
@@ -615,8 +638,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "A world-famous powerhouse men's fragrance oil. Opens with crisp, vibrant lemon, blackcurrant, and apple before developing into a rich, smoky birch wood heart and an intoxicating ambergris and patchouli base. Intense, captivating, and draws compliments everywhere.",
@@ -641,8 +665,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "An iconic modern masculine signature. Crisp, radiant Calabrian bergamot infused with spicy Sichuan pepper, settling over an intoxicating, woody trail of warm ambroxan and cedarwood. Effortlessly fresh, rugged, and magnetic.",
@@ -667,8 +692,9 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "10ml": 10000,
-            "30ml": 30000
+            "6ml": 7000,
+            "10ml": 15000,
+            "30ml": 35000
         },
         defaultSize: "30ml",
         description: "An irresistible burst of fresh, ripe red strawberries kissed with sweet confectionery sugar and a touch of warm vanilla. Sweet, joyful, and utterly delicious — like sunshine and freshly picked summer berries.",
@@ -718,11 +744,11 @@ export const PRODUCTS = [
         tagline: "3 × 10ml Pocket Atomizers (Pick Any 3 Scents!)",
         category: "bundle",
         gender: "unisex",
-        badge: "BEST VALUE (SAVE 5,000 TZS)",
+        badge: "BEST VALUE (SAVE 10,000 TZS)",
         isFlagship: false,
         isBestseller: true,
         prices: {
-            "3x10ml": 25000
+            "3x10ml": 35000
         },
         defaultSize: "3x10ml",
         description: "The ultimate trial pack! Choose any 3 pure scents or signature blends in sleek 10ml handbag/pocket atomizers. Experience different vibes for work, dates, and weekends without committing to full bottles. Saves 5,000 TZS instantly!",
@@ -747,7 +773,7 @@ export const PRODUCTS = [
         isFlagship: true,
         isBestseller: true,
         prices: {
-            "Set": 95000
+            "Set": 65000
         },
         defaultSize: "Set",
         description: "The pinnacle of NolMart Scents. Includes a full 30ml bottle of Crown Noir (Men's Flagship) and a full 30ml bottle of Cashmere Bloom (Women's Flagship). The ultimate anniversary, wedding, or couple's luxury gift set.",
@@ -768,11 +794,11 @@ export const PRODUCTS = [
         tagline: "1 × 10ml Burberry Weekend + Marshmallow + 212 VIP Men",
         category: "bundle",
         gender: "unisex",
-        badge: "NEW RELEASES (SAVE 2,000 TZS)",
+        badge: "NEW RELEASES (SAVE 10,000 TZS)",
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "3x10ml": 28000
+            "3x10ml": 35000
         },
         defaultSize: "3x10ml",
         description: "Experience all three of our latest releases in one curated collection: Burberry Weekend (Powdery Floral), Marshmallow (Confectionery Sweet), and 212 VIP Men (Fruity Aromatic Nightlife).",
@@ -797,7 +823,7 @@ export const PRODUCTS = [
         isFlagship: false,
         isBestseller: false,
         prices: {
-            "2x30ml": 70000
+            "2x30ml": 65000
         },
         defaultSize: "2x30ml",
         description: "Choose any two 30ml bottles from our Signature Blends collection (e.g. Obsidian Reef, Coastal Dream, Midnight Velvet, Electric Rush, Rose Cream). Packaged in a NolMart luxury gift bag.",
