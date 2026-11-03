@@ -31,7 +31,7 @@ This repository powers the official web platform **[scents.nolmart.com](https://
 - 💳 **Accepted Payment Methods**: Support for **Vodacom M-Pesa**, **Airtel Money**, **Selcom Pay**, **CRDB Bank (SimBanking)**, and **Cash on Delivery**.
 - 🚚 **Nationwide Delivery**: Fast 24–48 hour doorstep delivery to **all regions in Tanzania** with safe, protective packaging.
 - 🌿 **Fragrance Scent Notes**: Clear breakdown of Top, Heart, and Base notes, plus longevity and scent trail ratings.
-- 🎁 **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 25,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
+- 🎁 **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 35,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
 - ✨ **Premium Motion & Scroll Animations**: Every scroll animation is bidirectional — it plays scrolling down, rewinds scrolling up and replays endlessly (GSAP ScrollTrigger + Lenis inertia scrolling, `prefers-reduced-motion` respected).
 - 🧴 **Real-Time 3D Bottles (Three.js)**: The home page hero + flagship chapters scroll over a pinned 3D NolMart bottle that spins and morphs between scents; every product page has a drag-to-rotate 3D viewer. Labels are drawn live from each scent's name, and liquid/cap colours are sampled from the product photos (`js/bottle-palette.js`). Falls back to photos when WebGL is unavailable.
 

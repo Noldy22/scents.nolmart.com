@@ -39,6 +39,19 @@ export function initCartDrawer() {
         backdrop.addEventListener('click', closeCartDrawer);
     }
 
+    // Links inside the drawer (e.g. "Browse Scents") close it before navigating
+    const drawer = document.getElementById('cartDrawer');
+    if (drawer) {
+        drawer.addEventListener('click', (e) => {
+            if (e.target.closest('a[href]')) closeCartDrawer();
+        });
+    }
+
+    // Escape closes the drawer
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer && drawer.classList.contains('open')) closeCartDrawer();
+    });
+
     // Checkout button
     const checkoutBtn = document.getElementById('cartCheckoutBtn');
     if (checkoutBtn) {

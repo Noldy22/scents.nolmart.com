@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Render Products Grid (Home or Products page)
     renderProductsGrid();
 
+    // 5b. Discovery Set feature buttons (Add to Bag / WhatsApp)
+    const bundlesSection = document.getElementById('bundles');
+    if (bundlesSection) attachCardEventListeners(bundlesSection);
+
     // 6. Search Bar Autocomplete / Modal
     initSearch();
 
