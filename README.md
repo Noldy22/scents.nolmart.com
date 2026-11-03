@@ -32,7 +32,8 @@ This repository powers the official web platform **[scents.nolmart.com](https://
 - 🚚 **Nationwide Delivery**: Fast 24–48 hour doorstep delivery to **all regions in Tanzania** with safe, protective packaging.
 - 🌿 **Fragrance Scent Notes**: Clear breakdown of Top, Heart, and Base notes, plus longevity and scent trail ratings.
 - 🎁 **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 25,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
-- ✨ **Premium Motion & Scroll Animations**: Staggered scroll reveals, floating hero bottle physics, header elevation on scroll, and a floating WhatsApp concierge button.
+- ✨ **Premium Motion & Scroll Animations**: Every scroll animation is bidirectional — it plays scrolling down, rewinds scrolling up and replays endlessly (GSAP ScrollTrigger + Lenis inertia scrolling, `prefers-reduced-motion` respected).
+- 🧴 **Real-Time 3D Bottles (Three.js)**: The home page hero + flagship chapters scroll over a pinned 3D NolMart bottle that spins and morphs between scents; every product page has a drag-to-rotate 3D viewer. Labels are drawn live from each scent's name, and liquid/cap colours are sampled from the product photos (`js/bottle-palette.js`). Falls back to photos when WebGL is unavailable.
 
 ---
 
@@ -55,9 +56,15 @@ scents.nolmart.com/
 │   ├── cart.js             # LocalStorage cart state management & event bus
 │   ├── cart-drawer.js      # Sliding drawer UI & WhatsApp order formatter
 │   ├── scent-quiz.js       # 5-step interactive scent matcher algorithm
-│   └── main.js             # Page controller, animations & UI bindings
+│   ├── main.js             # Home page controller & UI bindings
+│   ├── motion.js           # Site-wide bidirectional scroll animations & smooth scroll
+│   ├── bottle3d.js         # Three.js bottle model, live label printing, viewer
+│   ├── bottle-palette.js   # Liquid & cap colours per scent (sampled from photos)
+│   ├── home-stage.js       # Scroll-driven 3D hero + flagship chapters
+│   └── vendor/             # three.js r170, GSAP 3.13 (ScrollTrigger, SplitText), Lenis
 └── img/
-    ├── logo-transparent.png # Header navigation logo (transparent high-res)
+    ├── logo-light.png       # Ivory/blue logo for the dark header & footer
+    ├── logo-transparent.png # Original navy logo (transparent high-res)
     ├── logo-horizontal.png  # Horizontal logo badge
     ├── logo-stacked.png     # Stacked brand logo
     ├── logo-dark.png        # Luxury dark edition logo

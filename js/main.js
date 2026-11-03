@@ -6,6 +6,7 @@ import { addItemToCart, getCartTotalCount } from './cart.js';
 import { initCartDrawer, openCartDrawer, directWhatsAppOrder, showToast } from './cart-drawer.js';
 import { initScentQuiz } from './scent-quiz.js';
 import { CONFIG } from './config.js';
+import { getBottlePalette } from './bottle-palette.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Cart Drawer
@@ -29,8 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Announcement Bar dismiss / ticker
     initAnnouncement();
 
-    // 8. Luxury Scroll Animations & Header Elevation
-    initScrollAnimations();
+    // 8. Scroll animations & header behaviour live in js/motion.js
 });
 
 // Mobile Nav Toggle
@@ -55,53 +55,84 @@ function initMobileNav() {
     }
 }
 
-// Render Flagship Showcase Cards on Home Page
+// Render the Flagship "chapters" of the home 3D stage.
+// Each chapter keeps the flagship-card contract (data-product-id, size pills,
+// add-to-bag & WhatsApp buttons) so attachCardEventListeners() wires it up.
+const ICON_WA = '<svg class="icon icon-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.95 1.18-.18.2-.35.23-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.68-2.08-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.63-.93-2.24-.25-.6-.5-.5-.68-.51h-.58c-.2 0-.53.08-.8.38-.28.3-1.06 1.03-1.06 2.51s1.08 2.91 1.23 3.11c.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.72.63.72.23 1.38.2 1.9.12.57-.08 1.77-.72 2.02-1.43.25-.7.25-1.3.18-1.43-.08-.12-.28-.2-.58-.35zM12.04 2C6.51 2 2.02 6.49 2.02 12.02c0 1.94.56 3.75 1.52 5.29L2 22l4.83-1.52c1.48.89 3.2 1.4 5.21 1.4 5.53 0 10.02-4.49 10.02-10.02C22.06 6.49 17.57 2 12.04 2zm0 18.28c-1.78 0-3.43-.56-4.79-1.52l-.34-.24-2.87.9.92-2.79-.27-.37a8.2 8.2 0 0 1-1.62-5.24c0-4.57 3.72-8.29 8.29-8.29s8.29 3.72 8.29 8.29-3.72 8.28-8.29 8.28z"/></svg>';
+const ICON_BAG = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>';
+
+function genderLabel(g) {
+    return g === 'men' ? 'For Him' : g === 'women' ? 'For Her' : 'Unisex';
+}
+
 function renderFlagshipShowcase() {
     const container = document.getElementById('flagshipsContainer');
     if (!container) return;
 
-    const flagships = getFlagshipProducts();
+    // Single-bottle flagships become 3D chapters (bundles stay in the catalog grid)
+    const flagships = getFlagshipProducts().filter(p => getBottlePalette(p.id));
+    const total = String(flagships.length).padStart(2, '0');
 
-    container.innerHTML = flagships.map(p => {
-        const price6 = p.prices["6ml"] ? `Tzs ${p.prices["6ml"].toLocaleString('en-US')}` : '';
-        const price10 = p.prices["10ml"] ? `Tzs ${p.prices["10ml"].toLocaleString('en-US')}` : '';
-        const price30 = p.prices["30ml"] ? `Tzs ${p.prices["30ml"].toLocaleString('en-US')}` : '';
+    container.innerHTML = flagships.map((p, i) => {
+        const price = (size) => p.prices[size] ? `Tzs ${p.prices[size].toLocaleString('en-US')}` : '';
+        const side = i % 2 === 0 ? 'right' : 'left';
 
         return `
-            <div class="flagship-card" data-product-id="${p.id}">
-                <div class="flagship-badge">${p.badge}</div>
-                <div class="flagship-img-wrap">
-                    <img src="${p.imageUrl}" alt="${p.name}" loading="lazy">
-                </div>
-                <div class="flagship-details">
-                    <span class="flagship-gender-tag">${p.gender.toUpperCase()}</span>
-                    <h3 class="flagship-name">${p.name}</h3>
-                    <p class="flagship-tagline">${p.tagline}</p>
-                    <div class="flagship-notes-preview">
-                        <span><strong>Notes:</strong> ${p.notes.top[0]}, ${p.notes.heart[0]}, ${p.notes.base[0]}</span>
-                    </div>
+            <article class="stage-panel chapter flagship-card" data-product-id="${p.id}" data-chapter="${i}" data-side="${side}">
+                <div class="container chapter-inner">
+                    <div class="chapter-card">
+                        <div class="chapter-meta" data-ch-item>
+                            <span class="chapter-index">${String(i + 1).padStart(2, '0')} <i>/</i> ${total}</span>
+                            <span class="flagship-badge">${p.badge}</span>
+                        </div>
+                        <span class="flagship-gender-tag" data-ch-item>The Flagship Perfumes · ${genderLabel(p.gender)}</span>
+                        <h3 class="flagship-name" data-ch-item>${p.name}</h3>
+                        <p class="flagship-tagline" data-ch-item>${p.tagline}</p>
 
-                    <!-- Size Switcher -->
-                    <div class="size-switch-wrap">
-                        <button class="size-pill-btn active" data-size="30ml">30ml (${price30})</button>
-                        <button class="size-pill-btn" data-size="10ml">10ml (${price10})</button>
-                        ${price6 ? `<button class="size-pill-btn" data-size="6ml">6ml (${price6})</button>` : ''}
-                    </div>
+                        <dl class="chapter-notes" data-ch-item>
+                            <div><dt>Top</dt><dd>${p.notes.top.slice(0, 3).join(', ')}</dd></div>
+                            <div><dt>Heart</dt><dd>${p.notes.heart.slice(0, 3).join(', ')}</dd></div>
+                            <div><dt>Base</dt><dd>${p.notes.base.slice(0, 3).join(', ')}</dd></div>
+                        </dl>
 
-                    <div class="flagship-card-actions">
-                        <button class="btn btn-primary add-to-bag-btn" data-id="${p.id}" data-size="30ml">
-                            Add to Bag
-                        </button>
-                        <button class="btn btn-whatsapp-icon wa-quick-btn" data-id="${p.id}" data-size="30ml" title="Order via WhatsApp">
-                            💬
-                        </button>
+                        <div class="chapter-specs" data-ch-item>
+                            <span><em>Longevity</em>${p.longevity}</span>
+                            <span><em>Projection</em>${p.sillage}</span>
+                        </div>
+
+                        <div class="size-switch-wrap" data-ch-item>
+                            <button class="size-pill-btn active" data-size="30ml">30ml · ${price('30ml')}</button>
+                            <button class="size-pill-btn" data-size="10ml">10ml · ${price('10ml')}</button>
+                            ${p.prices["6ml"] ? `<button class="size-pill-btn" data-size="6ml">6ml · ${price('6ml')}</button>` : ''}
+                        </div>
+
+                        <div class="flagship-card-actions" data-ch-item>
+                            <button class="btn btn-gold add-to-bag-btn" data-id="${p.id}" data-size="30ml">
+                                ${ICON_BAG} Add to Bag
+                            </button>
+                            <button class="btn btn-whatsapp-icon wa-quick-btn" data-id="${p.id}" data-size="30ml" title="Order via WhatsApp" aria-label="Order ${p.name} via WhatsApp">
+                                ${ICON_WA}
+                            </button>
+                            <a href="product.html?id=${p.id}" class="chapter-link">View details <span aria-hidden="true">→</span></a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </article>
         `;
     }).join('');
 
     attachCardEventListeners(container);
+
+    // Launch the 3D stage (loaded lazily so the shop works even if WebGL is unavailable)
+    const stage = document.getElementById('stage');
+    if (stage) {
+        import('./home-stage.js')
+            .then(m => m.initHomeStage(stage, flagships))
+            .catch(err => {
+                console.warn('3D stage unavailable, using photo fallback.', err);
+                stage.classList.add('stage-no-webgl');
+            });
+    }
 }
 
 // Render Products Grid with Category Filter Tabs
@@ -170,7 +201,7 @@ function renderProductsGrid() {
 
                         <div class="product-action-row">
                             <button class="btn btn-outline-primary card-add-bag-btn" data-id="${p.id}" data-size="${defaultSize}">
-                                🛒 Add
+                                Add to Bag
                             </button>
                             <button class="btn btn-whatsapp card-wa-buy-btn" data-id="${p.id}" data-size="${defaultSize}">
                                 Order
@@ -318,60 +349,3 @@ function initAnnouncement() {
     if (!bar) return;
     // Keep visible for high conversion reassurance
 }
-
-// 8. Luxury Scroll Animations
-function initScrollAnimations() {
-    // A. Header scroll elevation
-    const header = document.querySelector('.site-header');
-    if (header) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 25) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        }, { passive: true });
-    }
-
-    // B. IntersectionObserver for Reveal Animations
-    function attachReveals() {
-        const targets = document.querySelectorAll(
-            '.flagship-card, .product-card, .why-feature-box, .testimonial-card, .bundle-showcase-card'
-        );
-
-        targets.forEach((el) => {
-            if (!el.classList.contains('reveal-up')) {
-                el.classList.add('reveal-up');
-            }
-        });
-
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-revealed');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.05,
-                rootMargin: '100px 0px -20px 0px'
-            });
-
-            document.querySelectorAll('.reveal-up:not(.is-revealed)').forEach(el => observer.observe(el));
-        } else {
-            document.querySelectorAll('.reveal-up').forEach(el => el.classList.add('is-revealed'));
-        }
-    }
-
-    // Initial attach
-    attachReveals();
-
-    // Re-observe when filter tabs change
-    document.querySelectorAll('.category-filter-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            setTimeout(attachReveals, 80);
-        });
-    });
-}
-

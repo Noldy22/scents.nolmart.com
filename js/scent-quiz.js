@@ -182,7 +182,7 @@ function calculateAndRenderResult(answers) {
 
     matchContainer.innerHTML = `
         <div class="match-card">
-            <div class="match-badge">⭐ 99% MATCH FOR YOUR PROFILE</div>
+            <div class="match-badge">99% MATCH FOR YOUR PROFILE</div>
             <div class="match-grid">
                 <div class="match-image-box">
                     <img src="${matchedProduct.imageUrl}" alt="${matchedProduct.name}">
@@ -219,10 +219,10 @@ function calculateAndRenderResult(answers) {
 
                         <div class="match-actions">
                             <button class="btn btn-primary" id="quizAddToCartBtn" style="flex: 1;">
-                                🛒 Add to Shopping Bag
+                                Add to Shopping Bag
                             </button>
                             <button class="btn btn-whatsapp" id="quizWhatsAppBtn" style="flex: 1;">
-                                💬 Buy on WhatsApp
+                                Buy on WhatsApp
                             </button>
                         </div>
                     </div>
