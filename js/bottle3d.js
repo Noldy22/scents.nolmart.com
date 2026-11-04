@@ -19,7 +19,6 @@ const MODELS = {
 };
 // One real-world scale for every bottle, so sizes compare truthfully
 const WORLD_PER_METRE = 18.5;
-const TAU = Math.PI * 2;
 
 // Any size without its own model (bundles, "Set"...) shows the 30ml bottle
 export function bottleSizeFor(size) {
@@ -707,9 +706,8 @@ export async function createBottleStage(canvas, options = {}) {
         const e = 1 - Math.pow(1 - pose.ease, dt * 60);
         const c = pose.current, tg = pose.target;
         for (const k in c) c[k] += (tg[k] - c[k]) * e;
-        // Gentle float only; no idle tilt, so the label stays square to the viewer
         pivot.position.set(c.x, c.y + Math.sin(t * 1.1) * 0.035, 0);
-        pivot.rotation.set(c.rotX, c.rotY, c.rotZ);
+        pivot.rotation.set(c.rotX, c.rotY, c.rotZ + Math.sin(t * 0.7) * 0.012);
         pivot.scale.setScalar(c.scale);
     }
 
@@ -775,27 +773,26 @@ export async function createBottleStage(canvas, options = {}) {
 }
 
 // ---------- Drag-to-rotate helper (product page) ----------
-// The bottle rests facing straight to the front. Dragging turns it; when let
-// go it glides on briefly, then settles back to the nearest front-facing turn.
-export function enableDragRotate(element, stage) {
+export function enableDragRotate(element, stage, { autoSpin = 0.0035 } = {}) {
     let dragging = false;
     let lastX = 0, lastY = 0;
-    let velocity = 0;
+    let velocity = autoSpin;
+    let idleTimer = 0;
     const pose = stage.pose;
 
     element.addEventListener('pointerdown', (e) => {
         dragging = true;
-        velocity = 0;
         lastX = e.clientX; lastY = e.clientY;
         element.setPointerCapture(e.pointerId);
         element.classList.add('is-dragging');
+        clearTimeout(idleTimer);
     });
     element.addEventListener('pointermove', (e) => {
         if (!dragging) return;
         const dx = e.clientX - lastX;
         const dy = e.clientY - lastY;
         lastX = e.clientX; lastY = e.clientY;
-        velocity = dx * 0.012;
+        velocity = dx * 0.006;
         pose.target.rotY += dx * 0.012;
         pose.target.rotX = THREE.MathUtils.clamp(pose.target.rotX + dy * 0.006, -0.45, 0.45);
     });
@@ -803,24 +800,19 @@ export function enableDragRotate(element, stage) {
         if (!dragging) return;
         dragging = false;
         element.classList.remove('is-dragging');
+        idleTimer = setTimeout(() => { pose.target.rotX = 0; }, 1600);
     };
     element.addEventListener('pointerup', end);
     element.addEventListener('pointercancel', end);
 
-    // Frame-rate independent (same feel on 60 Hz and 120 Hz screens)
+    // Frame-rate independent auto-spin (same speed on 60 Hz and 120 Hz screens)
     let last = performance.now();
     function tick(now) {
         const f = Math.min(4, (now - last) / (1000 / 60));
         last = now;
         if (!dragging) {
-            velocity *= Math.pow(0.9, f);
-            if (Math.abs(velocity) > 0.002) {
-                pose.target.rotY += velocity * f;
-            } else {
-                const front = Math.round(pose.target.rotY / TAU) * TAU;
-                pose.target.rotY += (front - pose.target.rotY) * Math.min(1, 0.08 * f);
-            }
-            pose.target.rotX += (0 - pose.target.rotX) * Math.min(1, 0.08 * f);
+            velocity += (autoSpin - velocity) * 0.02 * f;
+            pose.target.rotY += velocity * f;
         }
         requestAnimationFrame(tick);
     }

@@ -289,9 +289,8 @@
                     const stage = await createBottleStage(viewer.querySelector('canvas'), { cameraZ: 5.6, size: bottleSizeFor(selectedSize) });
                     stage.bottle.prepare([product]);
                     stage.bottle.setProduct(product, bottleSizeFor(selectedSize));
-                    // Rest facing straight to the front
-                    stage.pose.target.rotY = 0;
-                    stage.pose.target.rotX = 0;
+                    stage.pose.target.rotY = -0.45;
+                    stage.pose.target.rotX = 0.06;
                     stage.snap();
                     viewerStage = stage;
                     viewerBottleSize = bottleSizeFor;
