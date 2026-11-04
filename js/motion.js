@@ -64,10 +64,10 @@ function initSmoothScroll() {
 
         // Pause inertia while the cart drawer / mobile menu lock the page
         const sync = () => {
-            const locked = document.body.style.overflow === 'hidden' || document.body.classList.contains('menu-open');
+            const locked = document.body.classList.contains('cart-open') || document.body.classList.contains('menu-open');
             if (locked) lenis.stop(); else lenis.start();
         };
-        new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+        new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
     }
 
     // Same-page anchor links glide to their target
@@ -90,6 +90,8 @@ function initSmoothScroll() {
 }
 
 // ---------- Header ----------
+// The navigation bar stays pinned to the top of the screen at all times;
+// scrolling only switches it to its solid "scrolled" style.
 function initHeaderBasic() {
     const header = document.querySelector('.site-header');
     if (!header) return;
@@ -99,20 +101,7 @@ function initHeaderBasic() {
 }
 
 function initHeader() {
-    const header = document.querySelector('.site-header');
-    if (!header) return;
-    ScrollTrigger.create({
-        start: 0,
-        end: 'max',
-        onUpdate(self) {
-            const y = self.scroll();
-            header.classList.toggle('scrolled', y > 30);
-            const menuOpen = document.body.classList.contains('menu-open');
-            const hide = self.direction === 1 && y > window.innerHeight * 0.7 && !menuOpen;
-            header.classList.toggle('header-hidden', hide);
-        }
-    });
-    header.classList.toggle('scrolled', window.scrollY > 30);
+    initHeaderBasic();
 }
 
 function initProgress() {

@@ -28,7 +28,7 @@ export const PRODUCTS = [
         },
         longevity: "12–16 Hours",
         sillage: "Strong (Commanding)",
-        imageUrl: "img/products/crown-noir.png"
+        imageUrl: "img/products/crown-noir.webp"
     },
     {
         id: "cashmere-bloom",
@@ -55,7 +55,7 @@ export const PRODUCTS = [
         },
         longevity: "10–14 Hours",
         sillage: "Moderate to Heavy (Radiant)",
-        imageUrl: "img/products/cashmere-bloom.png"
+        imageUrl: "img/products/cashmere-bloom.webp"
     },
     {
         id: "azure-vip",
@@ -82,7 +82,7 @@ export const PRODUCTS = [
         },
         longevity: "10–12 Hours",
         sillage: "Intimate to Moderate (Alluring)",
-        imageUrl: "img/products/azure-vip.png"
+        imageUrl: "img/products/azure-vip.webp"
     },
     {
         id: "onyx-bloom",
@@ -109,7 +109,7 @@ export const PRODUCTS = [
         },
         longevity: "12–16 Hours",
         sillage: "Strong (Enveloping)",
-        imageUrl: "img/products/onyx-bloom.png"
+        imageUrl: "img/products/onyx-bloom.webp"
     },
 
     // --- 🌊 SIGNATURE BLENDS ---
@@ -138,7 +138,7 @@ export const PRODUCTS = [
         },
         longevity: "10–14 Hours",
         sillage: "Moderate to Strong",
-        imageUrl: "img/products/obsidian-reef.png"
+        imageUrl: "img/products/obsidian-reef.webp"
     },
     {
         id: "coastal-dream",
@@ -165,7 +165,7 @@ export const PRODUCTS = [
         },
         longevity: "8–12 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/coastal-dream.png"
+        imageUrl: "img/products/coastal-dream.webp"
     },
     {
         id: "electric-rush",
@@ -192,7 +192,7 @@ export const PRODUCTS = [
         },
         longevity: "8–10 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/electric-rush.png"
+        imageUrl: "img/products/electric-rush.webp"
     },
     {
         id: "velvet-noir",
@@ -219,7 +219,7 @@ export const PRODUCTS = [
         },
         longevity: "10–12 Hours",
         sillage: "Moderate to Heavy",
-        imageUrl: "img/products/velvet-noir.png"
+        imageUrl: "img/products/velvet-noir.webp"
     },
     {
         id: "paradise-mist",
@@ -246,7 +246,7 @@ export const PRODUCTS = [
         },
         longevity: "10–14 Hours",
         sillage: "Strong",
-        imageUrl: "img/products/paradise-mist.png"
+        imageUrl: "img/products/paradise-mist.webp"
     },
     {
         id: "tropical-bloom",
@@ -273,7 +273,7 @@ export const PRODUCTS = [
         },
         longevity: "8–11 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/tropical-bloom.png"
+        imageUrl: "img/products/tropical-bloom.webp"
     },
     {
         id: "ocean-breeze",
@@ -300,7 +300,7 @@ export const PRODUCTS = [
         },
         longevity: "8–10 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/ocean-breeze.png"
+        imageUrl: "img/products/ocean-breeze.webp"
     },
     {
         id: "midnight-velvet",
@@ -327,7 +327,7 @@ export const PRODUCTS = [
         },
         longevity: "12–16 Hours",
         sillage: "Strong (Magnetic)",
-        imageUrl: "img/products/midnight-velvet.png"
+        imageUrl: "img/products/midnight-velvet.webp"
     },
     {
         id: "rose-cream",
@@ -354,7 +354,7 @@ export const PRODUCTS = [
         },
         longevity: "8–12 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/rose-cream.png"
+        imageUrl: "img/products/rose-cream.webp"
     },
     {
         id: "lagoon",
@@ -381,7 +381,7 @@ export const PRODUCTS = [
         },
         longevity: "8–10 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/lagoon.png"
+        imageUrl: "img/products/lagoon.webp"
     },
 
     // --- 🍬 PURE SCENTS (EXTRA LONG-LASTING) ---
@@ -410,7 +410,7 @@ export const PRODUCTS = [
         },
         longevity: "8–12 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/marshmallow.png"
+        imageUrl: "img/products/marshmallow.webp"
     },
     {
         id: "burberry-weekend",
@@ -437,7 +437,7 @@ export const PRODUCTS = [
         },
         longevity: "8–11 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/burberry-weekend.png"
+        imageUrl: "img/products/burberry-weekend.webp"
     },
     {
         id: "212-vip-men",
@@ -464,7 +464,7 @@ export const PRODUCTS = [
         },
         longevity: "9–12 Hours",
         sillage: "Strong",
-        imageUrl: "img/products/212-vip-men.png"
+        imageUrl: "img/products/212-vip-men.webp"
     },
     {
         id: "coconut-passion",
@@ -491,7 +491,7 @@ export const PRODUCTS = [
         },
         longevity: "8–11 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/coconut-passion.png"
+        imageUrl: "img/products/coconut-passion.webp"
     },
     {
         id: "vanilla-28",
@@ -518,7 +518,7 @@ export const PRODUCTS = [
         },
         longevity: "10–14 Hours",
         sillage: "Moderate to Heavy",
-        imageUrl: "img/products/vanilla-28.png"
+        imageUrl: "img/products/vanilla-28.webp"
     },
     {
         id: "pink-chiffon",
@@ -545,7 +545,7 @@ export const PRODUCTS = [
         },
         longevity: "8–11 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/pink-chiffon.png"
+        imageUrl: "img/products/pink-chiffon.webp"
     },
     {
         id: "tom-ford-noir-extreme",
@@ -572,7 +572,7 @@ export const PRODUCTS = [
         },
         longevity: "12–16 Hours",
         sillage: "Heavy (Magnetic)",
-        imageUrl: "img/products/tom-ford-noir-extreme.png"
+        imageUrl: "img/products/tom-ford-noir-extreme.webp"
     },
     {
         id: "reef",
@@ -599,7 +599,7 @@ export const PRODUCTS = [
         },
         longevity: "8–10 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/reef.png"
+        imageUrl: "img/products/reef.webp"
     },
     {
         id: "now-rave",
@@ -626,7 +626,7 @@ export const PRODUCTS = [
         },
         longevity: "8–10 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/now-rave.png"
+        imageUrl: "img/products/now-rave.webp"
     },
     {
         id: "club-de-nuit",
@@ -653,7 +653,7 @@ export const PRODUCTS = [
         },
         longevity: "12–16 Hours",
         sillage: "Strong (Unforgettable)",
-        imageUrl: "img/products/club-de-nuit.png"
+        imageUrl: "img/products/club-de-nuit.webp"
     },
     {
         id: "sauvage-dior",
@@ -680,7 +680,7 @@ export const PRODUCTS = [
         },
         longevity: "10–14 Hours",
         sillage: "Heavy (Radiant)",
-        imageUrl: "img/products/sauvage-dior.png"
+        imageUrl: "img/products/sauvage-dior.webp"
     },
     {
         id: "strawberry",
@@ -707,7 +707,7 @@ export const PRODUCTS = [
         },
         longevity: "8–12 Hours",
         sillage: "Moderate",
-        imageUrl: "img/products/strawberry.png"
+        imageUrl: "img/products/strawberry.webp"
     },
 
     // --- 🚗 CAR AIR FRESHENERS (HANGING REARVIEW MIRROR DIFFUSERS) ---
@@ -761,7 +761,7 @@ export const PRODUCTS = [
         },
         longevity: "8–14 Hours Each",
         sillage: "Customizable",
-        imageUrl: "img/products/bundle-try-and-buy.png"
+        imageUrl: "img/products/bundle-try-and-buy.webp"
     },
     {
         id: "bundle-his-hers",
@@ -786,7 +786,7 @@ export const PRODUCTS = [
         },
         longevity: "12–16 Hours",
         sillage: "Commanding & Radiant",
-        imageUrl: "img/products/bundle-his-hers.png"
+        imageUrl: "img/products/bundle-his-hers.webp"
     },
     {
         id: "bundle-new-arrivals",
@@ -811,7 +811,7 @@ export const PRODUCTS = [
         },
         longevity: "8–12 Hours",
         sillage: "Moderate to Strong",
-        imageUrl: "img/products/bundle-new-arrivals.png"
+        imageUrl: "img/products/bundle-new-arrivals.webp"
     },
     {
         id: "bundle-luxury-duo",
@@ -836,7 +836,7 @@ export const PRODUCTS = [
         },
         longevity: "10–14 Hours",
         sillage: "High",
-        imageUrl: "img/products/bundle-luxury-duo.png"
+        imageUrl: "img/products/bundle-luxury-duo.webp"
     }
 ];
 

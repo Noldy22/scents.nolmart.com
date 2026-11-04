@@ -33,7 +33,7 @@ This repository powers the official web platform **[scents.nolmart.com](https://
 - 🌿 **Fragrance Scent Notes**: Clear breakdown of Top, Heart, and Base notes, plus longevity and scent trail ratings.
 - 🎁 **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 35,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
 - ✨ **Premium Motion & Scroll Animations**: Every scroll animation is bidirectional — it plays scrolling down, rewinds scrolling up and replays endlessly (GSAP ScrollTrigger + Lenis inertia scrolling, `prefers-reduced-motion` respected).
-- 🧴 **Real-Time 3D Bottles (Three.js)**: The home page hero + flagship chapters scroll over a pinned 3D NolMart bottle that spins and morphs between scents; every product page has a drag-to-rotate 3D viewer. Labels are drawn live from each scent's name, and liquid/cap colours are sampled from the product photos (`js/bottle-palette.js`). Falls back to photos when WebGL is unavailable.
+- 🧴 **Real-Time 3D Bottles (Three.js)**: The home page hero + flagship chapters scroll over a pinned 3D NolMart bottle that spins and morphs between scents; every product page has a drag-to-rotate 3D viewer. The bottle is the Blender brand bottle (`models/nolmart-bottle.glb`: fluted glass, gold pump, ivory cap). Its navy label is painted live with each scent's name, and the liquid colour comes from `js/bottle-palette.js`. Falls back to photos when WebGL is unavailable.
 
 ---
 
@@ -58,8 +58,8 @@ scents.nolmart.com/
 │   ├── scent-quiz.js       # 5-step interactive scent matcher algorithm
 │   ├── main.js             # Home page controller & UI bindings
 │   ├── motion.js           # Site-wide bidirectional scroll animations & smooth scroll
-│   ├── bottle3d.js         # Three.js bottle model, live label printing, viewer
-│   ├── bottle-palette.js   # Liquid & cap colours per scent (sampled from photos)
+│   ├── bottle3d.js         # Loads the brand bottle GLB, live label printing, viewer
+│   ├── bottle-palette.js   # Liquid colours per scent
 │   ├── home-stage.js       # Scroll-driven 3D hero + flagship chapters
 │   └── vendor/             # three.js r170, GSAP 3.13 (ScrollTrigger, SplitText), Lenis
 └── img/
@@ -70,7 +70,7 @@ scents.nolmart.com/
     ├── logo-dark.png        # Luxury dark edition logo
     ├── logo-icon.png        # Perfume bottle app icon
     ├── favicon.ico          # Browser tab icon
-    └── products/            # 27 custom rendered luxury perfume bottle shots
+    └── products/            # Product shots rendered from the 3D bottle (WebP)
         ├── crown-noir.png
         ├── cashmere-bloom.png
         ├── azure-vip.png
@@ -80,6 +80,13 @@ scents.nolmart.com/
 ```
 
 ---
+
+## 🧴 Updating the 3D Bottle
+
+1. Export the bottle from Blender (`D:/projects/3D Models/brand_bottle/export_perfume.py`).
+2. Make the light web copy: `python tools/optimize_bottle_glb.py "<path>/nolmart_obsidian_reef.glb" models/nolmart-bottle.glb`
+3. Re-render the product images: run `node tools/dev-server.mjs`, open `http://127.0.0.1:3000/tools/render-product-images.html`,
+   then convert the PNGs it writes in `img/products/` to 640px WebP (quality 88).
 
 ## 🚀 Local Testing (PC & Mobile)
 

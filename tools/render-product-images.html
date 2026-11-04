@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Render product images</title>
+    <!--
+        Re-renders img/products/*.png from the 3D brand bottle (models/nolmart-bottle.glb).
+        1. node tools/dev-server.mjs
+        2. open http://127.0.0.1:3000/tools/render-product-images.html
+        Every single-bottle scent gets its own label; Discovery Sets get a group shot.
+        Add ?only=<id>,<id> to render just some products.
+    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Oswald:wght@600&display=swap">
+    <script type="importmap">
+        { "imports": { "three": "../js/vendor/three.module.min.js", "three/addons/": "../js/vendor/three-addons/" } }
+    </script>
+    <style>
+        body { font: 14px/1.5 system-ui, sans-serif; background: #f3eee4; margin: 20px; }
+        #stage { width: 800px; height: 800px; position: fixed; left: -9999px; top: 0; }
+        #log { white-space: pre-wrap; }
+        #out { display: flex; flex-wrap: wrap; gap: 8px; }
+        #out img { width: 160px; height: 160px; background: radial-gradient(70% 60% at 50% 62%, #fff, #ebe3d4); border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Rendering product images…</h1>
+    <canvas id="stage"></canvas>
+    <div id="out"></div>
+    <div id="log"></div>
+    <script type="module">
+        import { PRODUCTS, getProductById } from '../js/products-data.js';
+        import { getBottlePalette } from '../js/bottle-palette.js';
+        import { createBottleStage } from '../js/bottle3d.js';
+
+        const SIZE = 800;
+        const log = (m) => { document.getElementById('log').textContent += m + '\n'; };
+        const only = (new URLSearchParams(location.search).get('only') || '').split(',').filter(Boolean);
+        const want = (id) => !only.length || only.includes(id);
+
+        // Group shots for the Discovery Sets (which scents appear on each bottle)
+        const BUNDLES = {
+            'bundle-try-and-buy': ['obsidian-reef', 'vanilla-28', '212-vip-men'],
+            'bundle-his-hers': ['crown-noir', 'cashmere-bloom'],
+            'bundle-new-arrivals': ['burberry-weekend', 'marshmallow', '212-vip-men'],
+            'bundle-luxury-duo': ['obsidian-reef', 'midnight-velvet']
+        };
+
+        const stage = await createBottleStage(document.getElementById('stage'), {
+            dprMax: 1,
+            cameraZ: 5.3,
+            backdrop: ['#ffffff', '#e9e1d2'], // light studio for the glass to refract (cards are cream)
+            preserveDrawingBuffer: true
+        });
+        stage.resize();
+
+        function shot(product, rotY = -0.38) {
+            stage.bottle.setProduct(product);
+            Object.assign(stage.pose.target, { x: 0, y: -0.02, rotY, rotX: 0.07, rotZ: 0, scale: 1 });
+            stage.renderStill();
+            const c = document.createElement('canvas');
+            c.width = c.height = SIZE;
+            c.getContext('2d').drawImage(stage.renderer.domElement, 0, 0, SIZE, SIZE);
+            return c;
+        }
+
+        async function save(id, canvas) {
+            const blob = await new Promise((r) => canvas.toBlob(r, 'image/png'));
+            const res = await fetch(`/__save-product-image?id=${encodeURIComponent(id)}`, { method: 'POST', body: blob });
+            if (!res.ok) throw new Error(`${id}: ${res.status}`);
+            const img = new Image();
+            img.src = URL.createObjectURL(blob);
+            img.title = id;
+            document.getElementById('out').appendChild(img);
+            log(`saved ${id}`);
+        }
+
+        let n = 0;
+        for (const p of PRODUCTS) {
+            if (!getBottlePalette(p.id) || !want(p.id)) continue;
+            await save(p.id, shot(p));
+            n++;
+        }
+
+        for (const [id, ids] of Object.entries(BUNDLES)) {
+            if (!want(id)) continue;
+            const items = ids.map(getProductById).filter(Boolean);
+            const c = document.createElement('canvas');
+            c.width = c.height = SIZE;
+            const g = c.getContext('2d');
+            // [x offset, y offset, scale, rotY] — back bottles first
+            const layout = items.length === 3
+                ? [[-215, -18, 0.8, 0.12], [215, -18, 0.8, -0.5], [0, 22, 0.9, -0.2]]
+                : [[-150, 0, 0.9, 0.25], [150, 0, 0.9, -0.55]];
+            const order = items.length === 3 ? [0, 2, 1] : [0, 1];
+            order.forEach((itemIdx, slot) => {
+                const [dx, dy, s, rot] = layout[slot];
+                const img = shot(items[itemIdx], rot);
+                const w = SIZE * s;
+                g.drawImage(img, (SIZE - w) / 2 + dx, (SIZE - w) / 2 + dy + (SIZE - w) * 0.35, w, w);
+            });
+            await save(id, c);
+            n++;
+        }
+
+        document.querySelector('h1').textContent = `Done: ${n} images rendered`;
+        document.title = 'DONE';
+    </script>
+</body>
+</html>

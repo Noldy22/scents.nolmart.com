@@ -81,7 +81,7 @@ export async function initHomeStage(stageEl, flagships) {
         const v = viewHalf();
         if (isPortrait()) {
             // Keep the bottle in the free band between the header and the copy
-            const scale = Math.min(0.66, v.h * 0.4);
+            const scale = Math.min(0.74, v.h * 0.44);
             return {
                 x: 0,
                 y: v.h * 0.39,

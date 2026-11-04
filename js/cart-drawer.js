@@ -65,7 +65,7 @@ export function openCartDrawer() {
     if (drawer && backdrop) {
         drawer.classList.add('open');
         backdrop.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('cart-open');
 
         // Pre-fill customer details from localStorage if available
         try {
@@ -85,7 +85,7 @@ export function closeCartDrawer() {
     if (drawer && backdrop) {
         drawer.classList.remove('open');
         backdrop.classList.remove('open');
-        document.body.style.overflow = '';
+        document.body.classList.remove('cart-open');
     }
 }
 
