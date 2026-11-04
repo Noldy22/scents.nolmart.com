@@ -1,18 +1,30 @@
 // js/bottle3d.js
-// Real-time 3D NolMart bottle (Three.js).
-// The geometry is the brand bottle modelled in Blender (models/nolmart-bottle.glb):
-// fluted 30 ml glass, gold FEA15 pump, ivory cap with gold top and the navy
-// NolMart label. The label is painted at runtime so every bottle carries the
-// exact scent name from js/products-data.js; the juice colour comes from
-// js/bottle-palette.js.
+// Real-time 3D NolMart bottles (Three.js), one model per bottle size, all
+// modelled in Blender:
+//   30ml: fluted glass, gold pump, ivory cap, navy NolMart label
+//   10ml: slim glass vial, gloss black cap with a paper name band
+//    6ml: the 10ml vial with a shorter glass body
+// Labels are painted at runtime so every bottle carries the exact scent name
+// from js/products-data.js. The juice colour comes from js/bottle-palette.js.
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/RoomEnvironment.js';
 import { getBottlePalette } from './bottle-palette.js';
 
-const MODEL_URL = new URL('../models/nolmart-bottle.glb', import.meta.url).href;
-const BOTTLE_HEIGHT = 1.9; // world units, from the glass foot to the top of the cap
+const MODELS = {
+    '30ml': { url: new URL('../models/nolmart-bottle-30ml.glb', import.meta.url).href, label: 'front', glassThickness: 0.32 },
+    '10ml': { url: new URL('../models/nolmart-bottle-10ml.glb', import.meta.url).href, label: 'cap', glassThickness: 0.06 },
+    '6ml': { url: new URL('../models/nolmart-bottle-6ml.glb', import.meta.url).href, label: 'cap', glassThickness: 0.06 }
+};
+// One real-world scale for every bottle, so sizes compare truthfully
+const WORLD_PER_METRE = 18.5;
+const TAU = Math.PI * 2;
+
+// Any size without its own model (bundles, "Set"...) shows the 30ml bottle
+export function bottleSizeFor(size) {
+    return MODELS[size] ? size : '30ml';
+}
 
 // ---------- Capability checks ----------
 export function canRender3D() {
@@ -28,16 +40,17 @@ export function hasBottle(productId) {
     return !!getBottlePalette(productId);
 }
 
-// ---------- Model loading (shared, fetched once per page) ----------
-let modelPromise = null;
-export function loadBottleModel() {
-    if (!modelPromise) {
-        modelPromise = new GLTFLoader().loadAsync(MODEL_URL).catch((err) => {
-            modelPromise = null;
+// ---------- Model loading (shared, each size fetched once per page) ----------
+const modelPromises = {};
+export function loadBottleModel(size = '30ml') {
+    const key = bottleSizeFor(size);
+    if (!modelPromises[key]) {
+        modelPromises[key] = new GLTFLoader().loadAsync(MODELS[key].url).catch((err) => {
+            delete modelPromises[key];
             throw err;
         });
     }
-    return modelPromise;
+    return modelPromises[key];
 }
 
 // The GLB is quantised (int16/int8) to keep the download small. Expand to
@@ -266,29 +279,101 @@ function drawLabelCanvas(name) {
     return cv;
 }
 
-// ---------- Materials (tuned for real-time; names match the Blender file) ----------
-function makeMaterials() {
+// ---------- 10ml / 6ml cap band (off-white paper wrapped round the cap) ----------
+// Measured on the real vial: band 12.2 mm tall, 48.9 mm round, capitals 4.7 mm.
+// u = 0.5 is the front of the cap, so the name is centred on the canvas.
+const CAP_BAND = { w: 48.9, h: 12.2, cap: 4.7 };
+
+function drawCapLabel(name) {
+    const cv = document.createElement('canvas');
+    cv.width = 2048;
+    cv.height = Math.round(2048 * (CAP_BAND.h / CAP_BAND.w));
+    const W = cv.width, H = cv.height;
+    const g = cv.getContext('2d');
+    g.fillStyle = '#eee9dd';
+    g.fillRect(0, 0, W, H);
+
+    const text = String(name || '');
+    const fontFor = (s) => `700 ${s}px "Times New Roman", Times, "Liberation Serif", "Noto Serif", Georgia, serif`;
+    // The cap is only 16 mm wide, so keep the name within the part that faces
+    // the viewer (about 30% of the way round). Use one line, or two lines when
+    // that lets the letters be bigger.
+    const maxW = W * 0.3;
+    const capRatio = 0.662; // Times capital height per em
+    const full = (CAP_BAND.cap / CAP_BAND.h) * H / capRatio;
+    g.font = fontFor(full);
+    let lines = [text];
+    let size = Math.min(full, full * maxW / g.measureText(text).width);
+    const words = text.split(' ');
+    if (words.length > 1) {
+        let best = null;
+        for (let i = 1; i < words.length; i++) {
+            const a = words.slice(0, i).join(' ');
+            const b = words.slice(i).join(' ');
+            const w = Math.max(g.measureText(a).width, g.measureText(b).width);
+            if (!best || w < best.w) best = { lines: [a, b], w };
+        }
+        const twoLine = Math.min(full * 0.72, full * maxW / best.w);
+        if (twoLine > size * 1.05) {
+            lines = best.lines;
+            size = twoLine;
+        }
+    }
+    g.font = fontFor(size);
+    g.fillStyle = '#181616';
+    g.textAlign = 'center';
+    g.textBaseline = 'alphabetic';
+    const capH = size * capRatio;
+    const gap = size * 1.08;
+    lines.forEach((l, i) => {
+        const cy = H / 2 + (i - (lines.length - 1) / 2) * gap;
+        g.fillText(l, W / 2, cy + capH / 2);
+    });
+    return cv;
+}
+
+// ---------- Materials (tuned for real-time; names match the Blender files) ----------
+function makeMaterials(glassThickness) {
+    const liquid = new THREE.MeshPhysicalMaterial({
+        vertexColors: true,
+        roughness: 0.18,
+        metalness: 0,
+        clearcoat: 0.6,
+        clearcoatRoughness: 0.1,
+        envMapIntensity: 0.6
+    });
+    const labelPrint = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        roughness: 0.4,
+        clearcoat: 0.35,
+        clearcoatRoughness: 0.12,
+        envMapIntensity: 0.55
+    });
     return {
+        Perfume_Golden: liquid,
+        Perfume_Straw: liquid,
+        Label_Print: labelPrint,
+        Label_Paper_Print: labelPrint,
+        Gloss_Black: new THREE.MeshPhysicalMaterial({
+            color: '#0b0b0c',
+            metalness: 0,
+            roughness: 0.1,
+            clearcoat: 1,
+            clearcoatRoughness: 0.04,
+            envMapIntensity: 1.2
+        }),
         Glass: new THREE.MeshPhysicalMaterial({
             color: 0xffffff,
             metalness: 0,
             roughness: 0.035,
             transmission: 1,
-            thickness: 0.32,
+            thickness: glassThickness,
             ior: 1.5,
             dispersion: 0.8,
             clearcoat: 1,
             clearcoatRoughness: 0.03,
             envMapIntensity: 1.05,
             specularIntensity: 1
-        }),
-        Perfume_Golden: new THREE.MeshPhysicalMaterial({
-            vertexColors: true,
-            roughness: 0.18,
-            metalness: 0,
-            clearcoat: 0.6,
-            clearcoatRoughness: 0.1,
-            envMapIntensity: 0.6
         }),
         Polished_Gold: new THREE.MeshPhysicalMaterial({
             color: '#f0cd85',
@@ -310,28 +395,27 @@ function makeMaterials() {
         Orifice_Black: new THREE.MeshStandardMaterial({ color: '#060606', roughness: 0.5 }),
         // Opaque on purpose: transparent objects are not seen through transmissive glass
         Clear_Plastic: new THREE.MeshStandardMaterial({ color: '#e7edf0', roughness: 0.25 }),
-        Label_Print: new THREE.MeshPhysicalMaterial({
-            color: 0xffffff,
-            roughness: 0.4,
-            clearcoat: 0.35,
-            clearcoatRoughness: 0.12,
-            envMapIntensity: 0.55
-        }),
         Label_Back_Paper: new THREE.MeshStandardMaterial({ color: '#e8e6df', roughness: 0.8 })
     };
 }
 
 // ---------- Bottle model ----------
 class BottleModel {
-    constructor(renderer, gltf) {
+    constructor(renderer, gltf, size) {
         this.renderer = renderer;
+        this.size = size;
+        this.spec = MODELS[size];
         this.group = new THREE.Group();
         this.labelCache = new Map();
         this.currentLabelId = null;
         this._tmpA = new THREE.Color();
         this._tmpB = new THREE.Color();
         this._tmpC = new THREE.Color();
-        this.mats = makeMaterials();
+        this.mats = makeMaterials(this.spec.glassThickness);
+        if (this.spec.label === 'cap') {
+            // Uncoated printed paper keeps the ink black
+            Object.assign(this.mats.Label_Paper_Print, { roughness: 0.75, clearcoat: 0, envMapIntensity: 0.4 });
+        }
         this._build(gltf);
     }
 
@@ -349,9 +433,11 @@ class BottleModel {
         });
         const box = new THREE.Box3();
         parts.forEach((p) => { p.geo.computeBoundingBox(); box.union(p.geo.boundingBox); });
-        const s = BOTTLE_HEIGHT / (box.max.y - box.min.y);
+        const s = WORLD_PER_METRE;
+        this.height = (box.max.y - box.min.y) * s;
+        this.width = Math.max(box.max.x - box.min.x, box.max.z - box.min.z) * s;
         const place = new THREE.Matrix4()
-            .makeTranslation(0, -BOTTLE_HEIGHT / 2 - box.min.y * s, 0)
+            .makeTranslation(0, -this.height / 2 - box.min.y * s, 0)
             .multiply(new THREE.Matrix4().makeScale(s, s, s));
 
         parts.forEach(({ geo, matName }) => {
@@ -361,7 +447,7 @@ class BottleModel {
             const mat = this.mats[matName] || this.mats.White_Plastic;
             const mesh = new THREE.Mesh(geo, mat);
             mesh.name = matName;
-            if (matName === 'Perfume_Golden') {
+            if (matName.startsWith('Perfume_')) {
                 this.liquidGeo = geo;
                 geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(geo.attributes.position.count * 3), 3));
             }
@@ -379,17 +465,18 @@ class BottleModel {
         sg.fillStyle = grd;
         sg.fillRect(0, 0, 256, 256);
         this.shadow = new THREE.Mesh(
-            new THREE.PlaneGeometry(1.7, 0.9),
+            new THREE.PlaneGeometry(this.width * 2.1, this.width * 1.1),
             new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sh), transparent: true, depthWrite: false, opacity: 0.85 })
         );
         this.shadow.rotation.x = -Math.PI / 2;
-        this.shadow.position.y = -BOTTLE_HEIGHT / 2 - 0.006;
+        this.shadow.position.y = -this.height / 2 - 0.006;
         this.group.add(this.shadow);
     }
 
     _labelTexture(id, name) {
         if (this.labelCache.has(id)) return this.labelCache.get(id);
-        const tex = new THREE.CanvasTexture(drawLabelCanvas(name));
+        const art = this.spec.label === 'cap' ? drawCapLabel(name) : drawLabelCanvas(name);
+        const tex = new THREE.CanvasTexture(art);
         tex.colorSpace = THREE.SRGBColorSpace;
         tex.flipY = false; // glTF UV convention
         tex.anisotropy = Math.min(8, this.renderer.capabilities.getMaxAnisotropy());
@@ -441,6 +528,69 @@ class BottleModel {
     }
 }
 
+// ---------- All bottle sizes on one stage ----------
+// Same API as a single bottle (setProduct / blend / prepare) plus a size.
+// Other sizes load in the background the first time they are needed.
+class BottleSet {
+    constructor(renderer, parent) {
+        this.renderer = renderer;
+        this.group = new THREE.Group();
+        parent.add(this.group);
+        this.models = {};   // size -> BottleModel (loaded)
+        this.loading = {};  // size -> Promise<BottleModel>
+        this.active = null;
+        this.products = [];
+        this.onModelReady = null;
+    }
+
+    load(size) {
+        const key = bottleSizeFor(size);
+        if (this.models[key]) return Promise.resolve(this.models[key]);
+        if (!this.loading[key]) {
+            this.loading[key] = loadBottleModel(key).then((gltf) => {
+                const m = new BottleModel(this.renderer, gltf, key);
+                m.group.visible = false;
+                m.prepare(this.products);
+                this.group.add(m.group);
+                this.models[key] = m;
+                if (this.onModelReady) this.onModelReady(key);
+                return m;
+            });
+        }
+        return this.loading[key];
+    }
+
+    // Show the model for `size` (falls back to what is loaded until it arrives)
+    _use(size) {
+        const key = bottleSizeFor(size);
+        const m = this.models[key];
+        if (!m) { this.load(key).catch(() => {}); return this.active; }
+        if (m !== this.active) {
+            if (this.active) this.active.group.visible = false;
+            m.group.visible = true;
+            this.active = m;
+        }
+        return m;
+    }
+
+    get size() { return this.active ? this.active.size : '30ml'; }
+
+    prepare(products) {
+        this.products = products;
+        Object.values(this.models).forEach((m) => m.prepare(products));
+    }
+
+    setProduct(product, size = this.size) {
+        this.blend(product, product, 0, size, size);
+    }
+
+    // sizeA / sizeB: bottle size of each product; the bottle swaps at t = 0.5
+    blend(a, b, t, sizeA = this.size, sizeB = sizeA) {
+        const m = this._use(t < 0.5 ? sizeA : sizeB);
+        if (m) m.blend(a, b, t);
+    }
+}
+
 // ---------- Stage (renderer + camera + loop) ----------
 export async function createBottleStage(canvas, options = {}) {
     const {
@@ -449,11 +599,12 @@ export async function createBottleStage(canvas, options = {}) {
         fov = 28,
         onFrame = null,
         backdrop = ['#0e1f3a', '#050b16'],
-        preserveDrawingBuffer = false
+        preserveDrawingBuffer = false,
+        size = '30ml'
     } = options;
 
     // Start the download before the GPU setup so both happen in parallel
-    const modelReady = loadBottleModel();
+    const modelReady = loadBottleModel(size);
 
     const renderer = new THREE.WebGLRenderer({
         canvas,
@@ -513,11 +664,12 @@ export async function createBottleStage(canvas, options = {}) {
     };
     scene.add(backdropMesh);
 
-    const [gltf] = await Promise.all([modelReady, ensureFonts()]);
-    const bottle = new BottleModel(renderer, gltf);
+    await Promise.all([modelReady, ensureFonts()]);
     const pivot = new THREE.Group();
-    pivot.add(bottle.group);
     scene.add(pivot);
+    const bottle = new BottleSet(renderer, pivot);
+    await bottle.load(size);
+    bottle._use(size);
 
     // Pose: target values are set by callers, current values ease towards them
     const pose = {
@@ -555,8 +707,9 @@ export async function createBottleStage(canvas, options = {}) {
         const e = 1 - Math.pow(1 - pose.ease, dt * 60);
         const c = pose.current, tg = pose.target;
         for (const k in c) c[k] += (tg[k] - c[k]) * e;
+        // Gentle float only; no idle tilt, so the label stays square to the viewer
         pivot.position.set(c.x, c.y + Math.sin(t * 1.1) * 0.035, 0);
-        pivot.rotation.set(c.rotX, c.rotY, c.rotZ + Math.sin(t * 0.7) * 0.012);
+        pivot.rotation.set(c.rotX, c.rotY, c.rotZ);
         pivot.scale.setScalar(c.scale);
     }
 
@@ -612,30 +765,37 @@ export async function createBottleStage(canvas, options = {}) {
         Object.assign(pose.current, pose.target);
     }
 
-    return { renderer, scene, camera, bottle, pose, start, stop, snap, resize, renderStill };
+    // Switch bottle size (loads that model the first time)
+    async function setSize(next) {
+        await bottle.load(next);
+        bottle._use(next);
+    }
+
+    return { renderer, scene, camera, bottle, pose, start, stop, snap, resize, renderStill, setSize };
 }
 
 // ---------- Drag-to-rotate helper (product page) ----------
-export function enableDragRotate(element, stage, { autoSpin = 0.0035 } = {}) {
+// The bottle rests facing straight to the front. Dragging turns it; when let
+// go it glides on briefly, then settles back to the nearest front-facing turn.
+export function enableDragRotate(element, stage) {
     let dragging = false;
     let lastX = 0, lastY = 0;
-    let velocity = autoSpin;
-    let idleTimer = 0;
+    let velocity = 0;
     const pose = stage.pose;
 
     element.addEventListener('pointerdown', (e) => {
         dragging = true;
+        velocity = 0;
         lastX = e.clientX; lastY = e.clientY;
         element.setPointerCapture(e.pointerId);
         element.classList.add('is-dragging');
-        clearTimeout(idleTimer);
     });
     element.addEventListener('pointermove', (e) => {
         if (!dragging) return;
         const dx = e.clientX - lastX;
         const dy = e.clientY - lastY;
         lastX = e.clientX; lastY = e.clientY;
-        velocity = dx * 0.006;
+        velocity = dx * 0.012;
         pose.target.rotY += dx * 0.012;
         pose.target.rotX = THREE.MathUtils.clamp(pose.target.rotX + dy * 0.006, -0.45, 0.45);
     });
@@ -643,19 +803,24 @@ export function enableDragRotate(element, stage, { autoSpin = 0.0035 } = {}) {
         if (!dragging) return;
         dragging = false;
         element.classList.remove('is-dragging');
-        idleTimer = setTimeout(() => { pose.target.rotX = 0; }, 1600);
     };
     element.addEventListener('pointerup', end);
     element.addEventListener('pointercancel', end);
 
-    // Frame-rate independent auto-spin (same speed on 60 Hz and 120 Hz screens)
+    // Frame-rate independent (same feel on 60 Hz and 120 Hz screens)
     let last = performance.now();
     function tick(now) {
         const f = Math.min(4, (now - last) / (1000 / 60));
         last = now;
         if (!dragging) {
-            velocity += (autoSpin - velocity) * 0.02 * f;
-            pose.target.rotY += velocity * f;
+            velocity *= Math.pow(0.9, f);
+            if (Math.abs(velocity) > 0.002) {
+                pose.target.rotY += velocity * f;
+            } else {
+                const front = Math.round(pose.target.rotY / TAU) * TAU;
+                pose.target.rotY += (front - pose.target.rotY) * Math.min(1, 0.08 * f);
+            }
+            pose.target.rotX += (0 - pose.target.rotX) * Math.min(1, 0.08 * f);
         }
         requestAnimationFrame(tick);
     }

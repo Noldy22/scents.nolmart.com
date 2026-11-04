@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Fragrances — NolMart Scents Tanzania</title>
+    <title>All Fragrances | NolMart Scents Tanzania</title>
     <meta name="description" content="Browse the full collection of NolMart Scents luxury perfumes: Flagships, Signature Blends, Long-Lasting Fragrances, and Discovery Sets.">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="theme-color" content="#050b16">
@@ -13,7 +13,7 @@
 
     <!-- 1. ANNOUNCEMENT BANNER -->
     <div class="announcement-banner">
-        <span><strong>Fast Delivery to All Regions in Tanzania</strong> <i class="ann-sep">✦</i> Pay via <strong>Vodacom M-Pesa, Airtel Money, Selcom, CRDB</strong> or Cash on Delivery</span>
+        <span><strong>Fast Delivery to All Regions in Tanzania</strong> <i class="ann-sep">•</i> Pay via <strong>Vodacom M-Pesa, Airtel Money, Selcom, CRDB</strong> or Cash on Delivery</span>
         <a href="contact.html">Learn More →</a>
     </div>
 
@@ -123,7 +123,7 @@
             <!-- Customer checkout fields styled according to theme -->
             <div class="cart-checkout-form" id="cartCheckoutForm">
                 <div class="cart-form-header">
-                    <span>📋</span> Delivery & Contact Details
+                    Delivery & Contact Details
                 </div>
                 <div class="cart-input-field">
                     <label for="cartCustomerName">Your Name *</label>
@@ -136,11 +136,11 @@
                 <div class="cart-input-field">
                     <label for="cartPaymentPref">Preferred Payment</label>
                     <select id="cartPaymentPref">
-                        <option value="Vodacom M-Pesa">📱 Vodacom M-Pesa</option>
-                        <option value="Airtel Money">📲 Airtel Money</option>
-                        <option value="Selcom Pay">💳 Selcom Pay</option>
-                        <option value="CRDB Bank (SimBanking)">🏦 CRDB Bank (SimBanking)</option>
-                        <option value="Cash on Delivery">💵 Cash on Delivery</option>
+                        <option value="Vodacom M-Pesa">Vodacom M-Pesa</option>
+                        <option value="Airtel Money">Airtel Money</option>
+                        <option value="Selcom Pay">Selcom Pay</option>
+                        <option value="CRDB Bank (SimBanking)">CRDB Bank (SimBanking)</option>
+                        <option value="Cash on Delivery">Cash on Delivery</option>
                     </select>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                 <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
             </div>
             <div class="cart-delivery-note">
-                <span>🚚</span> Fast Delivery to All Regions in Tanzania (24–48h)
+                Fast Delivery to All Regions in Tanzania (24-48h)
             </div>
             <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
                 Complete Order on WhatsApp →
@@ -227,7 +227,7 @@
 
     <!-- Products Page Script -->
     <script type="module">
-        import { PRODUCTS, getProductById } from './js/products-data.js';
+        import { PRODUCTS, getProductById, getProductImage } from './js/products-data.js';
         import { addItemToCart } from './js/cart.js';
         import { initCartDrawer, openCartDrawer, directWhatsAppOrder, showToast } from './js/cart-drawer.js';
 
@@ -413,6 +413,8 @@
 
                             if (addBtn) addBtn.dataset.size = chosenSize;
                             if (waBtn) waBtn.dataset.size = chosenSize;
+                            const img = card.querySelector('.product-img-box img');
+                            if (img) img.src = getProductImage(product, chosenSize);
                         });
                     });
                 });

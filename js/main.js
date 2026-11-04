@@ -1,7 +1,7 @@
 // js/main.js
 // Main JavaScript logic for NolMart Scents
 
-import { PRODUCTS, getProductById, getFlagshipProducts, getBestsellerProducts } from './products-data.js';
+import { PRODUCTS, getProductById, getFlagshipProducts, getBestsellerProducts, getProductImage } from './products-data.js';
 import { addItemToCart, getCartTotalCount } from './cart.js';
 import { initCartDrawer, openCartDrawer, directWhatsAppOrder, showToast } from './cart-drawer.js';
 import { initScentQuiz } from './scent-quiz.js';
@@ -259,6 +259,13 @@ function attachCardEventListeners(container) {
 
                 if (addBtn) addBtn.dataset.size = chosenSize;
                 if (waBtn) waBtn.dataset.size = chosenSize;
+
+                const img = card.querySelector('.product-img-box img');
+                if (img) img.src = getProductImage(product, chosenSize);
+                // Flagship chapters: the 3D bottle switches to this size
+                if (card.classList.contains('flagship-card')) {
+                    document.dispatchEvent(new CustomEvent('nolmart:bottle-size', { detail: { id: productId, size: chosenSize } }));
+                }
             });
         });
     });

@@ -2,6 +2,7 @@
 // Shopping Cart State Management for NolMart Scents
 
 import { CONFIG } from './config.js';
+import { getProductImage } from './products-data.js';
 
 /**
  * Retrieves the current cart from Local Storage.
@@ -57,7 +58,7 @@ export function addItemToCart(product, size = "30ml", quantity = 1) {
             size: size,
             price: price,
             category: product.category,
-            imageUrl: product.imageUrl || "img/logo-icon.png",
+            imageUrl: getProductImage(product, size),
             quantity: quantity
         });
     }

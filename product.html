@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details — NolMart Scents</title>
+    <title>Product Details | NolMart Scents</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="theme-color" content="#050b16">
     <link rel="stylesheet" href="css/style.css">
@@ -15,7 +15,7 @@
 
     <!-- 1. ANNOUNCEMENT BANNER -->
     <div class="announcement-banner">
-        <span><strong>Fast Delivery to All Regions in Tanzania</strong> <i class="ann-sep">✦</i> Pay via <strong>Vodacom M-Pesa, Airtel Money, Selcom, CRDB</strong> or Cash on Delivery</span>
+        <span><strong>Fast Delivery to All Regions in Tanzania</strong> <i class="ann-sep">•</i> Pay via <strong>Vodacom M-Pesa, Airtel Money, Selcom, CRDB</strong> or Cash on Delivery</span>
         <a href="contact.html">Learn More →</a>
     </div>
 
@@ -108,7 +108,7 @@
             <!-- Customer checkout fields styled according to theme -->
             <div class="cart-checkout-form" id="cartCheckoutForm">
                 <div class="cart-form-header">
-                    <span>📋</span> Delivery & Contact Details
+                    Delivery & Contact Details
                 </div>
                 <div class="cart-input-field">
                     <label for="cartCustomerName">Your Name *</label>
@@ -121,11 +121,11 @@
                 <div class="cart-input-field">
                     <label for="cartPaymentPref">Preferred Payment</label>
                     <select id="cartPaymentPref">
-                        <option value="Vodacom M-Pesa">📱 Vodacom M-Pesa</option>
-                        <option value="Airtel Money">📲 Airtel Money</option>
-                        <option value="Selcom Pay">💳 Selcom Pay</option>
-                        <option value="CRDB Bank (SimBanking)">🏦 CRDB Bank (SimBanking)</option>
-                        <option value="Cash on Delivery">💵 Cash on Delivery</option>
+                        <option value="Vodacom M-Pesa">Vodacom M-Pesa</option>
+                        <option value="Airtel Money">Airtel Money</option>
+                        <option value="Selcom Pay">Selcom Pay</option>
+                        <option value="CRDB Bank (SimBanking)">CRDB Bank (SimBanking)</option>
+                        <option value="Cash on Delivery">Cash on Delivery</option>
                     </select>
                 </div>
             </div>
@@ -135,7 +135,7 @@
                 <span class="cart-subtotal-val" id="cartDrawerSubtotal">Tzs 0</span>
             </div>
             <div class="cart-delivery-note">
-                <span>🚚</span> Fast Delivery to All Regions in Tanzania (24–48h)
+                Fast Delivery to All Regions in Tanzania (24-48h)
             </div>
             <button class="btn btn-whatsapp cart-checkout-btn" id="cartCheckoutBtn">
                 Complete Order on WhatsApp →
@@ -212,7 +212,7 @@
 
     <!-- Dedicated Product Detail Script -->
     <script type="module">
-        import { PRODUCTS, getProductById } from './js/products-data.js';
+        import { PRODUCTS, getProductById, getProductImage } from './js/products-data.js';
         import { addItemToCart } from './js/cart.js';
         import { initCartDrawer, openCartDrawer, directWhatsAppOrder, showToast } from './js/cart-drawer.js';
         import { getBottlePalette } from './js/bottle-palette.js';
@@ -242,7 +242,7 @@
             const productId = urlParams.get('id') || "crown-noir";
             const product = getProductById(productId) || PRODUCTS[0];
 
-            document.title = `${product.name} — NolMart Scents Extrait de Parfum`;
+            document.title = `${product.name} | NolMart Scents`;
             const breadcrumbEl = document.getElementById('breadcrumbCurrentName');
             if (breadcrumbEl) breadcrumbEl.textContent = product.name;
 
@@ -250,12 +250,22 @@
             let selectedSize = product.defaultSize || Object.keys(product.prices)[0] || "30ml";
 
             // Persistent 3D viewer (survives the size-switch re-renders below)
+            let viewerStage = null;
+            let viewerBottleSize = null;
+            function showSize(size) {
+                const photo = viewer.querySelector('.viewer-photo');
+                if (photo) photo.src = getProductImage(product, size);
+                if (viewerStage) {
+                    const s = viewerBottleSize(size);
+                    viewerStage.setSize(s).then(() => viewerStage.bottle.setProduct(product, s));
+                }
+            }
             const palette = getBottlePalette(product.id);
             const viewer = document.createElement('div');
             viewer.className = 'bottle-viewer';
             viewer.innerHTML = `
                 <canvas aria-label="3D view of ${product.name}" role="img"></canvas>
-                <img src="${product.imageUrl}" alt="${product.name}" id="mainDetailImage" class="viewer-photo">
+                <img src="${getProductImage(product, selectedSize)}" alt="${product.name}" id="mainDetailImage" class="viewer-photo">
             `;
             const toolbar = document.createElement('div');
             toolbar.className = 'viewer-toolbar';
@@ -274,13 +284,17 @@
                         viewer.classList.toggle('show-photo', btn.dataset.view === 'photo');
                     });
                 });
-                import('./js/bottle3d.js').then(async ({ createBottleStage, enableDragRotate, canRender3D }) => {
+                import('./js/bottle3d.js').then(async ({ createBottleStage, enableDragRotate, canRender3D, bottleSizeFor }) => {
                     if (!canRender3D()) throw new Error('WebGL2 unavailable');
-                    const stage = await createBottleStage(viewer.querySelector('canvas'), { cameraZ: 5.4 });
-                    stage.bottle.setProduct(product);
-                    stage.pose.target.rotY = -0.45;
-                    stage.pose.target.rotX = 0.06;
+                    const stage = await createBottleStage(viewer.querySelector('canvas'), { cameraZ: 5.6, size: bottleSizeFor(selectedSize) });
+                    stage.bottle.prepare([product]);
+                    stage.bottle.setProduct(product, bottleSizeFor(selectedSize));
+                    // Rest facing straight to the front
+                    stage.pose.target.rotY = 0;
+                    stage.pose.target.rotX = 0;
                     stage.snap();
+                    viewerStage = stage;
+                    viewerBottleSize = bottleSizeFor;
                     enableDragRotate(viewer, stage);
                     stage.start();
                     viewer.classList.add('ready');
@@ -398,6 +412,7 @@
                     card.addEventListener('click', () => {
                         selectedSize = card.dataset.size;
                         renderDetail();
+                        showSize(selectedSize);
                     });
                 });
 

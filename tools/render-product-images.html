@@ -7,7 +7,8 @@
         Re-renders img/products/*.png from the 3D brand bottle (models/nolmart-bottle.glb).
         1. node tools/dev-server.mjs
         2. open http://127.0.0.1:3000/tools/render-product-images.html
-        Every single-bottle scent gets its own label; Discovery Sets get a group shot.
+        Every scent gets one picture per bottle size (<id>.png = 30ml, <id>-10ml.png, <id>-6ml.png);
+        Discovery Sets get a group shot.
         Add ?only=<id>,<id> to render just some products.
     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Oswald:wght@600&display=swap">
@@ -37,25 +38,28 @@
         const only = (new URLSearchParams(location.search).get('only') || '').split(',').filter(Boolean);
         const want = (id) => !only.length || only.includes(id);
 
-        // Group shots for the Discovery Sets (which scents appear on each bottle)
+        // Group shots for the Discovery Sets: which scents, in which bottle size
         const BUNDLES = {
-            'bundle-try-and-buy': ['obsidian-reef', 'vanilla-28', '212-vip-men'],
-            'bundle-his-hers': ['crown-noir', 'cashmere-bloom'],
-            'bundle-new-arrivals': ['burberry-weekend', 'marshmallow', '212-vip-men'],
-            'bundle-luxury-duo': ['obsidian-reef', 'midnight-velvet']
+            'bundle-try-and-buy': { size: '10ml', ids: ['obsidian-reef', 'vanilla-28', '212-vip-men'] },
+            'bundle-his-hers': { size: '30ml', ids: ['crown-noir', 'cashmere-bloom'] },
+            'bundle-new-arrivals': { size: '10ml', ids: ['burberry-weekend', 'marshmallow', '212-vip-men'] },
+            'bundle-luxury-duo': { size: '30ml', ids: ['obsidian-reef', 'midnight-velvet'] }
         };
+        const SIZES = ['30ml', '10ml', '6ml'];
 
         const stage = await createBottleStage(document.getElementById('stage'), {
             dprMax: 1,
-            cameraZ: 5.3,
+            cameraZ: 5.1,
             backdrop: ['#ffffff', '#e9e1d2'], // light studio for the glass to refract (cards are cream)
             preserveDrawingBuffer: true
         });
         stage.resize();
 
-        function shot(product, rotY = -0.38) {
-            stage.bottle.setProduct(product);
-            Object.assign(stage.pose.target, { x: 0, y: -0.02, rotY, rotX: 0.07, rotZ: 0, scale: 1 });
+        // Straight front view: no turn, no tilt
+        async function shot(product, size) {
+            await stage.setSize(size);
+            stage.bottle.setProduct(product, size);
+            Object.assign(stage.pose.target, { x: 0, y: 0, rotY: 0, rotX: 0, rotZ: 0, scale: 1 });
             stage.renderStill();
             const c = document.createElement('canvas');
             c.width = c.height = SIZE;
@@ -77,27 +81,31 @@
         let n = 0;
         for (const p of PRODUCTS) {
             if (!getBottlePalette(p.id) || !want(p.id)) continue;
-            await save(p.id, shot(p));
-            n++;
+            for (const size of SIZES) {
+                if (!p.prices[size]) continue;
+                await save(size === '30ml' ? p.id : `${p.id}-${size}`, await shot(p, size));
+                n++;
+            }
         }
 
-        for (const [id, ids] of Object.entries(BUNDLES)) {
+        for (const [id, set] of Object.entries(BUNDLES)) {
             if (!want(id)) continue;
-            const items = ids.map(getProductById).filter(Boolean);
+            const items = set.ids.map(getProductById).filter(Boolean);
             const c = document.createElement('canvas');
             c.width = c.height = SIZE;
             const g = c.getContext('2d');
-            // [x offset, y offset, scale, rotY] — back bottles first
+            // [x offset, y offset, scale]; back bottles first, middle one in front
+            const slim = set.size !== '30ml';
             const layout = items.length === 3
-                ? [[-215, -18, 0.8, 0.12], [215, -18, 0.8, -0.5], [0, 22, 0.9, -0.2]]
-                : [[-150, 0, 0.9, 0.25], [150, 0, 0.9, -0.55]];
+                ? (slim ? [[-150, -10, 0.86], [150, -10, 0.86], [0, 14, 0.92]] : [[-215, -18, 0.8], [215, -18, 0.8], [0, 22, 0.9]])
+                : [[-150, 0, 0.9], [150, 0, 0.9]];
             const order = items.length === 3 ? [0, 2, 1] : [0, 1];
-            order.forEach((itemIdx, slot) => {
-                const [dx, dy, s, rot] = layout[slot];
-                const img = shot(items[itemIdx], rot);
+            for (let slot = 0; slot < order.length; slot++) {
+                const [dx, dy, s] = layout[slot];
+                const img = await shot(items[order[slot]], set.size);
                 const w = SIZE * s;
                 g.drawImage(img, (SIZE - w) / 2 + dx, (SIZE - w) / 2 + dy + (SIZE - w) * 0.35, w, w);
-            });
+            }
             await save(id, c);
             n++;
         }

@@ -2,11 +2,11 @@
 // Complete perfume catalog derived directly from NolMart Perfume Business SOP v3.1
 
 export const PRODUCTS = [
-    // --- 👑 FLAGSHIP PERFUMES (EXCLUSIVE NOLMART HOUSE SCENTS) ---
+    // --- FLAGSHIP PERFUMES (EXCLUSIVE NOLMART HOUSE SCENTS) ---
     {
         id: "crown-noir",
         name: "Crown Noir",
-        tagline: "The Entrance Maker — Commanding, Dark & Fresh",
+        tagline: "The Entrance Maker: Commanding, Dark & Fresh",
         category: "flagship",
         gender: "men",
         badge: "FLAGSHIP EXCLUSIVE",
@@ -18,7 +18,7 @@ export const PRODUCTS = [
             "30ml": 35000
         },
         defaultSize: "30ml",
-        description: "NolMart's flagship men's signature scent. A crisp, sparkling citrus-fresh opening gives way to deep, rich smoky woods and warm amber. Fresh and confident up top, commanding and warm underneath — designed to transition seamlessly from daily office meetings to evening outings without fading away.",
+        description: "NolMart's flagship men's signature scent. A crisp, sparkling citrus-fresh opening gives way to deep, rich smoky woods and warm amber. Fresh and confident up top, commanding and warm underneath. Made to carry you from daily office meetings to evening outings without fading away.",
         bestFor: "Day-to-night signature wear, high-stakes meetings, dates, evening events.",
         character: "Bold • Smoky Oud • Sparkling Citrus • Commanding",
         notes: {
@@ -26,14 +26,14 @@ export const PRODUCTS = [
             heart: ["Cardamom", "Kulfi Accord", "Nutmeg"],
             base: ["Smoky Oud", "Amber", "Sandalwood", "Rich Tonka"]
         },
-        longevity: "12–16 Hours",
+        longevity: "12-16 Hours",
         sillage: "Strong (Commanding)",
         imageUrl: "img/products/crown-noir.webp"
     },
     {
         id: "cashmere-bloom",
         name: "Cashmere Bloom",
-        tagline: "Approachable Luxury — Powdery Florals & Sweet Warmth",
+        tagline: "Approachable Luxury: Powdery Florals & Sweet Warmth",
         category: "flagship",
         gender: "women",
         badge: "FLAGSHIP EXCLUSIVE",
@@ -45,7 +45,7 @@ export const PRODUCTS = [
             "30ml": 35000
         },
         defaultSize: "30ml",
-        description: "NolMart's flagship women's signature scent. Soft sweet vanilla comfort gently wrapped in delicate powdery floral elegance. Sweet, graceful, and warm — an everyday luxury perfume that draws genuine compliments everywhere you go.",
+        description: "NolMart's flagship women's signature scent. Soft sweet vanilla comfort gently wrapped in delicate powdery floral elegance. Sweet, graceful, and warm. An everyday luxury perfume that draws compliments everywhere you go.",
         bestFor: "Everyday signature wear, romantic dates, daytime elegance, luxury gifting.",
         character: "Elegant • Powdery Floral • Cozy Gourmand • Sophisticated",
         notes: {
@@ -53,14 +53,14 @@ export const PRODUCTS = [
             heart: ["Hyacinth", "Iris", "Peach Blossom", "Soft Marshmallow"],
             base: ["Creamy Vanilla", "Sandalwood", "Cashmere Wood", "Clean White Musk"]
         },
-        longevity: "10–14 Hours",
+        longevity: "10-14 Hours",
         sillage: "Moderate to Heavy (Radiant)",
         imageUrl: "img/products/cashmere-bloom.webp"
     },
     {
         id: "azure-vip",
         name: "Azure VIP",
-        tagline: "Quiet Confidence — Fresh Citrus & Warm Vanilla",
+        tagline: "Quiet Confidence: Fresh Citrus & Warm Vanilla",
         category: "flagship",
         gender: "men",
         badge: "FLAGSHIP CALM",
@@ -72,7 +72,7 @@ export const PRODUCTS = [
             "30ml": 35000
         },
         defaultSize: "30ml",
-        description: "NolMart's men's calm flagship scent. A fresh, bright citrus opening that settles into a smooth, warm bourbon vanilla base. Clean, effortless, and charming — it projects quiet confidence and style throughout your day.",
+        description: "NolMart's men's calm flagship scent. A fresh, bright citrus opening that settles into a smooth, warm bourbon vanilla base. Clean, effortless, and charming. It projects quiet confidence and style throughout your day.",
         bestFor: "Daily office wear, casual daytime outings, warm weather, understated elegance.",
         character: "Clean • Smooth Vanilla • Fresh Citrus • Refined",
         notes: {
@@ -80,14 +80,14 @@ export const PRODUCTS = [
             heart: ["Soft Spices", "Tonka Bean", "White Floral Accord"],
             base: ["Madagascar Vanilla Orchid", "Brown Sugar", "Amber Woods"]
         },
-        longevity: "10–12 Hours",
+        longevity: "10-12 Hours",
         sillage: "Intimate to Moderate (Alluring)",
         imageUrl: "img/products/azure-vip.webp"
     },
     {
         id: "onyx-bloom",
         name: "Onyx Bloom",
-        tagline: "The Statement — Dark Oud & Romantic Floral",
+        tagline: "The Statement: Dark Oud & Romantic Floral",
         category: "flagship",
         gender: "women",
         badge: "FLAGSHIP BOLD",
@@ -99,7 +99,7 @@ export const PRODUCTS = [
             "30ml": 35000
         },
         defaultSize: "30ml",
-        description: "NolMart's bold women's flagship. Rich, deep smoky woods softened and contrasted by delicate, sweet romantic flower petals. A captivating, magnetic fragrance for special moments when you want to leave an unforgettable impression.",
+        description: "NolMart's bold women's flagship. Rich, deep smoky woods softened and contrasted by delicate, sweet romantic flower petals. A magnetic fragrance for special moments when you want to leave an unforgettable impression.",
         bestFor: "Evening galas, formal dinners, red carpets, special romantic celebrations.",
         character: "Sensual • Smoky Oriental • Rosy Floral • Unforgettable",
         notes: {
@@ -107,16 +107,16 @@ export const PRODUCTS = [
             heart: ["Pink Chiffon Petals", "Jasmine", "Kulfi Accord"],
             base: ["Dark Oud Wood", "Golden Amber", "Smoky Vanilla"]
         },
-        longevity: "12–16 Hours",
+        longevity: "12-16 Hours",
         sillage: "Strong (Enveloping)",
         imageUrl: "img/products/onyx-bloom.webp"
     },
 
-    // --- 🌊 SIGNATURE BLENDS ---
+    // --- SIGNATURE BLENDS ---
     {
         id: "obsidian-reef",
         name: "Obsidian Reef",
-        tagline: "Dark Aquatic Mystery — Oud Meets Ocean Breeze",
+        tagline: "Dark Aquatic Mystery: Oud Meets Ocean Breeze",
         category: "signature",
         gender: "unisex",
         badge: "CUSTOMER FAVORITE",
@@ -136,7 +136,7 @@ export const PRODUCTS = [
             heart: ["Cardamom Spice", "Aquatic Driftwood"],
             base: ["Smoky Dark Oud", "Ambergris", "Clean Cedar"]
         },
-        longevity: "10–14 Hours",
+        longevity: "10-14 Hours",
         sillage: "Moderate to Strong",
         imageUrl: "img/products/obsidian-reef.webp"
     },
@@ -163,7 +163,7 @@ export const PRODUCTS = [
             heart: ["Vanilla Blossom", "Warm Coconut Milk"],
             base: ["Brown Sugar", "Amber", "Madagascar Vanilla"]
         },
-        longevity: "8–12 Hours",
+        longevity: "8-12 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/coastal-dream.webp"
     },
@@ -190,7 +190,7 @@ export const PRODUCTS = [
             heart: ["Lavender", "Subtle Coconut Flesh"],
             base: ["White Cedar", "Soft Musk", "Golden Amber"]
         },
-        longevity: "8–10 Hours",
+        longevity: "8-10 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/electric-rush.webp"
     },
@@ -217,7 +217,7 @@ export const PRODUCTS = [
             heart: ["Bourbon Vanilla", "Tonka Bean"],
             base: ["Brown Sugar Accord", "Cedarwood", "Musk"]
         },
-        longevity: "10–12 Hours",
+        longevity: "10-12 Hours",
         sillage: "Moderate to Heavy",
         imageUrl: "img/products/velvet-noir.webp"
     },
@@ -244,7 +244,7 @@ export const PRODUCTS = [
             heart: ["Island Coconut", "Vanilla Orchid"],
             base: ["Madagascar Vanilla", "Soft Amber", "Cashmere Musk"]
         },
-        longevity: "10–14 Hours",
+        longevity: "10-14 Hours",
         sillage: "Strong",
         imageUrl: "img/products/paradise-mist.webp"
     },
@@ -271,7 +271,7 @@ export const PRODUCTS = [
             heart: ["Chiffon Florals", "Coconut Milk"],
             base: ["Warm Vanilla", "Creamy Woods", "Cotton Musk"]
         },
-        longevity: "8–11 Hours",
+        longevity: "8-11 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/tropical-bloom.webp"
     },
@@ -298,7 +298,7 @@ export const PRODUCTS = [
             heart: ["Marine Accord", "Fresh Mint Leaf"],
             base: ["Driftwood", "Clean Amber", "White Musk"]
         },
-        longevity: "8–10 Hours",
+        longevity: "8-10 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/ocean-breeze.webp"
     },
@@ -325,7 +325,7 @@ export const PRODUCTS = [
             heart: ["Kulfi Accord", "Rose Absolute", "Vanilla Orchid"],
             base: ["Dark Oud", "Sandalwood", "Amber", "Rich Vanilla"]
         },
-        longevity: "12–16 Hours",
+        longevity: "12-16 Hours",
         sillage: "Strong (Magnetic)",
         imageUrl: "img/products/midnight-velvet.webp"
     },
@@ -352,7 +352,7 @@ export const PRODUCTS = [
             heart: ["Pink Chiffon Rose", "Vanilla Cream"],
             base: ["Brown Sugar", "Sandalwood", "Powdery Musk"]
         },
-        longevity: "8–12 Hours",
+        longevity: "8-12 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/rose-cream.webp"
     },
@@ -379,12 +379,12 @@ export const PRODUCTS = [
             heart: ["Ocean Lotus", "Creamy Coconut Flesh"],
             base: ["Driftwood", "Solar Amber", "Soft Musk"]
         },
-        longevity: "8–10 Hours",
+        longevity: "8-10 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/lagoon.webp"
     },
 
-    // --- 🍬 PURE SCENTS (EXTRA LONG-LASTING) ---
+    // --- PURE SCENTS (EXTRA LONG-LASTING) ---
     {
         id: "marshmallow",
         name: "Marshmallow",
@@ -408,7 +408,7 @@ export const PRODUCTS = [
             heart: ["Fluffy Marshmallow", "Cotton Candy Accord"],
             base: ["Vanilla Bean", "Whipped Cream", "Soft Musk"]
         },
-        longevity: "8–12 Hours",
+        longevity: "8-12 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/marshmallow.webp"
     },
@@ -435,7 +435,7 @@ export const PRODUCTS = [
             heart: ["Hyacinth", "Iris", "Peach Blossom", "Nectarine"],
             base: ["Sandalwood", "Cedar", "Soft Musk"]
         },
-        longevity: "8–11 Hours",
+        longevity: "8-11 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/burberry-weekend.webp"
     },
@@ -462,7 +462,7 @@ export const PRODUCTS = [
             heart: ["Vodka / Gin Accord", "Ginger", "Black Pepper"],
             base: ["King Wood", "Amber", "Leather Accord"]
         },
-        longevity: "9–12 Hours",
+        longevity: "9-12 Hours",
         sillage: "Strong",
         imageUrl: "img/products/212-vip-men.webp"
     },
@@ -489,7 +489,7 @@ export const PRODUCTS = [
             heart: ["Warm Vanilla Flower", "Aloe Accord"],
             base: ["Chamomile", "Amber Sugar"]
         },
-        longevity: "8–11 Hours",
+        longevity: "8-11 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/coconut-passion.webp"
     },
@@ -516,7 +516,7 @@ export const PRODUCTS = [
             heart: ["Tonka Absolute", "Brown Sugar"],
             base: ["Amber Woods", "Musk", "Patchouli"]
         },
-        longevity: "10–14 Hours",
+        longevity: "10-14 Hours",
         sillage: "Moderate to Heavy",
         imageUrl: "img/products/vanilla-28.webp"
     },
@@ -543,7 +543,7 @@ export const PRODUCTS = [
             heart: ["Pink Chiffon Petals", "Water Lily", "Apple Blossom"],
             base: ["Sheer Vanilla", "Sandalwood", "Chiffon Musk"]
         },
-        longevity: "8–11 Hours",
+        longevity: "8-11 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/pink-chiffon.webp"
     },
@@ -562,7 +562,7 @@ export const PRODUCTS = [
             "30ml": 35000
         },
         defaultSize: "30ml",
-        description: "An amber-drenched, woody oriental fragrance with a tantalizing, delectable heart. Captures the aspect of the person who relishes in immoderation and dares to be extraordinary.",
+        description: "An amber-drenched, woody oriental fragrance with a rich, delicious heart. Captures the aspect of the person who relishes in immoderation and dares to be extraordinary.",
         bestFor: "Evenings, formal suits, night events, statement signature scent.",
         character: "Dark • Oriental • Rich Cardamom • Smoky Woods",
         notes: {
@@ -570,7 +570,7 @@ export const PRODUCTS = [
             heart: ["Kulfi Accord", "Rose Absolute", "Jasmine", "Orange Blossom"],
             base: ["Dark Amber", "Sandalwood", "Smoky Vanilla"]
         },
-        longevity: "12–16 Hours",
+        longevity: "12-16 Hours",
         sillage: "Heavy (Magnetic)",
         imageUrl: "img/products/tom-ford-noir-extreme.webp"
     },
@@ -597,7 +597,7 @@ export const PRODUCTS = [
             heart: ["Marine Algae", "Clean Water Accord"],
             base: ["Driftwood", "Ambergris", "White Cedar"]
         },
-        longevity: "8–10 Hours",
+        longevity: "8-10 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/reef.webp"
     },
@@ -624,14 +624,14 @@ export const PRODUCTS = [
             heart: ["Lavender", "Crisp Thyme"],
             base: ["Cedarwood", "Clean Amber", "Musk"]
         },
-        longevity: "8–10 Hours",
+        longevity: "8-10 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/now-rave.webp"
     },
     {
         id: "club-de-nuit",
         name: "Club de Nuit",
-        tagline: "The Seductive Magnet — Smoky Birch & Sparkling Citrus",
+        tagline: "The Seductive Magnet: Smoky Birch & Sparkling Citrus",
         category: "pure",
         gender: "men",
         badge: "NEW ARRIVAL",
@@ -643,7 +643,7 @@ export const PRODUCTS = [
             "30ml": 35000
         },
         defaultSize: "30ml",
-        description: "A world-famous powerhouse men's fragrance oil. Opens with crisp, vibrant lemon, blackcurrant, and apple before developing into a rich, smoky birch wood heart and an intoxicating ambergris and patchouli base. Intense, captivating, and draws compliments everywhere.",
+        description: "A world-famous powerhouse men's fragrance oil. Opens with crisp, vibrant lemon, blackcurrant, and apple before developing into a rich, smoky birch wood heart and an intoxicating ambergris and patchouli base. Intense, magnetic, and draws compliments everywhere.",
         bestFor: "Evening outings, dates, office signature wear, high-impact first impressions.",
         character: "Smoky Woods • Crisp Citrus • Seductive • Magnetic",
         notes: {
@@ -651,14 +651,14 @@ export const PRODUCTS = [
             heart: ["Smoky Birch", "Jasmine", "Rose"],
             base: ["Ambergris", "Musk", "Patchouli", "Vanilla"]
         },
-        longevity: "12–16 Hours",
+        longevity: "12-16 Hours",
         sillage: "Strong (Unforgettable)",
         imageUrl: "img/products/club-de-nuit.webp"
     },
     {
         id: "sauvage-dior",
         name: "Sauvage Dior",
-        tagline: "Raw Masculinity — Radiant Calabrian Bergamot & Warm Ambroxan",
+        tagline: "Raw Masculinity: Radiant Calabrian Bergamot & Warm Ambroxan",
         category: "pure",
         gender: "men",
         badge: "NEW ARRIVAL",
@@ -678,7 +678,7 @@ export const PRODUCTS = [
             heart: ["Lavender", "Pink Pepper", "Vetiver", "Patchouli"],
             base: ["Warm Ambroxan", "Cedarwood", "Labdanum"]
         },
-        longevity: "10–14 Hours",
+        longevity: "10-14 Hours",
         sillage: "Heavy (Radiant)",
         imageUrl: "img/products/sauvage-dior.webp"
     },
@@ -697,7 +697,7 @@ export const PRODUCTS = [
             "30ml": 35000
         },
         defaultSize: "30ml",
-        description: "An irresistible burst of fresh, ripe red strawberries kissed with sweet confectionery sugar and a touch of warm vanilla. Sweet, joyful, and utterly delicious — like sunshine and freshly picked summer berries.",
+        description: "An irresistible burst of fresh, ripe red strawberries kissed with sweet confectionery sugar and a touch of warm vanilla. Sweet, joyful, and delicious, like freshly picked summer berries.",
         bestFor: "Everyday sweet signature, cheerful outings, weekend dates, mood-lifting wear.",
         character: "Fruity Sweet • Wild Strawberries • Cheerful • Delicious",
         notes: {
@@ -705,16 +705,16 @@ export const PRODUCTS = [
             heart: ["Strawberry Blossom", "Raspberry Nectar", "Spun Sugar"],
             base: ["Whipped Vanilla", "Soft White Musk"]
         },
-        longevity: "8–12 Hours",
+        longevity: "8-12 Hours",
         sillage: "Moderate",
         imageUrl: "img/products/strawberry.webp"
     },
 
-    // --- 🚗 CAR AIR FRESHENERS (HANGING REARVIEW MIRROR DIFFUSERS) ---
+    // --- CAR AIR FRESHENERS (HANGING REARVIEW MIRROR DIFFUSERS) ---
     {
         id: "car-freshener-strawberry",
         name: "Strawberry Car Air Freshener",
-        tagline: "Luxury Hanging Diffuser — 100% Pure Undiluted Strawberry Oil",
+        tagline: "Luxury Hanging Diffuser: 100% Pure Undiluted Strawberry Oil",
         category: "car-freshener",
         gender: "unisex",
         badge: "NEW PRODUCT",
@@ -732,12 +732,12 @@ export const PRODUCTS = [
             heart: ["Strawberry Nectar", "Sweet Fruity Blossom"],
             base: ["Warm Vanilla Undertone", "Porous Beechwood Diffuser"]
         },
-        longevity: "45–60 Days Continuous Diffusion",
+        longevity: "45-60 Days Continuous Diffusion",
         sillage: "Full Cabin Scent Coverage",
         imageUrl: "img/products/car-freshener-strawberry.png"
     },
 
-    // --- 🎁 DISCOVERY BUNDLES & GIFT SETS (HIGH CONVERSION UP-SELLS) ---
+    // --- DISCOVERY BUNDLES & GIFT SETS (HIGH CONVERSION UP-SELLS) ---
     {
         id: "bundle-try-and-buy",
         name: "Try & Buy Discovery Set",
@@ -759,7 +759,7 @@ export const PRODUCTS = [
             heart: ["Extra Long-Lasting", "Rich Scent Definition"],
             base: ["Includes Premium Mifuko Packaging", "Atomizer Sprayers"]
         },
-        longevity: "8–14 Hours Each",
+        longevity: "8-14 Hours Each",
         sillage: "Customizable",
         imageUrl: "img/products/bundle-try-and-buy.webp"
     },
@@ -776,7 +776,7 @@ export const PRODUCTS = [
             "Set": 65000
         },
         defaultSize: "Set",
-        description: "The pinnacle of NolMart Scents. Includes a full 30ml bottle of Crown Noir (Men's Flagship) and a full 30ml bottle of Cashmere Bloom (Women's Flagship). The ultimate anniversary, wedding, or couple's luxury gift set.",
+        description: "The pinnacle of NolMart Scents. Includes a full 30ml bottle of Crown Noir (Men's Flagship) and a full 30ml bottle of Cashmere Bloom (Women's Flagship). A perfect anniversary, wedding, or couple's luxury gift set.",
         bestFor: "Couples, anniversary gifts, weddings, Valentine's Day, premium luxury gifting.",
         character: "Flagship Duo • Men + Women • Long Scent Trail • Premium Gift Box",
         notes: {
@@ -784,7 +784,7 @@ export const PRODUCTS = [
             heart: ["Crown Noir (Smoky Oud & Cardamom)", "Cashmere Bloom (Hyacinth & Peach)"],
             base: ["Crown Noir (Dark Amber & Woods)", "Cashmere Bloom (Creamy Vanilla & Musk)"]
         },
-        longevity: "12–16 Hours",
+        longevity: "12-16 Hours",
         sillage: "Commanding & Radiant",
         imageUrl: "img/products/bundle-his-hers.webp"
     },
@@ -801,7 +801,7 @@ export const PRODUCTS = [
             "3x10ml": 35000
         },
         defaultSize: "3x10ml",
-        description: "Experience all three of our latest releases in one curated collection: Burberry Weekend (Powdery Floral), Marshmallow (Confectionery Sweet), and 212 VIP Men (Fruity Aromatic Nightlife).",
+        description: "Try all three of our latest releases in one set: Burberry Weekend (Powdery Floral), Marshmallow (Confectionery Sweet), and 212 VIP Men (Fruity Aromatic Nightlife).",
         bestFor: "Trendsetters, trying the newest releases, portable variety pack.",
         character: "Fresh • Sweet • Powdery • High Versatility",
         notes: {
@@ -809,7 +809,7 @@ export const PRODUCTS = [
             heart: ["High Scent Definition", "Long-Lasting Strength"],
             base: ["All-Day Longevity", "Pocket Atomizers"]
         },
-        longevity: "8–12 Hours",
+        longevity: "8-12 Hours",
         sillage: "Moderate to Strong",
         imageUrl: "img/products/bundle-new-arrivals.webp"
     },
@@ -834,7 +834,7 @@ export const PRODUCTS = [
             heart: ["Extra Long-Lasting", "Premium Maturation"],
             base: ["Deluxe Gift Packaging", "Free Delivery Across Tanzania Eligible"]
         },
-        longevity: "10–14 Hours",
+        longevity: "10-14 Hours",
         sillage: "High",
         imageUrl: "img/products/bundle-luxury-duo.webp"
     }
@@ -861,4 +861,17 @@ export function getProductsByCategory(category) {
 export function getProductsByGender(gender) {
     if (!gender || gender === "all") return PRODUCTS;
     return PRODUCTS.filter(p => p.gender === gender || p.gender === "unisex");
+}
+
+// Picture of a product in a given bottle size. Single scents have one render
+// per bottle (30ml: <id>.webp, 10ml: <id>-10ml.webp, 6ml: <id>-6ml.webp);
+// sets and car fresheners have a single picture.
+const SIZED_BOTTLES = ['10ml', '6ml'];
+export function getProductImage(product, size) {
+    if (!product) return 'img/logo-icon.png';
+    const single = !['bundle', 'car-freshener'].includes(product.category);
+    if (single && SIZED_BOTTLES.includes(size) && product.prices && product.prices[size]) {
+        return product.imageUrl.replace(/\.webp$/, `-${size}.webp`);
+    }
+    return product.imageUrl;
 }

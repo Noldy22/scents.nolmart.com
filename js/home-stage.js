@@ -2,7 +2,7 @@
 // Home page 3D stage: the hero and the four flagship chapters scroll over a
 // pinned (CSS sticky) WebGL canvas. Every value below is derived from the
 // scroll position, so the whole sequence plays forward when scrolling down
-// and rewinds exactly when scrolling back up — as many times as you like.
+// and rewinds exactly when scrolling back up, as many times as you like.
 
 import * as THREE from 'three';
 import { createBottleStage, canRender3D } from './bottle3d.js';
@@ -76,18 +76,22 @@ export async function initHomeStage(stageEl, flagships) {
         return { w: h * cam.aspect, h };
     }
 
-    // Target pose for a given state index
+    // Bottle size shown for each flagship (follows the chapter's size pills)
+    const sizes = {};
+    const sizeOf = (p) => sizes[p.id] || '30ml';
+
+    // Target pose for a given state index. At rest the label always faces
+    // the viewer straight on (no tilt); the bottle only turns in transitions.
     function poseFor(k) {
         const v = viewHalf();
+        const camZ = stage ? stage.camera.position.z : 6.2;
         if (isPortrait()) {
-            // Keep the bottle in the free band between the header and the copy
-            const scale = Math.min(0.74, v.h * 0.44);
-            return {
-                x: 0,
-                y: v.h * 0.39,
-                rotY: k % 2 === 0 ? -0.22 : 0.22,
-                scale
-            };
+            // Keep the bottle in the free band between the header and the copy;
+            // the tall 10ml vial is scaled to the same height as the 30ml bottle
+            const model = stage && stage.bottle.models[sizeOf(states[k])];
+            const fit = model ? Math.min(1, 1.75 / model.height) : 1;
+            const scale = Math.min(0.8, v.h * 0.47) * fit;
+            return { x: 0, y: v.h * 0.39, rotY: 0, scale };
         }
         // Hero + chapters with text on the left → bottle right, and vice versa
         const bottleRight = k === 0 || (k % 2 === 0);
@@ -95,18 +99,9 @@ export async function initHomeStage(stageEl, flagships) {
         return {
             x,
             y: k === 0 ? -0.04 : 0,
-            rotY: bottleRight ? -0.32 : 0.32,
-            scale: k === 0 ? 1.08 : 1
+            rotY: Math.atan2(-x, camZ), // square to the camera from the side of the screen
+            scale: k === 0 ? 1.16 : 1.08
         };
-    }
-
-    // ---------- Pointer parallax (desktop) ----------
-    const pointer = { x: 0, y: 0 };
-    if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-        window.addEventListener('pointermove', (e) => {
-            pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-            pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
-        }, { passive: true });
     }
 
     // ---------- The scroll-driven update ----------
@@ -141,10 +136,10 @@ export async function initHomeStage(stageEl, flagships) {
             const spin = reduceMotion ? 0 : (k + e) * TAU;
             baseRot.y = lerp(A.rotY, B.rotY, e) + spin;
             baseRot.x = arc * 0.18;
-            t.rotY = baseRot.y + pointer.x * 0.22;
-            t.rotX = baseRot.x + pointer.y * 0.08;
+            t.rotY = baseRot.y;
+            t.rotX = baseRot.x;
             t.rotZ = arc * 0.1 * (B.x >= A.x ? -1 : 1);
-            stage.bottle.blend(states[k], states[k + 1], f);
+            stage.bottle.blend(states[k], states[k + 1], f, sizeOf(states[k]), sizeOf(states[k + 1]));
         } else if (fallbackImg) {
             const nearest = states[Math.round(u)];
             if (fallbackImg.dataset.id !== nearest.id) {
@@ -193,10 +188,14 @@ export async function initHomeStage(stageEl, flagships) {
     if (stage) {
         stage.snap();
         stage.start();
-        // Pointer parallax stays alive between scroll events
-        gsap.ticker.add(() => {
-            stage.pose.target.rotY = baseRot.y + pointer.x * 0.22;
-            stage.pose.target.rotX = baseRot.x + pointer.y * 0.08;
+        // Size pills in a chapter switch that flagship's bottle (30ml / 10ml / 6ml)
+        stage.bottle.onModelReady = () => update(Math.max(0, window.scrollY - offsetTop(content)));
+        document.addEventListener('nolmart:bottle-size', (e) => {
+            const { id, size } = e.detail || {};
+            if (!id) return;
+            sizes[id] = size;
+            stage.bottle.load(size).catch(() => {});
+            update(Math.max(0, window.scrollY - offsetTop(content)));
         });
     }
 

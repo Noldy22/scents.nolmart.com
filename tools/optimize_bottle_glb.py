@@ -9,7 +9,11 @@ What changes (geometry and object names stay exactly as modelled):
     read natively by three.js GLTFLoader), so the file is roughly 4x smaller
   * the dip tube's unused UVs are dropped
 
-Usage: python -I tools/optimize_bottle_glb.py <in.glb> <out.glb>
+Usage: python -I tools/optimize_bottle_glb.py <in.glb> <out.glb> [--shorten Y0 Y1 D]
+
+--shorten makes a shorter bottle from the same model: the straight section between heights Y0 and Y1
+(metres, bottle standing on y = 0) is squeezed by D metres and everything above it moves down by D.
+Used to make the 6 ml vial from the 10 ml one.
 """
 import json
 import struct
@@ -18,6 +22,10 @@ import sys
 import numpy as np
 
 SRC, DST = sys.argv[1], sys.argv[2]
+SHORTEN = None
+if "--shorten" in sys.argv:
+    i = sys.argv.index("--shorten")
+    SHORTEN = tuple(float(v) for v in sys.argv[i + 1:i + 4])
 Q = 1e-5  # metres per position step
 
 COMP = {5120: np.int8, 5121: np.uint8, 5122: np.int16, 5123: np.uint16, 5125: np.uint32, 5126: np.float32}
@@ -76,17 +84,43 @@ def add(arr, comp, typ, stride=None, normalized=False, target=None, minmax=False
     return len(accs) - 1
 
 
-for mesh in gltf["meshes"]:
+def squeeze(pos, nrm):
+    """Shorten the straight section [Y0, Y1] by D; shift everything above it down by D."""
+    y0, y1, d = SHORTEN
+    k = (y1 - y0 - d) / (y1 - y0)
+    y = pos[:, 1]
+    mid = (y > y0) & (y < y1)
+    above = y >= y1
+    out = pos.copy()
+    out[mid, 1] = y0 + (y[mid] - y0) * k
+    out[above, 1] = y[above] - d
+    n = nrm.copy()
+    n[mid, 1] /= k  # normals of a y-scaled surface
+    return out, n
+
+
+# Meshes placed by their own node translation (nozzle parts) just move with the top
+moved_meshes = set()
+if SHORTEN:
+    for node in gltf["nodes"]:
+        t = node.get("translation")
+        if "mesh" in node and t and t[1] >= SHORTEN[1]:
+            t[1] -= SHORTEN[2]
+            moved_meshes.add(node["mesh"])
+
+for mi, mesh in enumerate(gltf["meshes"]):
     for prim in mesh["primitives"]:
         attrs = prim["attributes"]
         new_attrs = {}
 
         pos = read(attrs["POSITION"]).astype(np.float64)
+        nrm = read(attrs["NORMAL"]).astype(np.float64)
+        if SHORTEN and mi not in moved_meshes:
+            pos, nrm = squeeze(pos, nrm)
         qpos = np.round(pos / Q)
         assert np.abs(qpos).max() < 32767, "model too large for int16 quantisation"
         new_attrs["POSITION"] = add(qpos.astype(np.int16), 5122, "VEC3", stride=8, target=34962, minmax=True)
 
-        nrm = read(attrs["NORMAL"]).astype(np.float64)
         nrm /= np.maximum(np.linalg.norm(nrm, axis=1, keepdims=True), 1e-12)
         new_attrs["NORMAL"] = add(np.round(nrm * 127).astype(np.int8), 5120, "VEC3", stride=4,
                                   normalized=True, target=34962)

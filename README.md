@@ -1,4 +1,4 @@
-# 🛍️ NolMart Scents — Official Web Platform (`scents.nolmart.com`)
+# NolMart Scents: Official Web Platform (`scents.nolmart.com`)
 
 > **Luxury Long-Lasting Perfumes & Signature Fragrance Blends**  
 > Dedicated sub-brand of **[NolMart](https://nolmart.com)**.
@@ -9,35 +9,35 @@
 
 ---
 
-## 🌟 Overview
+## Overview
 
-**NolMart Scents** is engineered to deliver a seamless, high-converting digital shopping experience for luxury long-lasting fragrances across Tanzania. Every fragrance in our collection is carefully formulated and matured for extra-strength projection and guaranteed 12+ hour skin longevity.
+**NolMart Scents** is the online shop for long-lasting NolMart perfumes in Tanzania. Every fragrance is made with high-concentration oils for strong projection and 12+ hours on skin.
 
 This repository powers the official web platform **[scents.nolmart.com](https://scents.nolmart.com)** (and [noldy22.github.io/scents.nolmart.com](https://noldy22.github.io/scents.nolmart.com/)), adhering to NolMart's established e-commerce checkout architecture while offering modern aesthetics, smooth scroll animations, and fast mobile performance.
 
 ---
 
-## ✨ Key Features & High-Conversion UX
+## Key Features
 
-- 🔮 **Interactive 5-Step Scent Matcher Quiz**: Smart recommendation engine matching customers based on who they're shopping for, scent vibe, daily occasion, strength preference, and ideal bottle size — with 1-click add-to-bag.
-- 👑 **Flagship Collection Spotlight**: House signature fragrances with dedicated storytelling and scent notes:
+- **Interactive 5-Step Scent Matcher Quiz**: Smart recommendation engine matching customers based on who they're shopping for, scent vibe, daily occasion, strength preference, and ideal bottle size, with 1-click add-to-bag.
+- **Flagship Collection Spotlight**: House signature fragrances with dedicated storytelling and scent notes:
   - **Crown Noir** (Men's Bold Flagship)
   - **Cashmere Bloom** (Women's Elegant Flagship)
   - **Azure VIP** (Men's Fresh & Calm Flagship)
   - **Onyx Bloom** (Women's Bold & Sweet Flagship)
-- 💧 **Real-Time Size & Price Switcher**: Seamless 10ml (Pocket & Travel Atomizer) vs 30ml (Full Luxury Crystal Bottle) switcher directly on cards and product details.
-- 🛍️ **Slide-Out Shopping Bag Drawer**: Gender-neutral, modern slide-out cart with item counters, thumbnail previews, quantity steppers, and free delivery qualifiers.
-- 💬 **WhatsApp Express Checkout**: Instantly formats structured, professional receipts with customer items, selected bottle sizes, quantities, and totals in Tanzanian Shillings (TZS) sent directly to `+255 695 557 358`.
-- 💳 **Accepted Payment Methods**: Support for **Vodacom M-Pesa**, **Airtel Money**, **Selcom Pay**, **CRDB Bank (SimBanking)**, and **Cash on Delivery**.
-- 🚚 **Nationwide Delivery**: Fast 24–48 hour doorstep delivery to **all regions in Tanzania** with safe, protective packaging.
-- 🌿 **Fragrance Scent Notes**: Clear breakdown of Top, Heart, and Base notes, plus longevity and scent trail ratings.
-- 🎁 **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 35,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
-- ✨ **Premium Motion & Scroll Animations**: Every scroll animation is bidirectional — it plays scrolling down, rewinds scrolling up and replays endlessly (GSAP ScrollTrigger + Lenis inertia scrolling, `prefers-reduced-motion` respected).
-- 🧴 **Real-Time 3D Bottles (Three.js)**: The home page hero + flagship chapters scroll over a pinned 3D NolMart bottle that spins and morphs between scents; every product page has a drag-to-rotate 3D viewer. The bottle is the Blender brand bottle (`models/nolmart-bottle.glb`: fluted glass, gold pump, ivory cap). Its navy label is painted live with each scent's name, and the liquid colour comes from `js/bottle-palette.js`. Falls back to photos when WebGL is unavailable.
+- **Real-Time Size & Price Switcher**: Seamless 10ml (Pocket & Travel Atomizer) vs 30ml (Full Luxury Crystal Bottle) switcher directly on cards and product details.
+- **Slide-Out Shopping Bag Drawer**: Gender-neutral, modern slide-out cart with item counters, thumbnail previews, quantity steppers, and free delivery qualifiers.
+- **WhatsApp Express Checkout**: Instantly formats structured, professional receipts with customer items, selected bottle sizes, quantities, and totals in Tanzanian Shillings (TZS) sent directly to `+255 695 557 358`.
+- **Accepted Payment Methods**: Support for **Vodacom M-Pesa**, **Airtel Money**, **Selcom Pay**, **CRDB Bank (SimBanking)**, and **Cash on Delivery**.
+- **Nationwide Delivery**: Fast 24-48 hour doorstep delivery to **all regions in Tanzania** with safe, protective packaging.
+- **Fragrance Scent Notes**: Clear breakdown of Top, Heart, and Base notes, plus longevity and scent trail ratings.
+- **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 35,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
+- **Premium Motion & Scroll Animations**: Every scroll animation is bidirectional: it plays scrolling down, rewinds scrolling up and replays endlessly (GSAP ScrollTrigger + Lenis inertia scrolling, `prefers-reduced-motion` respected).
+- **Real-Time 3D Bottles (Three.js)**: The home page hero + flagship chapters scroll over a pinned 3D NolMart bottle that spins and morphs between scents; every product page has a drag-to-rotate 3D viewer. Each bottle size has its own Blender model in `models/` (30ml: fluted glass, gold pump, ivory cap, navy label; 10ml: slim vial with a black cap and a paper name band; 6ml: a shorter 10ml vial). Labels are painted live with each scent's name, and the liquid colour comes from `js/bottle-palette.js`. Falls back to photos when WebGL is unavailable.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 scents.nolmart.com/
@@ -70,7 +70,7 @@ scents.nolmart.com/
     ├── logo-dark.png        # Luxury dark edition logo
     ├── logo-icon.png        # Perfume bottle app icon
     ├── favicon.ico          # Browser tab icon
-    └── products/            # Product shots rendered from the 3D bottle (WebP)
+    └── products/            # Product shots rendered from the 3D bottles, one per size (WebP)
         ├── crown-noir.png
         ├── cashmere-bloom.png
         ├── azure-vip.png
@@ -81,14 +81,19 @@ scents.nolmart.com/
 
 ---
 
-## 🧴 Updating the 3D Bottle
+## Updating the 3D Bottles
 
-1. Export the bottle from Blender (`D:/projects/3D Models/brand_bottle/export_perfume.py`).
-2. Make the light web copy: `python tools/optimize_bottle_glb.py "<path>/nolmart_obsidian_reef.glb" models/nolmart-bottle.glb`
+1. Export the bottles from Blender (`D:/projects/3D Models/brand_bottle/export_perfume.py` for 30ml,
+   `D:/projects/3D Models/brand_bottle_10ml/export_10ml.py` for 10ml).
+2. Make the light web copies:
+   - `python tools/optimize_bottle_glb.py "<path>/nolmart_obsidian_reef.glb" models/nolmart-bottle-30ml.glb`
+   - `python tools/optimize_bottle_glb.py "<path>/nolmart_azure_vip_10ml.glb" models/nolmart-bottle-10ml.glb`
+   - `python tools/optimize_bottle_glb.py "<path>/nolmart_azure_vip_10ml.glb" models/nolmart-bottle-6ml.glb --shorten 0.014 0.078 0.031`
+     (the 6ml vial is the 10ml one with a 31 mm shorter glass body)
 3. Re-render the product images: run `node tools/dev-server.mjs`, open `http://127.0.0.1:3000/tools/render-product-images.html`,
    then convert the PNGs it writes in `img/products/` to 640px WebP (quality 88).
 
-## 🚀 Local Testing (PC & Mobile)
+## Local Testing (PC & Mobile)
 
 To test the appearance locally on your PC and your mobile phone on the same Wi-Fi network:
 
@@ -105,7 +110,7 @@ npx serve . -p 3000
 
 ---
 
-## 🌐 Deployment to Subdomain `scents.nolmart.com`
+## Deployment to Subdomain `scents.nolmart.com`
 
 ### Option 1: GitHub Pages (Current Live Test)
 - **Test URL**: [https://noldy22.github.io/scents.nolmart.com/](https://noldy22.github.io/scents.nolmart.com/)
@@ -122,7 +127,7 @@ npx serve . -p 3000
 
 ---
 
-## 🎨 Official Brand Palette
+## Official Brand Palette
 
 - **Primary Navy**: `#0f386b`
 - **Deep Midnight**: `#081d38`
@@ -134,7 +139,7 @@ npx serve . -p 3000
 
 ---
 
-## 📞 Business Contact
+## Business Contact
 
 - **Parent Brand**: NolMart ([nolmart.com](https://nolmart.com))
 - **WhatsApp Orders**: [+255 695 557 358](https://wa.me/255695557358)

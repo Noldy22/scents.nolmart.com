@@ -1,7 +1,7 @@
 // js/scent-quiz.js
 // Interactive 5-Question Scent Matcher for NolMart Scents
 
-import { PRODUCTS, getProductById } from './products-data.js';
+import { PRODUCTS, getProductById, getProductImage } from './products-data.js';
 import { addItemToCart } from './cart.js';
 import { openCartDrawer, directWhatsAppOrder, showToast } from './cart-drawer.js';
 
@@ -46,7 +46,7 @@ export function initScentQuiz() {
         }
 
         if (nextBtn) {
-            nextBtn.textContent = currentStep === totalSteps ? 'Reveal My Perfect Match 🔮' : 'Continue →';
+            nextBtn.textContent = currentStep === totalSteps ? 'Show My Match' : 'Continue →';
         }
     }
 
@@ -182,10 +182,10 @@ function calculateAndRenderResult(answers) {
 
     matchContainer.innerHTML = `
         <div class="match-card">
-            <div class="match-badge">99% MATCH FOR YOUR PROFILE</div>
+            <div class="match-badge">YOUR BEST MATCH</div>
             <div class="match-grid">
                 <div class="match-image-box">
-                    <img src="${matchedProduct.imageUrl}" alt="${matchedProduct.name}">
+                    <img src="${getProductImage(matchedProduct, chosenSize)}" alt="${matchedProduct.name}" id="quizMatchImage">
                 </div>
                 <div class="match-info">
                     <div class="match-category-tag">${matchedProduct.badge}</div>
@@ -193,7 +193,7 @@ function calculateAndRenderResult(answers) {
                     <p class="match-tagline">${matchedProduct.tagline}</p>
                     
                     <div style="background: rgba(33, 116, 219, 0.06); border-left: 3px solid var(--brand-blue); padding: 10px 14px; border-radius: var(--radius-sm); margin-bottom: 16px; font-size: 0.9rem; color: var(--brand-navy);">
-                        💡 <strong>Why this was picked for you:</strong> ${matchReason}
+                        <strong>Why we picked it:</strong> ${matchReason}
                     </div>
 
                     <p class="match-desc">${matchedProduct.description}</p>
@@ -235,7 +235,7 @@ function calculateAndRenderResult(answers) {
                     <img src="${runnerUpProduct.imageUrl}" alt="${runnerUpProduct.name}" style="width: 50px; height: 50px; object-fit: contain; border-radius: var(--radius-sm); background: #fff; padding: 4px; border: 1px solid var(--border-color);">
                     <div>
                         <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 700;">Alternative Recommendation</span>
-                        <h4 style="margin: 0; font-size: 1.05rem; color: var(--brand-navy-dark);">${runnerUpProduct.name} — <span style="font-size: 0.88rem; font-weight: normal; color: var(--text-secondary);">${runnerUpProduct.tagline}</span></h4>
+                        <h4 style="margin: 0; font-size: 1.05rem; color: var(--brand-navy-dark);">${runnerUpProduct.name}: <span style="font-size: 0.88rem; font-weight: normal; color: var(--text-secondary);">${runnerUpProduct.tagline}</span></h4>
                     </div>
                 </div>
                 <a href="product.html?id=${runnerUpProduct.id}" class="btn btn-outline-primary" style="padding: 8px 18px; font-size: 0.85rem;">
@@ -253,6 +253,8 @@ function calculateAndRenderResult(answers) {
             matchContainer.querySelectorAll('.size-choice-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activeSize = btn.dataset.size;
+            const img = document.getElementById('quizMatchImage');
+            if (img) img.src = getProductImage(matchedProduct, activeSize);
         });
     });
 

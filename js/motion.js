@@ -3,7 +3,7 @@
 //  • Lenis inertia scrolling (desktop wheel/trackpad; native on touch)
 //  • Direction-aware header (hides scrolling down, returns scrolling up)
 //  • Reveal animations that play on the way in, rewind when you scroll back
-//    past them, and replay every time — in both scroll directions.
+//    past them, and replay every time, in both scroll directions.
 //  • Scrubbed parallax, scroll-velocity marquees, counters.
 // Respects prefers-reduced-motion and fails safe (content stays visible).
 

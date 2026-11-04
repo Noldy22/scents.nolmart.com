@@ -10,6 +10,7 @@ import {
     clearCart
 } from './cart.js';
 import { CONFIG } from './config.js';
+import { getProductById, getProductImage } from './products-data.js';
 
 export function initCartDrawer() {
     renderCartDrawer();
@@ -138,7 +139,7 @@ export function renderCartDrawer() {
         return `
             <div class="cart-drawer-item" data-key="${item.itemKey}">
                 <div class="cart-item-thumb">
-                    <img src="${item.imageUrl}" alt="${item.name}">
+                    <img src="${getProductById(item.id) ? getProductImage(getProductById(item.id), item.size) : item.imageUrl}" alt="${item.name}">
                 </div>
                 <div class="cart-item-info">
                     <div class="cart-item-header">
@@ -225,7 +226,7 @@ function handleWhatsAppCheckout() {
         if (deliveryLocation) localStorage.setItem('nolmart_customer_location', deliveryLocation);
     } catch(e) {}
 
-    let message = `*🛍️ NEW ORDER — NOLMART SCENTS*\n`;
+    let message = `*NEW ORDER: NOLMART SCENTS*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
     message += `*Customer Details:*\n`;
     message += `• *Name:* ${customerName}\n`;
@@ -259,7 +260,7 @@ export function directWhatsAppOrder(product, size = "30ml", quantity = 1) {
     const price = product.prices[size] || Object.values(product.prices)[0] || 0;
     const total = (price * quantity).toLocaleString('en-US');
 
-    let message = `*✨ INSTANT ORDER — NOLMART SCENTS*\n`;
+    let message = `*INSTANT ORDER: NOLMART SCENTS*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
     message += `Hello NolMart Scents! I would like to order:\n\n`;
     message += `• *Fragrance:* ${product.name}\n`;
@@ -285,7 +286,7 @@ export function showToast(message, duration = 3000) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.innerHTML = `
-        <span class="toast-icon">✨</span>
+        <span class="toast-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
         <span class="toast-text">${message}</span>
     `;
 
