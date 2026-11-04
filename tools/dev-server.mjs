@@ -13,7 +13,7 @@ const PORT = Number(process.argv[2] || 3000);
 const TYPES = {
     '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8',
     '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg',
-    '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.glb': 'model/gltf-binary', '.webp': 'image/webp'
+    '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.glb': 'model/gltf-binary', '.webp': 'image/webp', '.webmanifest': 'application/manifest+json'
 };
 
 http.createServer((req, res) => {

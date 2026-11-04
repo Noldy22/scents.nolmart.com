@@ -100,12 +100,6 @@ export function updateCartBadges() {
             el.classList.remove('has-items');
         }
     });
-
-    // Update bottom mobile bar if present
-    const mobileTotal = document.getElementById('mobileBarTotal');
-    if (mobileTotal) {
-        mobileTotal.textContent = `Tzs ${getCartTotalPrice().toLocaleString('en-US')}`;
-    }
 }
 
 export function renderCartDrawer() {

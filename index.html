@@ -6,8 +6,16 @@
     <title>NolMart Scents | Luxury Long-Lasting Perfumes & Signature Blends in Tanzania</title>
     <meta name="description" content="Shop luxury perfumes crafted for 12+ hours skin longevity. Flagship scents, signature blends, and 10ml/30ml discovery bottles. Fast delivery to all regions in Tanzania.">
     <meta name="theme-color" content="#050b16">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="application-name" content="NolMart Scents">
+    <meta name="apple-mobile-web-app-title" content="NolMart Scents">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="preload" href="img/logo-light.png" as="image">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preload" href="models/nolmart-bottle.glb" as="fetch" type="model/gltf-binary" crossorigin>
@@ -543,24 +551,6 @@
         </div>
     </div>
 
-    <!-- 12. STICKY MOBILE BOTTOM BAR -->
-    <div class="mobile-sticky-bar">
-        <div class="mobile-bar-content">
-            <div class="mobile-bag-summary">
-                <span class="mobile-bag-label">Bag Total:</span>
-                <span class="mobile-bag-total" id="mobileBarTotal">Tzs 0</span>
-            </div>
-            <div style="display: flex; gap: 8px;">
-                <button class="btn btn-outline-primary open-cart-btn" style="padding: 10px 16px; font-size: 0.85rem;">
-                    View Bag
-                </button>
-                <a href="https://wa.me/255695557358?text=Hello%20NolMart%20Scents!%20I%20would%20like%20to%20order%20perfume." target="_blank" rel="noopener" class="btn btn-whatsapp" style="padding: 10px 16px; font-size: 0.85rem;">
-                    WhatsApp
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- 13. SITE FOOTER -->
     <footer class="site-footer">
         <div class="container">
@@ -642,5 +632,6 @@
     <script src="js/vendor/lenis.min.js" defer></script>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/motion.js"></script>
+    <script type="module" src="js/pwa.js"></script>
 </body>
 </html>

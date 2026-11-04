@@ -1,0 +1,31 @@
+{
+  "id": "./",
+  "name": "NolMart Scents",
+  "short_name": "NolMart Scents",
+  "description": "Luxury long-lasting perfumes and signature blends. Order in 30ml, 10ml and 6ml with fast delivery across Tanzania.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050b16",
+  "theme_color": "#050b16",
+  "categories": ["shopping", "lifestyle", "beauty"],
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "img/screenshots/home-mobile.jpg", "sizes": "412x915", "type": "image/jpeg", "form_factor": "narrow", "label": "Flagship perfumes in 3D" },
+    { "src": "img/screenshots/catalog-mobile.jpg", "sizes": "412x915", "type": "image/jpeg", "form_factor": "narrow", "label": "All scents in 30ml, 10ml and 6ml" },
+    { "src": "img/screenshots/home-wide.jpg", "sizes": "1280x800", "type": "image/jpeg", "form_factor": "wide", "label": "NolMart Scents home page" }
+  ],
+  "shortcuts": [
+    { "name": "All Scents", "url": "products.html", "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Scent Matcher", "url": "index.html#quiz", "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Contact & Delivery", "url": "contact.html", "icons": [{ "src": "img/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

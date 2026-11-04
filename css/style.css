@@ -1536,43 +1536,6 @@ h1, h2, h3, .serif-font {
     opacity: 1;
 }
 
-/* 12. STICKY MOBILE BOTTOM BAR */
-.mobile-sticky-bar {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #ffffff;
-    border-top: 1px solid var(--border-color);
-    padding: 10px 16px;
-    z-index: 999;
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
-}
-
-.mobile-bar-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.mobile-bag-summary {
-    display: flex;
-    flex-direction: column;
-}
-
-.mobile-bag-label {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-}
-
-.mobile-bag-total {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--brand-navy);
-}
-
 /* 13. SITE FOOTER */
 .site-footer {
     background: var(--brand-navy-dark);
@@ -1978,14 +1941,6 @@ h1, h2, h3, .serif-font {
 
     .size-buttons {
         justify-content: center;
-    }
-
-    .mobile-sticky-bar {
-        display: block;
-    }
-
-    body {
-        padding-bottom: 70px;
     }
 
     .footer-grid {
@@ -3143,7 +3098,6 @@ h1, h2, h3 { letter-spacing: -0.01em; }
     color: #fff;
 }
 .floating-wa-concierge:hover { transform: translateY(-3px); border-color: var(--gold); color: #fff; }
-.page-home .floating-wa-concierge { bottom: 96px; }
 
 /* ==========================================================================
    24. INNER PAGES (catalog, product, contact)
@@ -3339,15 +3293,6 @@ h1, h2, h3 { letter-spacing: -0.01em; }
     .section-head { margin-bottom: 40px; }
     .marquee-band { padding: 34px 0 40px; }
 
-    .mobile-sticky-bar {
-        background: rgba(5, 11, 22, 0.92);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-top: 1px solid var(--line-gold-soft);
-    }
-    .mobile-bag-label { color: var(--muted-on-dark); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.62rem; }
-    .mobile-bag-total { color: var(--champagne); font-family: var(--font-serif); }
-    .mobile-sticky-bar .btn-outline-primary { color: var(--champagne); border-color: var(--line-gold); }
 
     .info-panel { padding: 30px 22px; }
     .page-hero { padding: calc(var(--header-h) + 50px) 0 56px; }
@@ -3358,15 +3303,25 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 }
 
 /* Concierge: compact gold-ringed orb that expands on hover */
-.floating-wa-concierge { padding: 8px; gap: 0; }
-.floating-wa-concierge span {
-    max-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    opacity: 0;
-    transition: max-width 0.6s var(--ease-lux), opacity 0.4s ease, margin 0.6s var(--ease-lux);
+/* WhatsApp button: just the green WhatsApp icon, no dark ring or label */
+.floating-wa-concierge {
+    padding: 0;
+    gap: 0;
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border-radius: 50%;
 }
-.floating-wa-concierge:hover span, .floating-wa-concierge:focus-visible span { max-width: 180px; opacity: 1; margin: 0 10px 0 10px; }
+.floating-wa-concierge .icon {
+    width: 56px;
+    height: 56px;
+    padding: 13px;
+    box-shadow: 0 10px 26px -8px rgba(18, 140, 74, 0.6);
+}
+.floating-wa-concierge span { display: none; }
+.floating-wa-concierge:hover { transform: translateY(-3px) scale(1.04); }
 .page-home .floating-wa-concierge { bottom: 28px; right: 28px; }
 .page-home .stage-hud { right: 96px; }
 .footer-links .btn-whatsapp, .footer-links .btn-whatsapp:hover { color: #fff; padding-left: 26px; }
@@ -3417,11 +3372,11 @@ h1, h2, h3 { letter-spacing: -0.01em; }
    keeps the sticky navigation bar pinned while the page is locked. */
 html:has(> body.menu-open), html:has(> body.cart-open) { overflow: hidden; }
 
-/* Phones: the home page bottom bar already has a WhatsApp button, so the
-   floating concierge would sit on top of it */
+/* Phones: the same compact WhatsApp button on every page */
 @media (max-width: 768px) {
-    .page-home .floating-wa-concierge { display: none; }
-    .floating-wa-concierge { bottom: calc(18px + env(safe-area-inset-bottom)); right: 16px; }
+    .floating-wa-concierge,
+    .page-home .floating-wa-concierge { bottom: calc(18px + env(safe-area-inset-bottom)); right: 16px; }
+    .floating-wa-concierge .icon { width: 52px; height: 52px; padding: 12px; }
 }
 
 /* 3D viewer toolbar: keep the toggle labels on one line on phones */
@@ -3429,4 +3384,28 @@ html:has(> body.menu-open), html:has(> body.cart-open) { overflow: hidden; }
 @media (max-width: 480px) {
     .viewer-toolbar { flex-wrap: wrap; gap: 8px; }
     .viewer-hint { flex-basis: 100%; text-align: center; }
+}
+
+/* Install the web app (shown only when the browser can install it) */
+.install-app { margin-top: 22px; }
+.install-app[hidden], .install-app-btn[hidden], .install-app-hint[hidden] { display: none; }
+.install-app-btn { display: inline-flex; align-items: center; gap: 10px; }
+.install-app-btn .icon { width: 18px; height: 18px; }
+.install-app-hint { margin-top: 12px; font-size: 0.82rem; line-height: 1.6; color: var(--muted-on-dark); max-width: 320px; }
+.nav-install-app { display: none; }
+@media (max-width: 768px) {
+    .nav-install-app:not([hidden]) {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        border: 1px solid var(--line-gold);
+        border-radius: var(--radius-full);
+        padding: 10px 20px;
+        color: var(--champagne);
+        font: inherit;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
 }
