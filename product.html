@@ -434,7 +434,7 @@
             if (relatedContainer) {
                 const related = PRODUCTS.filter(p => p.id !== product.id && (p.category === product.category || p.gender === product.gender)).slice(0, 4);
                 relatedContainer.innerHTML = related.map(rp => {
-                    const price = Object.values(rp.prices)[0].toLocaleString('en-US');
+                    const price = (rp.prices[rp.defaultSize] || rp.prices['30ml'] || Object.values(rp.prices)[0]).toLocaleString('en-US');
                     return `
                         <div class="product-card" data-product-id="${rp.id}">
                             <div class="product-badge-tag">${rp.badge}</div>
