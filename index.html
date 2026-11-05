@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-loading">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +17,157 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="preload" href="img/logo-light.png" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Oswald:wght@600&amp;display=swap">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preload" href="models/nolmart-bottle.glb" as="fetch" type="model/gltf-binary" crossorigin>
     <script type="importmap">
         { "imports": { "three": "./js/vendor/three.module.min.js", "three/addons/": "./js/vendor/three-addons/" } }
     </script>
+    <link rel="preload" href="models/nolmart-bottle-30ml.glb" as="fetch" type="model/gltf-binary" crossorigin>
+    <!-- Fetch the 3D code in parallel instead of one file after another -->
+    <link rel="modulepreload" href="js/vendor/three.module.min.js">
+    <link rel="modulepreload" href="js/vendor/three-addons/GLTFLoader.js">
+    <link rel="modulepreload" href="js/vendor/three-addons/BufferGeometryUtils.js">
+    <link rel="modulepreload" href="js/vendor/three-addons/RoomEnvironment.js">
+    <link rel="modulepreload" href="js/bottle3d.js">
+    <link rel="modulepreload" href="js/bottle-palette.js">
+    <link rel="modulepreload" href="js/home-stage.js">
+    <!-- Loading screen styles (inline so it shows on the very first paint) -->
+    <style>
+        html.is-loading { overflow: hidden; }
+        .site-loader {
+            position: fixed; inset: 0; z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(90% 70% at 50% 40%, #0e2a52 0%, #071328 55%, #050b16 100%);
+            color: #ece6da;
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 1s cubic-bezier(0.77, 0, 0.18, 1) 0.25s;
+        }
+        .site-loader.is-done { clip-path: inset(0 0 100% 0); pointer-events: none; }
+        .site-loader-inner {
+            display: flex; flex-direction: column; align-items: center; gap: 22px;
+            transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .site-loader.is-done .site-loader-inner { opacity: 0; transform: translateY(-24px) scale(0.96); }
+        .site-loader-bottle { width: 92px; height: auto; overflow: visible; filter: drop-shadow(0 18px 40px rgba(75, 150, 240, 0.25)); animation: ldrFloat 3.2s ease-in-out infinite; }
+        .ldr-ivory { fill: #f4efe4; }
+        .ldr-glass { fill: none; stroke: #f4efe4; stroke-width: 7; }
+        .ldr-tube { stroke: #f4efe4; stroke-width: 5; stroke-linecap: round; }
+        .ldr-wave { animation: ldrWave 2.4s linear infinite; }
+        .ldr-wave-back { opacity: 0.45; animation-duration: 3.6s; animation-direction: reverse; }
+        .ldr-shine { fill: rgba(255, 255, 255, 0.18); }
+        .site-loader-brand { font-family: "Poppins", "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.42em; text-transform: uppercase; color: #f4efe4; padding-left: 0.42em; }
+        .site-loader-brand span { color: #4b96f0; }
+        .site-loader-bar { width: 168px; height: 1px; background: rgba(236, 230, 218, 0.16); overflow: hidden; }
+        .site-loader-bar span { display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #b08a3e, #f3dca2, #d4af37); box-shadow: 0 0 10px rgba(230, 201, 138, 0.7); }
+        .site-loader-pct { font-family: "Playfair Display", Georgia, serif; font-size: 0.95rem; letter-spacing: 0.12em; color: #e6c98a; font-variant-numeric: tabular-nums; min-width: 4ch; text-align: center; }
+        @keyframes ldrWave { from { transform: translateX(0); } to { transform: translateX(60px); } }
+        @keyframes ldrFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @media (prefers-reduced-motion: reduce) {
+            .site-loader-bottle, .ldr-wave { animation: none; }
+            .site-loader { transition: opacity 0.4s ease; }
+            .site-loader.is-done { clip-path: none; opacity: 0; }
+        }
+    </style>
+    <noscript><style>.site-loader { display: none; } html.is-loading { overflow: auto; }</style></noscript>
 </head>
 <body class="page-home">
+
+    <!-- Loading screen: shown until the page, fonts and 3D bottle are ready -->
+    <div class="site-loader" id="siteLoader" role="status" aria-live="polite" aria-label="Loading NolMart Scents">
+        <div class="site-loader-inner">
+            <svg class="site-loader-bottle" viewBox="0 0 120 160" aria-hidden="true">
+                <defs>
+                    <clipPath id="ldrGlassClip"><rect x="21" y="51" width="78" height="92" rx="6"/></clipPath>
+                    <linearGradient id="ldrJuiceFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#7ab6ff"/>
+                        <stop offset="1" stop-color="#2f6fd1"/>
+                    </linearGradient>
+                </defs>
+                <rect x="48" y="6" width="24" height="17" rx="3" class="ldr-ivory"/>
+                <circle cx="60" cy="14.5" r="3.6" fill="#050b16"/>
+                <circle cx="60" cy="14.5" r="1.4" class="ldr-ivory"/>
+                <rect x="38" y="27" width="44" height="15" rx="4" class="ldr-ivory"/>
+                <g clip-path="url(#ldrGlassClip)">
+                    <g id="ldrJuice" transform="translate(0 143)">
+                        <path class="ldr-wave ldr-wave-back" d="M-180 0 q15 -5 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 V200 H-180 Z" fill="url(#ldrJuiceFill)"/>
+                        <g transform="translate(0 3)"><path class="ldr-wave" d="M-180 0 q15 -5 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 V200 H-180 Z" fill="url(#ldrJuiceFill)"/></g>
+                    </g>
+                    <rect x="26" y="56" width="7" height="82" rx="3.5" class="ldr-shine"/>
+                </g>
+                <line x1="60" y1="44" x2="60" y2="84" class="ldr-tube"/>
+                <rect x="14.5" y="44.5" width="91" height="105" rx="12" class="ldr-glass"/>
+            </svg>
+            <div class="site-loader-brand">NolMart <span>Scents</span></div>
+            <div class="site-loader-bar"><span id="ldrBar"></span></div>
+            <div class="site-loader-pct"><span id="ldrPct">0</span>%</div>
+        </div>
+    </div>
+    <script>
+        // Loading screen progress. Parts report in as they finish; the screen
+        // lifts once all of them are done (or after 12 s, whatever happens).
+        window.NolmartLoader = (function () {
+            var root = document.documentElement;
+            var el = document.getElementById('siteLoader');
+            var juice = document.getElementById('ldrJuice');
+            var bar = document.getElementById('ldrBar');
+            var pct = document.getElementById('ldrPct');
+            var weights = { page: 0.25, fonts: 0.1, model: 0.45, stage: 0.2 };
+            var parts = { page: 0, fonts: 0, model: 0, stage: 0 };
+            var shown = 0, start = Date.now(), MIN = 900, MAX = 12000;
+            var api = { revealed: false };
+            function target() {
+                var t = 0;
+                for (var k in weights) t += weights[k] * parts[k];
+                return t;
+            }
+            function allDone() {
+                for (var k in parts) if (parts[k] < 1) return false;
+                return true;
+            }
+            function draw(v) {
+                // juice surface: y = 143 (empty) to y = 54 (full)
+                juice.setAttribute('transform', 'translate(0 ' + (143 - 89 * v).toFixed(2) + ')');
+                bar.style.transform = 'scaleX(' + v.toFixed(4) + ')';
+                pct.textContent = Math.round(v * 100);
+            }
+            function tick() {
+                if (api.revealed) return;
+                var t = target();
+                if (allDone()) {
+                    shown += (1 - shown) * 0.14;
+                    if (shown > 0.995 && Date.now() - start >= MIN) { draw(1); return reveal(); }
+                } else {
+                    // drift a little ahead while waiting so it never looks frozen
+                    var goal = Math.max(t, Math.min(t + 0.08, 0.96, shown + 0.002));
+                    shown += (goal - shown) * 0.1;
+                }
+                draw(shown);
+                requestAnimationFrame(tick);
+            }
+            function reveal() {
+                if (api.revealed) return;
+                api.revealed = true;
+                draw(1);
+                el.classList.add('is-done');
+                root.classList.remove('is-loading');
+                document.dispatchEvent(new Event('nolmart:revealed'));
+                setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 1500);
+            }
+            api.progress = function (key, f) {
+                if (key in parts) parts[key] = Math.max(parts[key], Math.min(1, f || 0));
+            };
+            api.ready = function (key) { api.progress(key, 1); };
+            document.addEventListener('DOMContentLoaded', function () { api.progress('page', 0.6); });
+            window.addEventListener('load', function () { api.ready('page'); });
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { api.ready('fonts'); });
+            else api.ready('fonts');
+            setTimeout(reveal, MAX);
+            requestAnimationFrame(tick);
+            return api;
+        })();
+    </script>
 
     <!-- 1. TOP ANNOUNCEMENT BANNER -->
     <div class="announcement-banner">

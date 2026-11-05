@@ -62,12 +62,15 @@ function initSmoothScroll() {
         gsap.ticker.add((time) => lenis.raf(time * 1000));
         gsap.ticker.lagSmoothing(0);
 
-        // Pause inertia while the cart drawer / mobile menu lock the page
+        // Pause inertia while the cart drawer / mobile menu / loading screen lock the page
         const sync = () => {
-            const locked = document.body.classList.contains('cart-open') || document.body.classList.contains('menu-open');
+            const locked = document.body.classList.contains('cart-open') || document.body.classList.contains('menu-open')
+                || document.documentElement.classList.contains('is-loading');
             if (locked) lenis.stop(); else lenis.start();
         };
+        sync();
         new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     }
 
     // Same-page anchor links glide to their target

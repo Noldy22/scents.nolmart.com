@@ -135,6 +135,7 @@ function renderFlagshipShowcase() {
             .catch(err => {
                 console.warn('3D stage unavailable, using photo fallback.', err);
                 stage.classList.add('stage-no-webgl');
+                if (window.NolmartLoader) { window.NolmartLoader.ready('model'); window.NolmartLoader.ready('stage'); }
             });
     }
 }

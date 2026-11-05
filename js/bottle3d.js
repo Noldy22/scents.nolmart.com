@@ -3,7 +3,8 @@
 // modelled in Blender:
 //   30ml: fluted glass, gold pump, ivory cap, navy NolMart label
 //   10ml: slim glass vial, gloss black cap with a paper name band
-//    6ml: the 10ml vial with a shorter glass body
+//    6ml: the 10ml vial with a shorter glass body (built from the 10ml file
+//         in the browser, so it costs no extra download)
 // Labels are painted at runtime so every bottle carries the exact scent name
 // from js/products-data.js. The juice colour comes from js/bottle-palette.js.
 
@@ -15,7 +16,8 @@ import { getBottlePalette } from './bottle-palette.js';
 const MODELS = {
     '30ml': { url: new URL('../models/nolmart-bottle-30ml.glb', import.meta.url).href, label: 'front', glassThickness: 0.32 },
     '10ml': { url: new URL('../models/nolmart-bottle-10ml.glb', import.meta.url).href, label: 'cap', glassThickness: 0.06 },
-    '6ml': { url: new URL('../models/nolmart-bottle-6ml.glb', import.meta.url).href, label: 'cap', glassThickness: 0.06 }
+    // Straight wall between 14 mm and 78 mm squeezed by 31 mm (metres)
+    '6ml': { url: new URL('../models/nolmart-bottle-10ml.glb', import.meta.url).href, label: 'cap', glassThickness: 0.06, shorten: [0.014, 0.078, 0.031] }
 };
 // One real-world scale for every bottle, so sizes compare truthfully
 const WORLD_PER_METRE = 18.5;
@@ -39,17 +41,41 @@ export function hasBottle(productId) {
     return !!getBottlePalette(productId);
 }
 
-// ---------- Model loading (shared, each size fetched once per page) ----------
+// ---------- Model loading (shared, each file fetched once per page) ----------
 const modelPromises = {};
-export function loadBottleModel(size = '30ml') {
-    const key = bottleSizeFor(size);
-    if (!modelPromises[key]) {
-        modelPromises[key] = new GLTFLoader().loadAsync(MODELS[key].url).catch((err) => {
-            delete modelPromises[key];
+export function loadBottleModel(size = '30ml', onProgress = null) {
+    const url = MODELS[bottleSizeFor(size)].url;
+    if (!modelPromises[url]) {
+        const progress = (e) => { if (onProgress && e.lengthComputable && e.total) onProgress(e.loaded / e.total); };
+        modelPromises[url] = new GLTFLoader().loadAsync(url, progress).catch((err) => {
+            delete modelPromises[url];
             throw err;
         });
     }
-    return modelPromises[key];
+    return modelPromises[url];
+}
+
+// Shorter bottle from the same model: squeeze the straight wall between
+// heights y0 and y1 (metres) by d and move everything above it down by d.
+function shortenGeometry(geo, [y0, y1, d]) {
+    const k = (y1 - y0 - d) / (y1 - y0);
+    const pos = geo.attributes.position;
+    const nrm = geo.attributes.normal;
+    for (let i = 0; i < pos.count; i++) {
+        const y = pos.getY(i);
+        if (y >= y1) {
+            pos.setY(i, y - d);
+        } else if (y > y0) {
+            pos.setY(i, y0 + (y - y0) * k);
+            if (nrm) {
+                const nx = nrm.getX(i), ny = nrm.getY(i) / k, nz = nrm.getZ(i);
+                const len = Math.hypot(nx, ny, nz) || 1;
+                nrm.setXYZ(i, nx / len, ny / len, nz / len);
+            }
+        }
+    }
+    pos.needsUpdate = true;
+    if (nrm) nrm.needsUpdate = true;
 }
 
 // The GLB is quantised (int16/int8) to keep the download small. Expand to
@@ -428,6 +454,7 @@ class BottleModel {
             if (!o.isMesh) return;
             const geo = toFloatAttributes(o.geometry.clone());
             geo.applyMatrix4(o.matrixWorld);
+            if (this.spec.shorten) shortenGeometry(geo, this.spec.shorten);
             parts.push({ geo, matName: (o.material && o.material.name) || '' });
         });
         const box = new THREE.Box3();
@@ -599,11 +626,12 @@ export async function createBottleStage(canvas, options = {}) {
         onFrame = null,
         backdrop = ['#0e1f3a', '#050b16'],
         preserveDrawingBuffer = false,
-        size = '30ml'
+        size = '30ml',
+        onProgress = null
     } = options;
 
     // Start the download before the GPU setup so both happen in parallel
-    const modelReady = loadBottleModel(size);
+    const modelReady = loadBottleModel(size, onProgress);
 
     const renderer = new THREE.WebGLRenderer({
         canvas,
@@ -763,13 +791,22 @@ export async function createBottleStage(canvas, options = {}) {
         Object.assign(pose.current, pose.target);
     }
 
+    // Prepare every shader and the glass refraction buffer before the first
+    // visible frame, so the reveal is smooth (no stutter while compiling)
+    async function warmUp() {
+        try {
+            if (renderer.compileAsync) await renderer.compileAsync(scene, camera);
+        } catch (e) { /* older browsers compile on first render instead */ }
+        renderStill();
+    }
+
     // Switch bottle size (loads that model the first time)
     async function setSize(next) {
         await bottle.load(next);
         bottle._use(next);
     }
 
-    return { renderer, scene, camera, bottle, pose, start, stop, snap, resize, renderStill, setSize };
+    return { renderer, scene, camera, bottle, pose, start, stop, snap, resize, renderStill, setSize, warmUp };
 }
 
 // ---------- Drag-to-rotate helper (product page) ----------

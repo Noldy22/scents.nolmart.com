@@ -41,11 +41,18 @@ export async function initHomeStage(stageEl, flagships) {
     const ghostWords = Array.from(ghost.children);
 
     // ---------- 3D or photo fallback ----------
+    // The home page loading screen (inline in index.html) waits for this
+    const loader = window.NolmartLoader;
+    const loaderReady = () => { if (loader) { loader.ready('model'); loader.ready('stage'); } };
     let stage = null;
     if (canRender3D()) {
         try {
             const isSmall = window.innerWidth < 900;
-            stage = await createBottleStage(canvas, { dprMax: isSmall ? 1.5 : 1.75 });
+            stage = await createBottleStage(canvas, {
+                dprMax: isSmall ? 1.5 : 1.75,
+                onProgress: (f) => { if (loader) loader.progress('model', f); }
+            });
+            if (loader) loader.ready('model');
             stage.bottle.prepare(flagships);
             stage.bottle.setProduct(states[0]);
             addGoldDust(stage);
@@ -55,7 +62,7 @@ export async function initHomeStage(stageEl, flagships) {
             stage = null;
         }
     }
-    if (!stage) stageEl.classList.add('stage-no-webgl');
+    if (!stage) { stageEl.classList.add('stage-no-webgl'); loaderReady(); }
     const fallbackImg = fallback ? fallback.querySelector('img') : null;
 
     // ---------- Layout helpers ----------
@@ -199,7 +206,17 @@ export async function initHomeStage(stageEl, flagships) {
     update(Math.max(0, window.scrollY - offsetTop(content)));
     if (stage) {
         stage.snap();
+        // Compile the shaders now, behind the loading screen, then show it
+        await stage.warmUp();
         stage.start();
+        loaderReady();
+        // Load the 10ml vial in the background on good connections, so the
+        // 10ml / 6ml size pills switch instantly
+        const conn = navigator.connection || {};
+        if (!conn.saveData && !/2g/.test(conn.effectiveType || '')) {
+            const later = window.requestIdleCallback || ((fn) => setTimeout(fn, 1500));
+            setTimeout(() => later(() => stage.bottle.load('10ml').catch(() => {})), 4000);
+        }
         // Pointer parallax stays alive between scroll events
         gsap.ticker.add(() => {
             stage.pose.target.rotY = baseRot.y + pointer.x * 0.22;
@@ -238,7 +255,12 @@ export async function initHomeStage(stageEl, flagships) {
         };
         // Split only once the web fonts are in, so line breaks are measured correctly
         const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-        Promise.race([fontsReady, new Promise(r => setTimeout(r, 2500))]).then(playIntro);
+        // ...and only once the loading screen has lifted, so it is seen
+        const revealed = new Promise((r) => {
+            if (!window.NolmartLoader || window.NolmartLoader.revealed) r();
+            else document.addEventListener('nolmart:revealed', r, { once: true });
+        });
+        Promise.all([revealed, Promise.race([fontsReady, new Promise(r => setTimeout(r, 2500))])]).then(playIntro);
 
         gsap.fromTo(heroContent,
             { y: 0, autoAlpha: 1, filter: 'blur(0px)' },

@@ -33,6 +33,7 @@ This repository powers the official web platform **[scents.nolmart.com](https://
 - **Fragrance Scent Notes**: Clear breakdown of Top, Heart, and Base notes, plus longevity and scent trail ratings.
 - **Discovery Sets & Up-Sells**: "Try & Buy" (3 × 10ml for 35,000 TZS), His & Hers Couple Packs, and Luxury Duo sets.
 - **Premium Motion & Scroll Animations**: Every scroll animation is bidirectional: it plays scrolling down, rewinds scrolling up and replays endlessly (GSAP ScrollTrigger + Lenis inertia scrolling, `prefers-reduced-motion` respected).
+- **Loading Screen & Fast 3D Start**: the home page shows an animated NolMart bottle that fills as the page, fonts and 3D bottle load, then reveals everything at once. The 3D code and bottle model are preloaded in parallel, fonts are linked directly, shaders are prepared behind the loading screen, and the 10ml vial is fetched in the background on good connections.
 - **Installable Web App**: `manifest.webmanifest`, app icons (`tools/make_app_icons.py`) and an offline-friendly service worker (`sw.js`, network first). An "Install the App" button appears in the footer and mobile menu when the browser supports it; on iPhone it explains Safari's Add to Home Screen.
 - **Real-Time 3D Bottles (Three.js)**: The home page hero + flagship chapters scroll over a pinned 3D NolMart bottle that spins and morphs between scents; every product page has a drag-to-rotate 3D viewer. Each bottle size has its own Blender model in `models/` (30ml: fluted glass, gold pump, ivory cap, navy label; 10ml: slim vial with a black cap and a paper name band; 6ml: a shorter 10ml vial). Labels are painted live with each scent's name, and the liquid colour comes from `js/bottle-palette.js`. Falls back to photos when WebGL is unavailable.
 
@@ -89,8 +90,8 @@ scents.nolmart.com/
 2. Make the light web copies:
    - `python tools/optimize_bottle_glb.py "<path>/nolmart_obsidian_reef.glb" models/nolmart-bottle-30ml.glb`
    - `python tools/optimize_bottle_glb.py "<path>/nolmart_azure_vip_10ml.glb" models/nolmart-bottle-10ml.glb`
-   - `python tools/optimize_bottle_glb.py "<path>/nolmart_azure_vip_10ml.glb" models/nolmart-bottle-6ml.glb --shorten 0.014 0.078 0.031`
-     (the 6ml vial is the 10ml one with a 31 mm shorter glass body)
+   The 6ml vial has no file of its own: `js/bottle3d.js` builds it in the browser from the 10ml model
+   (glass body 31 mm shorter), so it costs no extra download.
 3. Re-render the product images: run `node tools/dev-server.mjs`, open `http://127.0.0.1:3000/tools/render-product-images.html`,
    then convert the PNGs it writes in `img/products/` to 640px WebP (quality 88).
 

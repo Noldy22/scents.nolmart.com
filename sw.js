@@ -3,7 +3,7 @@
 // Every page, picture and 3D bottle that has been opened is kept, so the app
 // still opens (and shows what was already seen) without a connection.
 
-const CACHE = 'nolmart-scents-v1';
+const CACHE = 'nolmart-scents-v2';
 const SHELL = [
     './',
     'index.html',

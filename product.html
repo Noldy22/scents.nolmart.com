@@ -15,10 +15,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Oswald:wght@600&amp;display=swap">
     <link rel="stylesheet" href="css/style.css">
     <script type="importmap">
         { "imports": { "three": "./js/vendor/three.module.min.js", "three/addons/": "./js/vendor/three-addons/" } }
     </script>
+    <!-- Fetch the 3D code in parallel instead of one file after another -->
+    <link rel="modulepreload" href="js/vendor/three.module.min.js">
+    <link rel="modulepreload" href="js/vendor/three-addons/GLTFLoader.js">
+    <link rel="modulepreload" href="js/vendor/three-addons/BufferGeometryUtils.js">
+    <link rel="modulepreload" href="js/vendor/three-addons/RoomEnvironment.js">
+    <link rel="modulepreload" href="js/bottle3d.js">
+    <link rel="modulepreload" href="js/bottle-palette.js">
 </head>
 <body class="page-product">
 
